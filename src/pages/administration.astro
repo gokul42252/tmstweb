@@ -1,0 +1,444 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { TEMPLE_INFO } from "../data/templeData";
+import Button from "../components/UI/Button.astro";
+
+const committeeMembers = [
+  {
+    role: "Kshethra Thanthri (ക്ഷേത്ര തന്ത്രി)",
+    name: "Brahmasree Kidangassery Illam",
+    desc: "Hereditary High Priest lineage guiding all Tantric rites, Utsavam rituals, and sacred consecrations."
+  },
+  {
+    role: "Devaswom Sub Group Officer",
+    name: "Travancore Devaswom Board",
+    desc: "Statutory governmental administration overseeing assets, accounting, and pilgrim infrastructure."
+  },
+  {
+    role: "Kshethra Melshanthi (മേൽശാന്തി)",
+    name: "Sree Narayanan Namboothiri",
+    desc: "Chief Priest performing daily morning Nirmalyam, Vedic poojas, and evening Deeparadhana."
+  },
+  {
+    role: "Kshetra Upadeshaka Samithi President",
+    name: "Sri. K. R. Gopalakrishnan Nair",
+    desc: "Elected devotee advisory committee president coordinating temple affairs and cultural programs."
+  },
+  {
+    role: "Samithi Secretary",
+    name: "Sri. M. N. Radhakrishnan",
+    desc: "Managing devotee correspondence, Annadanam arrangements, and voluntary festival seva."
+  },
+  {
+    role: "Devaswom Accounts & Auditor",
+    name: "Statutory Audit Cell, TDB",
+    desc: "Ensuring complete financial transparency, official donation vouchers, and statutory audits."
+  }
+];
+---
+
+<BaseLayout
+  title="Temple Administration & Donations | Thirumarady Sri Mahadeva Temple"
+  description="Travancore Devaswom Board governance, Kidangassery Thanthri lineage, Kshetra Samithi. Secure Annadanam & Renovation donation portal with instant receipt generation."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🏛️</span>
+        <span>ക്ഷേത്ര ഭരണവും അന്നദാന സംഭാവനകളും</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Administration & Devotee Donations
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Governed under the Travancore Devaswom Board with Tantric authority from Kidangassery Illam. Support sacred Annadanam and heritage temple conservation.
+      </p>
+
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#donation" class="btn btn-primary font-bold shadow-md">
+          Donate to Annadanam / Renovation ↓
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Administrative Structure & Committee -->
+  <section class="py-16 sm:py-20 bg-stone-50 border-b border-stone-200">
+    <div class="container max-w-5xl">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Administrative Governance</span>
+        <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+          Governing Committee & Thanthri Lineage
+        </h2>
+        <p class="text-stone-600 text-sm max-w-2xl mx-auto mt-2">
+          Administered by the Travancore Devaswom Board since 1965 in close collaboration with the local Kshetra Upadeshaka Samithi.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {committeeMembers.map((member) => (
+          <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] uppercase font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 inline-block mb-2">
+                {member.role}
+              </span>
+              <h3 class="text-base sm:text-lg font-serif font-bold text-stone-900 mb-2">
+                {member.name}
+              </h3>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                {member.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Thanthri Family Deep-Dive Card -->
+      <div id="thanthri" class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-950/80 via-stone-900 to-amber-950/80 border border-amber-500/30 text-white">
+        <div class="flex flex-col sm:flex-row items-center gap-6">
+          <div class="w-16 h-16 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-3xl flex-shrink-0">
+            🔱
+          </div>
+          <div class="space-y-1 text-center sm:text-left">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Tantric Lineage (തന്ത്രി പരമ്പര)</span>
+            <h3 class="text-xl font-serif font-bold text-white">Kidangassery Illam (കിടങ്ങശ്ശേരി ഇല്ലം)</h3>
+            <p class="text-xs sm:text-sm text-stone-300 leading-relaxed max-w-3xl">
+              The high priests of Kidangassery Illam hold hereditary rights for conducting all high Tantric rites at Thirumarady Shiva Temple. They consecrate the Kodiyettam for the annual Dhanu festival, oversee the Navakam & Kalasam rituals, and preserve the strict sanctity of the Sreekovil.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Secure Annadanam & Temple Renovation Donation Portal -->
+  <section id="donation" class="py-16 sm:py-24 bg-stone-900 text-white relative">
+    <div class="container max-w-4xl">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-2 border border-amber-500/30">
+          <span>🍚</span>
+          <span>നിത്യ അന്നദാനവും ക്ഷേത്ര പുനരുദ്ധാരണവും</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mb-2">
+          Secure Temple Donation Portal
+        </h2>
+        <p class="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto font-light">
+          Contribute towards daily Annadanam, heritage woodwork conservation, Veda Patashala, or the Annual Utsavam fund. Receive an instant official 80G tax-exempt receipt.
+        </p>
+      </div>
+
+      <!-- Donation Form Card -->
+      <div class="p-6 sm:p-10 rounded-3xl bg-stone-950 border border-amber-500/30 shadow-2xl">
+        <form id="donation-form" class="space-y-6">
+          <!-- Cause Selection -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">
+              Select Donation Cause (സംഭാവന ഇനം) *
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="p-4 rounded-xl bg-stone-900 border border-stone-700 flex items-start space-x-3 cursor-pointer hover:border-amber-400">
+                <input type="radio" name="donationCause" value="Nitya Annadanam Fund" checked class="mt-1 text-amber-500" />
+                <div>
+                  <span class="block text-sm font-bold text-white">Nitya Annadanam (നിത്യ അന്നദാനം)</span>
+                  <span class="text-xs text-stone-400">Sponsor free holy midday meals for devotees and pilgrims</span>
+                </div>
+              </label>
+
+              <label class="p-4 rounded-xl bg-stone-900 border border-stone-700 flex items-start space-x-3 cursor-pointer hover:border-amber-400">
+                <input type="radio" name="donationCause" value="Heritage Woodwork & Renovation" class="mt-1 text-amber-500" />
+                <div>
+                  <span class="block text-sm font-bold text-white">Temple Renovation (ക്ഷേത്ര നവീകരണം)</span>
+                  <span class="text-xs text-stone-400">Preservation of copper roof, teakwood carvings & murals</span>
+                </div>
+              </label>
+
+              <label class="p-4 rounded-xl bg-stone-900 border border-stone-700 flex items-start space-x-3 cursor-pointer hover:border-amber-400">
+                <input type="radio" name="donationCause" value="Annual Dhanu Utsavam Fund" class="mt-1 text-amber-500" />
+                <div>
+                  <span class="block text-sm font-bold text-white">Annual Utsavam Fund (ഉത്സവ ഫണ്ട്)</span>
+                  <span class="text-xs text-stone-400">Support Panchavadyam, Melam, and Thiruvathira Arattu</span>
+                </div>
+              </label>
+
+              <label class="p-4 rounded-xl bg-stone-900 border border-stone-700 flex items-start space-x-3 cursor-pointer hover:border-amber-400">
+                <input type="radio" name="donationCause" value="Veda & Cultural Trust" class="mt-1 text-amber-500" />
+                <div>
+                  <span class="block text-sm font-bold text-white">Veda & Cultural Seva (വേദ സംരക്ഷണം)</span>
+                  <span class="text-xs text-stone-400">Support traditional Vedic chanting & temple art students</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Preset Amount Buttons & Custom Amount Input -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+              Select Amount (തുക തിരഞ്ഞെടുക്കുക) *
+            </label>
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
+              <button type="button" class="amount-btn py-2.5 rounded-xl bg-stone-900 border border-stone-700 text-sm font-bold hover:border-amber-400 hover:text-amber-300" data-amt="251">₹251</button>
+              <button type="button" class="amount-btn py-2.5 rounded-xl bg-stone-900 border border-stone-700 text-sm font-bold hover:border-amber-400 hover:text-amber-300" data-amt="501">₹501</button>
+              <button type="button" class="amount-btn active py-2.5 rounded-xl bg-amber-500 text-stone-950 font-bold text-sm shadow-md" data-amt="1001">₹1,001</button>
+              <button type="button" class="amount-btn py-2.5 rounded-xl bg-stone-900 border border-stone-700 text-sm font-bold hover:border-amber-400 hover:text-amber-300" data-amt="2501">₹2,501</button>
+              <button type="button" class="amount-btn py-2.5 rounded-xl bg-stone-900 border border-stone-700 text-sm font-bold hover:border-amber-400 hover:text-amber-300" data-amt="5001">₹5,001</button>
+              <button type="button" class="amount-btn py-2.5 rounded-xl bg-stone-900 border border-stone-700 text-sm font-bold hover:border-amber-400 hover:text-amber-300" data-amt="10001">₹10,001</button>
+            </div>
+
+            <div class="relative">
+              <span class="absolute left-4 top-3 text-stone-400 font-bold">₹</span>
+              <input
+                type="number"
+                id="custom-amount"
+                name="amount"
+                value="1001"
+                min="51"
+                required
+                placeholder="Or enter custom amount..."
+                class="w-full pl-9 pr-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white font-mono font-bold text-base focus:outline-none focus:border-amber-400"
+              />
+            </div>
+          </div>
+
+          <!-- Devotee Details -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="donor-name" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Devotee / Donor Name *
+              </label>
+              <input
+                type="text"
+                id="donor-name"
+                name="donorName"
+                required
+                placeholder="e.g., Harikrishnan N."
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+              />
+            </div>
+
+            <div>
+              <label for="pan-number" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                PAN Number (For 80G Tax Exemption)
+              </label>
+              <input
+                type="text"
+                id="pan-number"
+                name="panNumber"
+                placeholder="ABCDE1234F"
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400 uppercase"
+              />
+            </div>
+
+            <div>
+              <label for="donor-phone" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Mobile Number *
+              </label>
+              <input
+                type="tel"
+                id="donor-phone"
+                name="donorPhone"
+                required
+                placeholder="+91 94470 00000"
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+              />
+            </div>
+
+            <div>
+              <label for="donor-email" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Email Address (For Tax Receipt Voucher) *
+              </label>
+              <input
+                type="email"
+                id="donor-email"
+                name="donorEmail"
+                required
+                placeholder="devotee@example.com"
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+              />
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-serif font-black text-lg tracking-wide uppercase shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2"
+          >
+            <span>🍚 Confirm Contribution & Generate 80G Receipt</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Donation Receipt Modal -->
+  <div id="donation-receipt-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white text-stone-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button id="close-don-modal-btn" class="absolute top-5 right-5 text-stone-400 hover:text-stone-800 text-2xl font-bold p-1">
+        ✕
+      </button>
+
+      <!-- Printable Receipt -->
+      <div id="printable-don-receipt" class="print-area space-y-4">
+        <div class="text-center pb-4 border-b-2 border-stone-800">
+          <div class="w-12 h-12 mx-auto rounded-full bg-amber-600 text-white flex items-center justify-center text-xl mb-1">
+            🔱
+          </div>
+          <h2 class="text-xl font-serif font-black text-stone-900">
+            തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം
+          </h2>
+          <p class="text-xs font-serif uppercase tracking-wider font-bold text-amber-900">
+            Thirumarady Sri Mahadeva Temple Devaswom
+          </p>
+          <p class="text-[11px] text-stone-500">
+            Travancore Devaswom Board • Reg No: TDB/EKM/THIRU/1965
+          </p>
+          <div class="inline-block mt-2 px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider border border-emerald-300">
+            Official Donation Voucher (80G Tax-Exempt)
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Voucher ID</span>
+            <span id="don-receipt-no" class="font-mono font-bold text-stone-900">TDB-DON-2026-5521</span>
+          </div>
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Transaction Date</span>
+            <span id="don-receipt-time" class="font-mono font-bold text-stone-900">15 Nov 2026, 01:35 AM</span>
+          </div>
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Donor Name</span>
+            <span id="don-receipt-name" class="font-bold text-stone-900">Harikrishnan N.</span>
+          </div>
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">PAN Number</span>
+            <span id="don-receipt-pan" class="font-bold text-stone-900">ABCDE1234F</span>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs">
+          <span class="text-stone-500 block text-[10px] uppercase">Dedicated Cause:</span>
+          <span id="don-receipt-cause" class="font-bold text-amber-900 text-sm">Nitya Annadanam Fund</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-amber-50 border border-amber-300 flex items-center justify-between">
+          <span class="font-serif font-bold text-amber-900 text-sm">Donation Amount Received:</span>
+          <span id="don-receipt-amount" class="font-serif font-black text-amber-900 text-2xl">₹1,001</span>
+        </div>
+
+        <div class="pt-4 border-t border-stone-200 flex items-center justify-between text-[11px] text-stone-500">
+          <p>This donation is eligible for income tax deduction under Section 80G of the Income Tax Act.</p>
+          <div class="text-center flex-shrink-0 pl-4">
+            <div class="w-16 h-16 rounded-full border-2 border-red-700/60 text-red-700 flex items-center justify-center text-[9px] font-bold uppercase tracking-tighter transform rotate-[-8deg] p-1">
+              Devaswom Seal
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 flex gap-3 no-print">
+        <button
+          onclick="window.print()"
+          class="flex-1 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-bold text-sm transition-colors flex items-center justify-center gap-2 print-include"
+        >
+          <span>🖨️ Print / Download 80G Receipt</span>
+        </button>
+        <button
+          id="done-don-btn"
+          class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-sm transition-colors"
+        >
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Amount buttons
+  const amountBtns = document.querySelectorAll(".amount-btn");
+  const customAmountInput = document.getElementById("custom-amount") as HTMLInputElement;
+
+  amountBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      amountBtns.forEach(b => {
+        b.classList.remove("active", "bg-amber-500", "text-stone-950", "shadow-md");
+        b.classList.add("bg-stone-900", "text-white");
+      });
+      btn.classList.add("active", "bg-amber-500", "text-stone-950", "shadow-md");
+      btn.classList.remove("bg-stone-900", "text-white");
+
+      const amt = btn.getAttribute("data-amt") || "1001";
+      if (customAmountInput) customAmountInput.value = amt;
+    });
+  });
+
+  if (customAmountInput) {
+    customAmountInput.addEventListener("input", () => {
+      const currentVal = customAmountInput.value;
+      amountBtns.forEach(b => {
+        if (b.getAttribute("data-amt") === currentVal) {
+          b.classList.add("active", "bg-amber-500", "text-stone-950", "shadow-md");
+          b.classList.remove("bg-stone-900", "text-white");
+        } else {
+          b.classList.remove("active", "bg-amber-500", "text-stone-950", "shadow-md");
+          b.classList.add("bg-stone-900", "text-white");
+        }
+      });
+    });
+  }
+
+  // Modal elements
+  const donModal = document.getElementById("donation-receipt-modal");
+  const closeDonModalBtn = document.getElementById("close-don-modal-btn");
+  const doneDonBtn = document.getElementById("done-don-btn");
+  const donForm = document.getElementById("donation-form");
+
+  function closeDonationModal() {
+    donModal?.classList.add("hidden");
+    donModal?.classList.remove("flex");
+  }
+
+  closeDonModalBtn?.addEventListener("click", closeDonationModal);
+  doneDonBtn?.addEventListener("click", closeDonationModal);
+  donModal?.addEventListener("click", (e) => {
+    if (e.target === donModal) {
+      closeDonationModal();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && donModal && !donModal.classList.contains("hidden")) {
+      closeDonationModal();
+    }
+  });
+
+  donForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const cause = (document.querySelector("input[name='donationCause']:checked") as HTMLInputElement)?.value || "Nitya Annadanam";
+    const amount = customAmountInput?.value || "1001";
+    const name = (document.getElementById("donor-name") as HTMLInputElement)?.value || "Devotee";
+    const pan = (document.getElementById("pan-number") as HTMLInputElement)?.value || "NOT PROVIDED";
+
+    const voucherNo = "TDB-DON-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
+    const timeStr = new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+
+    const rNo = document.getElementById("don-receipt-no");
+    const rTime = document.getElementById("don-receipt-time");
+    const rName = document.getElementById("don-receipt-name");
+    const rPan = document.getElementById("don-receipt-pan");
+    const rCause = document.getElementById("don-receipt-cause");
+    const rAmt = document.getElementById("don-receipt-amount");
+
+    if (rNo) rNo.textContent = voucherNo;
+    if (rTime) rTime.textContent = timeStr;
+    if (rName) rName.textContent = name;
+    if (rPan) rPan.textContent = pan.toUpperCase();
+    if (rCause) rCause.textContent = cause;
+    if (rAmt) rAmt.textContent = `₹${parseInt(amount).toLocaleString("en-IN")}`;
+
+    donModal?.classList.remove("hidden");
+    donModal?.classList.add("flex");
+  });
+</script>

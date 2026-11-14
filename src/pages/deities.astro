@@ -1,0 +1,166 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { DEITIES_INFO, PRADAKSHINA_GUIDELINES } from "../data/templeData";
+import Button from "../components/UI/Button.astro";
+---
+
+<BaseLayout
+  title="Deities (Prathishta) & Pradakshina Guide | Thirumarady Sri Mahadeva Temple"
+  description="Worship Lord Shiva facing East, and sub-deities Lord Ganapathy, Lord Ayyappan, Lord Subrahmanian. Visual guide on proper Shiva circumambulation and the Somassuthram rule."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🕉️</span>
+        <span>പ്രതിഷ്ഠകളും പ്രദക്ഷിണ ക്രമവും</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Deities & Circumambulation Guide
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Learn about the east-facing Lord Shiva sanctum, the benevolent Upa Devatas, and the proper Tantric protocol for Shiva Pradakshina.
+      </p>
+
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#pradakshina" class="btn btn-primary font-bold shadow-md">
+          View Shiva Pradakshina Rule ↓
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Deity Profiles -->
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container max-w-5xl">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Divine Presence</span>
+        <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+          The Presiding Sanctum & Upa Devatas
+        </h2>
+      </div>
+
+      <div class="space-y-10">
+        {DEITIES_INFO.map((deity, idx) => (
+          <div class={`p-6 sm:p-8 rounded-3xl bg-white border shadow-sm hover:shadow-md transition-shadow ${idx === 0 ? "border-amber-400 ring-2 ring-amber-400/20" : "border-stone-200"}`}>
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 mb-4 border-b border-stone-100">
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl text-amber-800 flex-shrink-0">
+                  {idx === 0 ? "🔱" : idx === 1 ? "🐘" : idx === 2 ? "🏹" : idx === 3 ? "🦚" : "🐍"}
+                </div>
+                <div>
+                  <span class="text-[11px] uppercase tracking-wider font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200 inline-block mb-1">
+                    {deity.direction}
+                  </span>
+                  <h3 class="text-xl sm:text-2xl font-serif font-bold text-stone-900">
+                    {deity.name}
+                  </h3>
+                  <p class="text-xs font-malayalam font-bold text-stone-500">{deity.malayalam}</p>
+                </div>
+              </div>
+
+              <div class="sm:text-right flex-shrink-0">
+                <span class="text-xs font-mono font-semibold text-stone-500 block">Posture & Bhava:</span>
+                <span class="text-xs font-bold text-stone-800">{deity.posture}</span>
+              </div>
+            </div>
+
+            <p class="text-stone-700 text-sm sm:text-base leading-relaxed mb-6">
+              {deity.description}
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-stone-100 text-xs">
+              <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-100">
+                <strong class="text-amber-900 block mb-1">Principal Offerings:</strong>
+                <span class="text-stone-700">{deity.keyOfferings.join(" • ")}</span>
+              </div>
+              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+                <strong class="text-stone-900 block mb-1">Pradakshina Count:</strong>
+                <span class="text-amber-900 font-semibold">{deity.pradakshinaCount}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proper Circumambulation (Pradakshina) Guide Section -->
+  <section id="pradakshina" class="py-16 sm:py-24 bg-stone-950 text-white relative">
+    <div class="container max-w-5xl">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs font-bold mb-3 border border-red-500/40">
+          <span>⚠️</span>
+          <span>ശ്രദ്ധിക്കുക: ക്ഷേത്ര ആചാര വിധി</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mb-2">
+          {PRADAKSHINA_GUIDELINES.title}
+        </h2>
+        <p class="text-amber-400 font-malayalam text-base sm:text-lg mb-4">
+          {PRADAKSHINA_GUIDELINES.malayalamTitle}
+        </p>
+        <p class="text-stone-300 text-sm sm:text-base max-w-3xl mx-auto leading-relaxed font-light">
+          {PRADAKSHINA_GUIDELINES.importance}
+        </p>
+      </div>
+
+      <!-- Interactive Step Flowchart / Visual Diagram -->
+      <div class="p-6 sm:p-8 rounded-3xl bg-stone-900 border border-amber-500/30 mb-12">
+        <div class="text-center mb-8 pb-4 border-b border-stone-800">
+          <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Visual Walkthrough</span>
+          <h3 class="text-xl font-serif font-bold text-white mt-1">
+            How to Complete One Sacred Shiva Pradakshina
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+          {PRADAKSHINA_GUIDELINES.steps.map((st) => (
+            <div class={`p-5 rounded-2xl bg-stone-950/80 border flex flex-col justify-between relative group hover:border-amber-400 transition-all ${
+              st.step === 2 || st.step === 3
+                ? "border-amber-500/50 bg-gradient-to-b from-stone-950 to-amber-950/30"
+                : "border-stone-800"
+            }`}>
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class={`w-8 h-8 rounded-lg font-bold text-sm flex items-center justify-center ${
+                    st.step === 2 || st.step === 3 
+                      ? "bg-red-600 text-white" 
+                      : "bg-amber-500 text-stone-950"
+                  }`}>
+                    {st.step}
+                  </span>
+                  {(st.step === 2 || st.step === 3) && (
+                    <span class="text-[10px] uppercase font-bold text-red-400 bg-red-950/60 px-2 py-0.5 rounded border border-red-500/40">
+                      ⚠️ Do Not Cross
+                    </span>
+                  )}
+                </div>
+                <h4 class="text-base font-serif font-bold text-amber-300 mb-2">
+                  {st.title}
+                </h4>
+                <p class="text-xs text-stone-300 leading-relaxed">
+                  {st.desc}
+                </p>
+              </div>
+              <div class="mt-4 pt-2 border-t border-stone-900 text-[10px] text-amber-400/80 font-mono">
+                Step {st.step} of 4
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Scriptural Wisdom -->
+        <div class="mt-8 p-4 rounded-xl bg-amber-950/40 border border-amber-500/20 text-xs text-amber-200/90 leading-relaxed text-center sm:text-left">
+          <strong>Scriptural Significance:</strong> {PRADAKSHINA_GUIDELINES.scripturalReason}
+        </div>
+      </div>
+
+      <div class="text-center">
+        <Button href="/vazhipadu#booking" variant="primary" size="lg" class="font-bold">
+          Book Vazhipadu for Lord Shiva & Upa Devatas →
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

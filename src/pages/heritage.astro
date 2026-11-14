@@ -1,0 +1,177 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { TEMPLE_INFO } from "../data/templeData";
+import Button from "../components/UI/Button.astro";
+---
+
+<BaseLayout
+  title="History & Architecture (Sthala Puranam) | Thirumarady Sri Mahadeva Temple"
+  description="Origin legend, archaeological heritage, traditional Kerala temple woodwork, murals, traditional Brahmin Illams, and 1965 Devaswom transition."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🏛️</span>
+        <span>സ്ഥലപുരാണവും വാസ്തുശില്പ കലയും</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        History & Temple Architecture
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Unravel the ancient Sthala Mahatmyam, centuries of Tantric lineage, monumental Kerala woodwork, and sacred heritage of Thirumarady Mahadeva Kshetram.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sthala Puranam (Origin Legend) -->
+  <section class="py-16 sm:py-20 bg-stone-50 border-b border-stone-200">
+    <div class="container max-w-5xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-6 space-y-5">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-900 text-xs font-semibold">
+            <span>📜</span>
+            <span>ഉത്ഭവ ചരിത്രം</span>
+          </div>
+          <h2 class="text-3xl font-serif font-bold text-stone-900 leading-tight">
+            The Ancient Origin Legend (സ്ഥലപുരാണം)
+          </h2>
+          <p class="text-stone-700 text-sm sm:text-base leading-relaxed">
+            The antiquity of <strong>Thirumarady Sri Mahadeva Temple</strong> dates back into the mist of early medieval Kerala history. According to sacred oral lore, during an epoch when learned hermits were traversing the fertile plains between the ancient trade routes of Piravom and Koothattukulam, divine effulgence was sighted in this quiet agrarian enclave.
+          </p>
+          <p class="text-stone-700 text-sm sm:text-base leading-relaxed">
+            A sacred Shiva Lingam was discovered in the clearing, radiating immense serene cosmic energy. Astrological scrutiny (Devaprashnam) revealed that the Lingam represented Lord Shiva in his East-facing, supreme benign aspect (Sadasiva), bestowing long life, health, and liberation.
+          </p>
+          <div class="p-4 rounded-xl bg-amber-100/70 border-l-4 border-amber-600 text-xs text-amber-950 italic">
+            "The name 'Thirumarady' itself resonates with the auspicious presence (Thiru) of Lord Mahadeva who turned His merciful gaze upon this sacred land."
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="rounded-3xl overflow-hidden shadow-xl border-2 border-amber-200">
+            <img 
+              src="/uploads/temple/hero-temple.jpg" 
+              alt="Thirumarady Mahadeva Temple Sreekovil" 
+              class="w-full h-80 sm:h-96 object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Four Traditional Ooralan Illams & 1965 Devaswom Takeover -->
+  <section class="py-16 sm:py-20 bg-stone-900 text-white">
+    <div class="container max-w-5xl">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-2 border border-amber-500/30">
+          <span>⚖️</span>
+          <span>ഭരണ പാരമ്പര്യം</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mb-3">
+          The Four Historic Ooralan Illams & Devaswom Board
+        </h2>
+        <p class="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto font-light">
+          For generations, the temple and the adjoining sacred grove (<strong>Edaprakavu</strong>) were held in stewardship by four eminent Brahmin families:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {TEMPLE_INFO.hereditaryIllams.map((illam, idx) => (
+          <div class="p-5 rounded-2xl bg-stone-950/80 border border-amber-500/20 text-center">
+            <div class="w-10 h-10 mx-auto rounded-full bg-amber-500/10 text-amber-400 font-bold flex items-center justify-center text-sm mb-3">
+              {idx + 1}
+            </div>
+            <h3 class="text-base font-serif font-bold text-amber-300 mb-1">{illam.split("(")[0]}</h3>
+            <p class="text-xs font-malayalam text-stone-400">{illam.includes("(") ? illam.split("(")[1].replace(")", "") : ""}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-950/60 via-stone-950 to-amber-950/60 border border-amber-500/30 text-stone-300 text-sm sm:text-base leading-relaxed space-y-4">
+        <h3 class="text-xl font-serif font-bold text-white flex items-center gap-2">
+          <span>📜</span>
+          <span>1965: The Transition to Travancore Devaswom Board</span>
+        </h3>
+        <p>
+          In the mid-20th century, to ensure systematic pilgrim facilities, statutory auditing, and long-term temple preservation, the administration of Thirumarady Shiva Temple and the connected Edaprakavu was transferred to the <strong>Travancore Devaswom Board (തിരുവിതാംകൂർ ദേവസ്വം ബോർഡ്) in 1965</strong>.
+        </p>
+        <p>
+          While official administration and assets are maintained by the Devaswom Board and the locally formed <strong>Kshetra Upadeshaka Samithi</strong>, the Tantric authority remains with the revered <strong>Kidangassery Illam (കിടങ്ങശ്ശേരി ഇല്ലം)</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Traditional Kerala Vastu & Architecture Details -->
+  <section id="architecture" class="py-16 sm:py-20 bg-stone-50">
+    <div class="container max-w-5xl">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Architectural Grandeur</span>
+        <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+          Traditional Kerala Woodwork & Vastu Architecture
+        </h2>
+        <p class="text-stone-600 text-sm sm:text-base max-w-2xl mx-auto mt-2">
+          Constructed following the classical Tantra Samuchaya and Thachu Shastra guidelines, the temple exemplifies the finest Kerala indigenous wooden and granite craftsmanship.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1: Sreekovil -->
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mb-4">
+              🏛️
+            </div>
+            <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">East-Facing Vatta Sreekovil (വട്ടശ്രീകോവിൽ)</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              The sanctum sanctorum (Vatta Sreekovil) faces East to welcome the dawn rays. Topped with a steep pyramidal roof clad in protective copper sheets (Chembu Mecha മേൽക്കൂര), designed to withstand torrential monsoon rains while preserving thermal equilibrium inside the Garbhagriha.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100 text-xs text-amber-800 font-semibold">
+            Copper Pyramidal Roof • Granite Adhishtana
+          </div>
+        </div>
+
+        <!-- Feature 2: Namaskara Mandapam -->
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mb-4">
+              🪵
+            </div>
+            <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">Carved Namaskara Mandapam</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              The square pavilion situated in front of the Sreekovil houses exquisite teakwood carvings (Darushilpam). Ceiling panels depict floral rosettes, Navagrahas, and intricate relief vignettes from the Ramayana and Shiva Purana.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100 text-xs text-amber-800 font-semibold">
+            Teakwood Carvings • Tantric Mandapam
+          </div>
+        </div>
+
+        <!-- Feature 3: Murals & Vilakkumadam -->
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mb-4">
+              🪔
+            </div>
+            <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">Vilakkumadam & Murals</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              The outer walls of the Nalambalam are structured with traditional wooden lattice frames holding rows of brass lamps (Vilakkumadam). Ancient natural pigment murals (Chuvarchithrangal) depict Lord Shiva's Kiratharjuna and Dakshinamurthy forms.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100 text-xs text-amber-800 font-semibold">
+            Bronze Vilakkumadam • Ancient Frescoes
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center">
+        <Button href="/gallery" variant="primary" size="lg" class="font-bold">
+          Explore Photo & Video Gallery →
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

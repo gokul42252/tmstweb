@@ -1,0 +1,110 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/UI/Button.astro";
+---
+
+<BaseLayout
+  title="Plan Your Pilgrimage (Devotee Guide) | Thirumarady Sri Mahadeva Temple"
+  description="Comprehensive visitor and pilgrim guide for devotees visiting Thirumarady Shiva Temple. Dress code, darshan timings, pradakshina order, and amenities."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🙏</span>
+        <span>തീർത്ഥാടക വഴികാട്ടി</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Plan Your Temple Visit
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        A welcoming guide for out-of-station devotees, Sabarimala pilgrims, and first-time visitors to Thirumarady Sri Mahadeva Kshetram.
+      </p>
+    </div>
+  </section>
+
+  <!-- Visitor Steps -->
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container max-w-5xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div class="p-6 rounded-3xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold mb-4">
+              1
+            </div>
+            <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">Check Timings & Attire</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Temple is open from 05:00 AM – 10:30 AM and 05:00 PM – 08:00 PM. Men must wear traditional Mundu (shirt removal is mandatory inside Nalambalam). Women should wear Saree, Set Mundu, or Salwar.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100">
+            <a href="/etiquette" class="text-xs font-bold text-amber-800 hover:text-amber-900">
+              Read Complete Dress Code →
+            </a>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold mb-4">
+              2
+            </div>
+            <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">Book Offerings</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Pre-book sacred poojas such as Jaladhara, Maha Mrityunjaya Homam, and Swayamvara Pushpanjali in your birth star online or at the Devaswom counter.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100">
+            <a href="/vazhipadu" class="text-xs font-bold text-amber-800 hover:text-amber-900">
+              Vazhipadu Rate List →
+            </a>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold mb-4">
+              3
+            </div>
+            <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">Circumambulate & Pray</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Pray first at the flagstaff, Kanni Moola Ganapathy, then receive Lord Shiva's divine darshan. Follow the strict Somassuthram rule (do not cross the northern holy spout).
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100">
+            <a href="/deities#pradakshina" class="text-xs font-bold text-amber-800 hover:text-amber-900">
+              Pradakshina Rules →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Devotee Amenities Box -->
+      <div class="p-8 rounded-3xl bg-white border border-stone-200 shadow-sm space-y-4">
+        <h3 class="text-xl font-serif font-bold text-stone-900">Pilgrim Amenities Available</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs text-stone-700">
+          <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+            <span class="text-base block mb-1">👞</span>
+            <span class="font-bold text-stone-900 block">Footwear Counter</span>
+            <span>Safely deposit shoes & chappals outside Gopuram</span>
+          </div>
+          <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+            <span class="text-base block mb-1">💧</span>
+            <span class="font-bold text-stone-900 block">Pure Drinking Water</span>
+            <span>Purified water stations available</span>
+          </div>
+          <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+            <span class="text-base block mb-1">🍚</span>
+            <span class="font-bold text-stone-900 block">Nitya Annadanam</span>
+            <span>Midday prasadam feast for pilgrims</span>
+          </div>
+          <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+            <span class="text-base block mb-1">🚗</span>
+            <span class="font-bold text-stone-900 block">Vehicle Parking</span>
+            <span>Spacious parking for cars, tempo & buses</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

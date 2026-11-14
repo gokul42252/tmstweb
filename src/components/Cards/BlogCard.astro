@@ -1,0 +1,53 @@
+---
+import { formatDate } from '../../utils/dateUtils';
+import Button from '../UI/Button.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+  className?: string;
+}
+
+const { post, className = '' } = Astro.props;
+const href = `/blog/${post.id}`;
+---
+
+<div class:list={['card group overflow-hidden flex flex-col h-full bg-white border border-stone-200/90 rounded-2xl shadow-sm hover:shadow-md transition-shadow', className]}>
+  {post.data.image && (
+    <a href={href} class="overflow-hidden aspect-video block bg-stone-900">
+      <img
+        src={post.data.image.url}
+        alt={post.data.image.alt}
+        class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+      />
+    </a>
+  )}
+
+  <div class="p-6 flex flex-col flex-1">
+    <a href={href} class="block">
+      <h3 class="mb-1 text-lg font-serif font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
+        {post.data.title}
+      </h3>
+    </a>
+
+    <div class="text-stone-600 flex flex-col flex-1">
+      <div class="mb-3 flex items-center text-xs text-stone-500">
+        <span class="mr-2">📅</span>
+        <span>{formatDate(post.data.pubDate)}</span>
+        <span class="mx-2">•</span>
+        <span>{post.data.author}</span>
+      </div>
+
+      <p class="text-stone-600 text-xs sm:text-sm mb-4 line-clamp-3 leading-relaxed">
+        {post.data.description}
+      </p>
+
+      <div class="mt-auto pt-3 border-t border-stone-100 flex items-center justify-between">
+        <a href={href} class="text-xs font-bold text-amber-800 hover:text-amber-900 inline-flex items-center gap-1">
+          <span>Read Full Article</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

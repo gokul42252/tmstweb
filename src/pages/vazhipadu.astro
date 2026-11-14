@@ -1,0 +1,700 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { VAZHIPADU_OFFERINGS, NAKSHATRAS, TEMPLE_INFO } from "../data/templeData";
+import Button from "../components/UI/Button.astro";
+
+// Group offerings by deity
+const shivaOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "shiva");
+const ganapathyOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "ganapathy");
+const ayyappanOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "ayyappan");
+const subrahmanianOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "subrahmanian");
+const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
+---
+
+<BaseLayout
+  title="Vazhipadu Offerings & Online Booking | Thirumarady Sri Mahadeva Temple"
+  description="Transparent rate list of daily and special vazhipadus (Dhara, Pushpanjali, Maha Mrityunjaya Homam) with spiritual significance. Online booking form for out-of-station devotees."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🥥</span>
+        <span>വഴിപാടുകളും ഓൺലൈൻ ബുക്കിംഗും</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Temple Vazhipadu & Offerings
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Transparent rate list of sacred poojas, homams, and abhishekam across all deities. Devotees worldwide can sponsor rituals in their Nakshatra.
+      </p>
+
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#booking" class="btn btn-primary font-bold shadow-lg">
+          Go to Online Booking Form ↓
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rate List with Tabs / Filter -->
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-serif font-bold text-stone-900 mb-2">
+          Authorized Devaswom Rate List
+        </h2>
+        <p class="text-xs sm:text-sm text-stone-600">
+          Prescribed rates according to the Travancore Devaswom Board regulations.
+        </p>
+      </div>
+
+      <!-- Deity Filter Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <button class="vazhipadu-tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-amber-600 text-white shadow-sm transition-all" data-target="all">
+          All Deities (എല്ലാ വഴിപാടുകളും)
+        </button>
+        <button class="vazhipadu-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-stone-700 border border-stone-300 hover:border-amber-500 hover:text-amber-800 transition-all" data-target="shiva">
+          🔱 Lord Shiva (മഹാദേവൻ)
+        </button>
+        <button class="vazhipadu-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-stone-700 border border-stone-300 hover:border-amber-500 hover:text-amber-800 transition-all" data-target="ganapathy">
+          🐘 Ganapathy (ഗണപതി)
+        </button>
+        <button class="vazhipadu-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-stone-700 border border-stone-300 hover:border-amber-500 hover:text-amber-800 transition-all" data-target="ayyappan">
+          🏹 Ayyappan (ശാസ്താവ്)
+        </button>
+        <button class="vazhipadu-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-stone-700 border border-stone-300 hover:border-amber-500 hover:text-amber-800 transition-all" data-target="subrahmanian">
+          🦚 Subrahmanian (സുബ്രഹ്മണ്യൻ)
+        </button>
+        <button class="vazhipadu-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-stone-700 border border-stone-300 hover:border-amber-500 hover:text-amber-800 transition-all" data-target="serpent">
+          🐍 Nagaraja (നാഗങ്ങൾ)
+        </button>
+      </div>
+
+      <!-- Offerings Grid -->
+      <div id="offerings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {VAZHIPADU_OFFERINGS.map((item) => (
+          <div class={`offering-card p-6 rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group`} data-deity={item.deity}>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] uppercase tracking-wider font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                  {item.deityName.split("(")[0]}
+                </span>
+                <span class="text-lg font-serif font-black text-amber-800">
+                  ₹{item.rate}
+                </span>
+              </div>
+
+              <h3 class="text-lg font-serif font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
+                {item.name}
+              </h3>
+              <p class="text-xs font-malayalam font-bold text-stone-500 mb-3">{item.malayalam}</p>
+
+              <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                {item.description}
+              </p>
+
+              <div class="p-3 rounded-xl bg-amber-50/80 border border-amber-200/70 text-xs text-amber-950 leading-tight">
+                <strong class="font-bold text-amber-900 block mb-0.5">Spiritual Significance:</strong>
+                <span>{item.significance}</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between">
+              <span class="text-[11px] text-stone-400">Prasad Available</span>
+              <button
+                class="select-offering-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 hover:bg-amber-600 text-stone-950 transition-colors"
+                data-id={item.id}
+                data-name={item.name}
+                data-rate={item.rate}
+              >
+                + Select Offering
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Online Booking & Payment Form Section -->
+  <section id="booking" class="py-16 sm:py-24 bg-stone-900 text-white relative">
+    <div class="container max-w-4xl">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-2 border border-amber-500/30">
+          <span>🪔</span>
+          <span>വിദൂര ഭക്തർക്കുള്ള ഓൺലൈൻ ബുക്കിംഗ്</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mb-2">
+          Online Vazhipadu Booking Form
+        </h2>
+        <p class="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto font-light">
+          Fill in your devotional details. The Melshanthi will perform the sacred archana/homam in your name and Nakshatra. Prasad can be collected at the counter or delivered via Speed Post.
+        </p>
+      </div>
+
+      <!-- Booking Card Form -->
+      <div class="p-6 sm:p-10 rounded-3xl bg-stone-950 border border-amber-500/30 shadow-2xl relative">
+        <form id="vazhipadu-booking-form" class="space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Devotee Name -->
+            <div>
+              <label for="devotee-name" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Devotee Full Name (ഭക്തന്റെ പേര്) *
+              </label>
+              <input
+                type="text"
+                id="devotee-name"
+                name="devoteeName"
+                required
+                placeholder="e.g., Ananthakrishnan K."
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+              />
+            </div>
+
+            <!-- Birth Star / Nakshatram Dropdown -->
+            <div>
+              <label for="nakshatra" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Birth Star / Nakshatra (ജന്മനക്ഷത്രം) *
+              </label>
+              <select
+                id="nakshatra"
+                name="nakshatra"
+                required
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+              >
+                <option value="">Select your 27 Birth Star...</option>
+                {NAKSHATRAS.map((star) => (
+                  <option value={star.en}>{star.en} ({star.ml})</option>
+                ))}
+              </select>
+            </div>
+
+            <!-- Gotram (Optional) -->
+            <div>
+              <label for="gotra" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Gotra (ഗോത്രം - Optional)
+              </label>
+              <input
+                type="text"
+                id="gotra"
+                name="gotra"
+                placeholder="e.g., Kasyapa, Bharadwaja, Shiva Gotra"
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+              />
+            </div>
+
+            <!-- Date of Offering -->
+            <div>
+              <label for="offering-date" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Date of Offering (വഴിപാട് തീയതി) *
+              </label>
+              <input
+                type="date"
+                id="offering-date"
+                name="offeringDate"
+                required
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+              />
+            </div>
+
+            <!-- Phone Number -->
+            <div>
+              <label for="phone" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Mobile Number (വാട്സ്ആപ്പ് നമ്പർ) *
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder="+91 98765 43210"
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+              />
+            </div>
+
+            <!-- Email Address -->
+            <div>
+              <label for="email" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+                Email Address (For Instant Receipt) *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="devotee@example.com"
+                class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+              />
+            </div>
+          </div>
+
+          <!-- Select Offerings Dropdown & Selected Cart List -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+              Select Vazhipadu Offering(s) *
+            </label>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <select
+                id="offering-select"
+                class="flex-1 px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+              >
+                <option value="">Choose an offering to add...</option>
+                <optgroup label="🔱 Lord Shiva (ശ്രീ മഹാദേവൻ)">
+                  {shivaOfferings.map((item) => (
+                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.name} — ₹{item.rate}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="🐘 Lord Ganapathy (ഗണപതി)">
+                  {ganapathyOfferings.map((item) => (
+                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.name} — ₹{item.rate}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="🏹 Lord Ayyappan (ശാസ്താവ്)">
+                  {ayyappanOfferings.map((item) => (
+                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.name} — ₹{item.rate}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="🦚 Lord Subrahmanian (സുബ്രഹ്മണ്യൻ)">
+                  {subrahmanianOfferings.map((item) => (
+                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.name} — ₹{item.rate}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="🐍 Nagaraja & Sarpam (നാഗങ്ങൾ)">
+                  {serpentOfferings.map((item) => (
+                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.name} — ₹{item.rate}
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
+
+              <button
+                type="button"
+                id="add-offering-btn"
+                class="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-sm transition-colors whitespace-nowrap"
+              >
+                + Add Offering
+              </button>
+            </div>
+
+            <!-- Selected Offerings Container -->
+            <div id="selected-offerings-container" class="mt-4 space-y-2">
+              <p id="empty-cart-msg" class="text-xs text-stone-500 italic">No offerings added yet. Select one above or click "+ Select Offering" from the cards.</p>
+            </div>
+          </div>
+
+          <!-- Prasad Delivery Mode -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+              Prasad Delivery Mode (പ്രസാദ വിതരണം)
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label class="p-3.5 rounded-xl bg-stone-900 border border-stone-700 flex items-center space-x-3 cursor-pointer hover:border-amber-400">
+                <input type="radio" name="deliveryMode" value="counter" checked class="text-amber-500 focus:ring-amber-400" />
+                <div>
+                  <span class="block text-sm font-bold text-white">Direct Counter Pickup</span>
+                  <span class="text-xs text-stone-400">Collect prasad at Thirumarady temple counter</span>
+                </div>
+              </label>
+
+              <label class="p-3.5 rounded-xl bg-stone-900 border border-stone-700 flex items-center space-x-3 cursor-pointer hover:border-amber-400">
+                <input type="radio" name="deliveryMode" value="postal" class="text-amber-500 focus:ring-amber-400" />
+                <div>
+                  <span class="block text-sm font-bold text-white">Postal Delivery (+ ₹60 Speed Post)</span>
+                  <span class="text-xs text-stone-400">Consecrated Vibhuti & Sandal dispatched home</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Postal Address (revealed if postal chosen) -->
+          <div id="postal-address-group" class="hidden">
+            <label for="address" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+              Complete Postal Address & PIN Code *
+            </label>
+            <textarea
+              id="address"
+              name="address"
+              rows="2"
+              placeholder="House name / Flat No, Street, City, State, PIN Code"
+              class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
+            ></textarea>
+          </div>
+
+          <!-- Live Price Summary -->
+          <div class="p-4 rounded-xl bg-amber-950/40 border border-amber-500/30 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-stone-400 block">Total Contribution Amount</span>
+              <span class="text-xs text-amber-300">Inclusive of temple dakshina & archana</span>
+            </div>
+            <div class="text-right">
+              <span id="total-price-display" class="text-2xl sm:text-3xl font-serif font-black text-amber-400">
+                ₹0
+              </span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-serif font-black text-lg tracking-wide uppercase shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2"
+          >
+            <span>🪔 Confirm & Generate Temple Booking Receipt</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Receipt Modal (Generated Upon Booking) -->
+  <div id="receipt-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white text-stone-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button id="close-modal-btn" class="absolute top-5 right-5 text-stone-400 hover:text-stone-800 text-2xl font-bold p-1">
+        ✕
+      </button>
+
+      <!-- Printable Area -->
+      <div id="printable-receipt" class="print-area space-y-4">
+        <!-- Header -->
+        <div class="text-center pb-4 border-b-2 border-stone-800">
+          <div class="w-12 h-12 mx-auto rounded-full bg-amber-600 text-white flex items-center justify-center text-xl mb-1">
+            🔱
+          </div>
+          <h2 class="text-xl font-serif font-black text-stone-900">
+            തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം
+          </h2>
+          <p class="text-xs font-serif uppercase tracking-wider font-bold text-amber-900">
+            Thirumarady Sri Mahadeva Temple
+          </p>
+          <p class="text-[11px] text-stone-500">
+            Travancore Devaswom Board • Piravom, Ernakulam • PIN: 686662
+          </p>
+          <div class="inline-block mt-2 px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider border border-emerald-300">
+            Official E-Vazhipadu Receipt (CONFIRMED)
+          </div>
+        </div>
+
+        <!-- Receipt Details Grid -->
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Receipt No.</span>
+            <span id="receipt-no" class="font-mono font-bold text-stone-900">TM-2026-8849</span>
+          </div>
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Booking Date & Time</span>
+            <span id="receipt-timestamp" class="font-mono font-bold text-stone-900">15 Nov 2026, 01:30 AM</span>
+          </div>
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Devotee Name</span>
+            <span id="receipt-name" class="font-bold text-stone-900">Ananthakrishnan K.</span>
+          </div>
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Birth Star (Nakshatram)</span>
+            <span id="receipt-star" class="font-bold text-amber-800">Thiruvathira (തിരുവാതിര)</span>
+          </div>
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Pooja Conduct Date</span>
+            <span id="receipt-date" class="font-bold text-stone-900">2026-12-01</span>
+          </div>
+          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+            <span class="text-stone-400 block text-[10px] uppercase">Prasad Delivery</span>
+            <span id="receipt-delivery" class="font-bold text-stone-900">Counter Pickup</span>
+          </div>
+        </div>
+
+        <!-- Booked Offerings List -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">Booked Offerings:</h4>
+          <div id="receipt-items-list" class="space-y-1 text-xs">
+            <!-- Dynamic items injected here -->
+          </div>
+        </div>
+
+        <!-- Total Paid -->
+        <div class="p-3 rounded-xl bg-amber-50 border border-amber-300 flex items-center justify-between">
+          <span class="font-serif font-bold text-amber-900 text-sm">Total Sown Dakshina / Rate:</span>
+          <span id="receipt-total" class="font-serif font-black text-amber-900 text-lg">₹500</span>
+        </div>
+
+        <!-- Devaswom Stamp Seal -->
+        <div class="pt-4 border-t border-stone-200 flex items-center justify-between text-[11px] text-stone-500">
+          <div>
+            <p><strong>Note:</strong> Present this e-receipt or SMS confirmation at the Devaswom counter to collect holy Prasad.</p>
+          </div>
+          <div class="text-center flex-shrink-0 pl-4">
+            <div class="w-16 h-16 rounded-full border-2 border-red-700/60 text-red-700 flex items-center justify-center text-[9px] font-bold uppercase tracking-tighter transform rotate-[-8deg] p-1">
+              Devaswom Seal
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-6 flex gap-3 no-print">
+        <button
+          onclick="window.print()"
+          class="flex-1 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-bold text-sm transition-colors flex items-center justify-center gap-2 print-include"
+        >
+          <span>🖨️ Print / Download PDF</span>
+        </button>
+        <button
+          id="done-modal-btn"
+          class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-sm transition-colors"
+        >
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Tab filtering logic
+  const tabButtons = document.querySelectorAll(".vazhipadu-tab-btn");
+  const offeringCards = document.querySelectorAll(".offering-card");
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach(b => {
+        b.classList.remove("active", "bg-amber-600", "text-white");
+        b.classList.add("bg-white", "text-stone-700");
+      });
+      btn.classList.add("active", "bg-amber-600", "text-white");
+      btn.classList.remove("bg-white", "text-stone-700");
+
+      const target = btn.getAttribute("data-target");
+      offeringCards.forEach(card => {
+        if (target === "all" || card.getAttribute("data-deity") === target) {
+          (card as HTMLElement).style.display = "flex";
+        } else {
+          (card as HTMLElement).style.display = "none";
+        }
+      });
+    });
+  });
+
+  // Selected Offerings Cart State
+  interface CartItem {
+    id: string;
+    name: string;
+    rate: number;
+  }
+
+  let cart: CartItem[] = [];
+
+  const cartContainer = document.getElementById("selected-offerings-container");
+  const emptyMsg = document.getElementById("empty-cart-msg");
+  const totalPriceDisplay = document.getElementById("total-price-display");
+  const postalAddressGroup = document.getElementById("postal-address-group");
+  const deliveryRadios = document.querySelectorAll("input[name='deliveryMode']");
+  const offeringSelect = document.getElementById("offering-select") as HTMLSelectElement;
+  const addOfferingBtn = document.getElementById("add-offering-btn");
+  const bookingForm = document.getElementById("vazhipadu-booking-form");
+
+  // Toggle postal address field
+  deliveryRadios.forEach(radio => {
+    radio.addEventListener("change", (e) => {
+      const val = (e.target as HTMLInputElement).value;
+      if (val === "postal") {
+        postalAddressGroup?.classList.remove("hidden");
+      } else {
+        postalAddressGroup?.classList.add("hidden");
+      }
+      updateCartUI();
+    });
+  });
+
+  function updateCartUI() {
+    if (!cartContainer || !emptyMsg || !totalPriceDisplay) return;
+
+    if (cart.length === 0) {
+      emptyMsg.style.display = "block";
+      cartContainer.querySelectorAll(".cart-row").forEach(el => el.remove());
+      totalPriceDisplay.textContent = "₹0";
+      return;
+    }
+
+    emptyMsg.style.display = "none";
+    cartContainer.querySelectorAll(".cart-row").forEach(el => el.remove());
+
+    let subtotal = 0;
+    cart.forEach((item, index) => {
+      subtotal += item.rate;
+      const row = document.createElement("div");
+      row.className = "cart-row flex items-center justify-between p-3 rounded-lg bg-stone-900 border border-stone-800 text-xs";
+      row.innerHTML = `
+        <span class="font-semibold text-stone-200">${item.name}</span>
+        <div class="flex items-center space-x-3">
+          <span class="font-mono text-amber-400 font-bold">₹${item.rate}</span>
+          <button type="button" class="text-red-400 hover:text-red-300 remove-btn" data-index="${index}">✕</button>
+        </div>
+      `;
+      cartContainer.appendChild(row);
+    });
+
+    // Check delivery cost
+    const selectedDelivery = (document.querySelector("input[name='deliveryMode']:checked") as HTMLInputElement)?.value;
+    const deliveryFee = selectedDelivery === "postal" ? 60 : 0;
+    const finalTotal = subtotal + deliveryFee;
+
+    if (deliveryFee > 0) {
+      const delRow = document.createElement("div");
+      delRow.className = "cart-row flex items-center justify-between p-2.5 rounded-lg bg-stone-900/60 border border-stone-800 text-xs text-stone-400";
+      delRow.innerHTML = `
+        <span>Speed Post Prasad Delivery</span>
+        <span class="font-mono text-amber-300">+₹60</span>
+      `;
+      cartContainer.appendChild(delRow);
+    }
+
+    totalPriceDisplay.textContent = `₹${finalTotal}`;
+
+    // Add remove listener
+    cartContainer.querySelectorAll(".remove-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const idx = parseInt(btn.getAttribute("data-index") || "0");
+        cart.splice(idx, 1);
+        updateCartUI();
+      });
+    });
+  }
+
+  // Add from dropdown
+  addOfferingBtn?.addEventListener("click", () => {
+    if (!offeringSelect || !offeringSelect.value) return;
+    const selectedOption = offeringSelect.selectedOptions[0];
+    const id = offeringSelect.value;
+    const name = selectedOption.getAttribute("data-name") || "";
+    const rate = parseInt(selectedOption.getAttribute("data-rate") || "0");
+
+    cart.push({ id, name, rate });
+    offeringSelect.value = "";
+    updateCartUI();
+  });
+
+  // Auto set minimum date to today
+  const offeringDateInput = document.getElementById("offering-date") as HTMLInputElement;
+  if (offeringDateInput) {
+    const today = new Date().toISOString().split("T")[0];
+    offeringDateInput.min = today;
+  }
+
+  // Add from cards
+  document.querySelectorAll(".select-offering-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id") || "";
+      const name = btn.getAttribute("data-name") || "";
+      const rate = parseInt(btn.getAttribute("data-rate") || "0");
+
+      cart.push({ id, name, rate });
+      updateCartUI();
+
+      // Visual button feedback
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "✓ Added!";
+      btn.classList.add("bg-emerald-500", "text-white");
+      btn.classList.remove("bg-amber-500", "text-stone-950");
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.remove("bg-emerald-500", "text-white");
+        btn.classList.add("bg-amber-500", "text-stone-950");
+      }, 1200);
+
+      // Scroll to booking form
+      document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // Modal elements
+  const receiptModal = document.getElementById("receipt-modal");
+  const closeModalBtn = document.getElementById("close-modal-btn");
+  const doneModalBtn = document.getElementById("done-modal-btn");
+
+  function closeReceiptModal() {
+    receiptModal?.classList.add("hidden");
+    receiptModal?.classList.remove("flex");
+  }
+
+  closeModalBtn?.addEventListener("click", closeReceiptModal);
+  doneModalBtn?.addEventListener("click", closeReceiptModal);
+  receiptModal?.addEventListener("click", (e) => {
+    if (e.target === receiptModal) {
+      closeReceiptModal();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && receiptModal && !receiptModal.classList.contains("hidden")) {
+      closeReceiptModal();
+    }
+  });
+
+  // Form submit handler
+  bookingForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (cart.length === 0) {
+      alert("Please add at least one Vazhipadu offering before confirming.");
+      return;
+    }
+
+    const name = (document.getElementById("devotee-name") as HTMLInputElement).value;
+    const star = (document.getElementById("nakshatra") as HTMLSelectElement).value;
+    const date = (document.getElementById("offering-date") as HTMLInputElement).value;
+    const delivery = (document.querySelector("input[name='deliveryMode']:checked") as HTMLInputElement)?.value;
+
+    const receiptNo = "TM-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
+    const receiptTime = new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+
+    // Populate modal fields
+    const rNo = document.getElementById("receipt-no");
+    const rTime = document.getElementById("receipt-timestamp");
+    const rName = document.getElementById("receipt-name");
+    const rStar = document.getElementById("receipt-star");
+    const rDate = document.getElementById("receipt-date");
+    const rDelivery = document.getElementById("receipt-delivery");
+    const rItems = document.getElementById("receipt-items-list");
+    const rTotal = document.getElementById("receipt-total");
+
+    if (rNo) rNo.textContent = receiptNo;
+    if (rTime) rTime.textContent = receiptTime;
+    if (rName) rName.textContent = name;
+    if (rStar) rStar.textContent = star;
+    if (rDate) rDate.textContent = date;
+    if (rDelivery) rDelivery.textContent = delivery === "postal" ? "Speed Post Dispatch" : "Temple Counter Pickup";
+
+    if (rItems) {
+      rItems.innerHTML = "";
+      cart.forEach(item => {
+        const itemRow = document.createElement("div");
+        itemRow.className = "flex justify-between py-1 border-b border-stone-100";
+        itemRow.innerHTML = `<span>${item.name}</span><span class="font-mono font-bold">₹${item.rate}</span>`;
+        rItems.appendChild(itemRow);
+      });
+      if (delivery === "postal") {
+        const postRow = document.createElement("div");
+        postRow.className = "flex justify-between py-1 border-b border-stone-100 text-stone-500";
+        postRow.innerHTML = `<span>Postal Delivery Charge</span><span class="font-mono">₹60</span>`;
+        rItems.appendChild(postRow);
+      }
+    }
+
+    const subtotal = cart.reduce((acc, curr) => acc + curr.rate, 0);
+    const finalAmount = subtotal + (delivery === "postal" ? 60 : 0);
+    if (rTotal) rTotal.textContent = `₹${finalAmount}`;
+
+    // Show modal
+    receiptModal?.classList.remove("hidden");
+    receiptModal?.classList.add("flex");
+  });
+</script>
+

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Sacred circle with gold gradient -->
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#92400e" />
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#dc2626" />
+      <stop offset="50%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#fde047" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="50" cy="50" r="48" fill="#1c1613" stroke="url(#goldGrad)" stroke-width="3" />
+  
+  <!-- Sacred Trishul & Damaru silhouette -->
+  <path d="M50 15 L50 78 M42 22 C36 28 35 40 43 46 M58 22 C64 28 65 40 57 46 M43 46 C48 48 52 48 57 46" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linecap="round" fill="none" />
+  
+  <!-- Sacred Tripundra (Three lines of Bhasma) -->
+  <line x1="38" y1="52" x2="62" y2="52" stroke="#fef3c7" stroke-width="2" stroke-linecap="round" />
+  <line x1="36" y1="56" x2="64" y2="56" stroke="#fef3c7" stroke-width="2" stroke-linecap="round" />
+  <line x1="38" y1="60" x2="62" y2="60" stroke="#fef3c7" stroke-width="2" stroke-linecap="round" />
+  
+  <!-- Kumkum Tilak -->
+  <circle cx="50" cy="56" r="2.2" fill="#dc2626" />
+  
+  <!-- Nilavilakku / Diya Base -->
+  <path d="M35 84 Q50 80 65 84 L60 88 L40 88 Z" fill="url(#goldGrad)" />
+</svg>

@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/UI/Button.astro";
+
+const etiquetteRules = [
+  {
+    category: "Dress Code for Men (പുരുഷന്മാർക്ക്)",
+    rules: [
+      "Traditional Kerala Mundu (Dhoti) wrapped around the waist is mandatory.",
+      "Upper body MUST remain bare when entering the Nalambalam (inner courtyard). Shirts, vests, t-shirts, and jackets must be removed and kept outside.",
+      "An Angavastram (Tholmundu) or folded cotton towel may be draped over the shoulder.",
+      "Pants, jeans, bermudas, and shorts are strictly not permitted inside the inner courtyard."
+    ],
+    icon: "🥻"
+  },
+  {
+    category: "Dress Code for Women (സ്ത്രീകൾക്ക്)",
+    rules: [
+      "Traditional Saree, Kerala Set Mundu (Mundum Neriyathum), Half Saree, or modest Salwar Kameez with Dupatta properly draped.",
+      "Western attire including jeans, sleeveless tops, miniskirts, tight leggings, and shorts are strictly disallowed.",
+      "Modest, respectful presentation honoring the sacred spiritual atmosphere of the Shiva sanctum."
+    ],
+    icon: "🥻"
+  },
+  {
+    category: "Photography & Videography (ഫോട്ടോഗ്രാഫി വിലക്ക്)",
+    rules: [
+      "Photography and video recording are STRICTLY FORBIDDEN inside the Nalambalam (inner shrine complex) and facing the Sreekovil.",
+      "Drones, commercial camera rigs, and tripods are completely prohibited on temple grounds without written Devaswom Board permission.",
+      "Mobile phones must be switched off or placed in complete silent mode prior to stepping onto the stone prakaram."
+    ],
+    icon: "📷"
+  },
+  {
+    category: "Purity & Ritual Sanctity (ശുദ്ധി & ആചാരങ്ങൾ)",
+    rules: [
+      "Devotees should take a bath and wear fresh, clean traditional clothes before visiting the temple.",
+      "Deposit all footwear (shoes, sandals, chappals) at the designated footwear counter outside the outer Gopuram entrance.",
+      "Do not enter the temple during periods of ritual impurity (Aashoucham - birth / death periods in the immediate family).",
+      "Smoking, consumption of alcohol, tobacco, non-vegetarian food, and chewing gum on temple premises are strictly illegal."
+    ],
+    icon: "🌿"
+  }
+];
+---
+
+<BaseLayout
+  title="Dress Code & Temple Etiquette | Thirumarady Sri Mahadeva Temple"
+  description="Traditional Kerala temple attire rules (Mundu for men, Saree/Set Mundu for women), photography rules inside Nalambalam, and sacred visitor etiquette."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🙏</span>
+        <span>ക്ഷേത്ര ആചാര മര്യാദകൾ</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Dress Code & Temple Etiquette
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Preserving the pristine spiritual sanctity of Thirumarady Sri Mahadeva Kshetram through traditional attire, mindful reverence, and Agamic purity.
+      </p>
+    </div>
+  </section>
+
+  <!-- Key Guidelines Cards -->
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container max-w-5xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        {etiquetteRules.map((sec) => (
+          <div class="p-6 sm:p-8 rounded-3xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-3 mb-4 pb-3 border-b border-stone-100">
+                <span class="text-2xl">{sec.icon}</span>
+                <h2 class="text-lg font-serif font-bold text-stone-900">{sec.category}</h2>
+              </div>
+              <ul class="space-y-3">
+                {sec.rules.map((rule) => (
+                  <li class="flex items-start space-x-2 text-xs sm:text-sm text-stone-700 leading-relaxed">
+                    <span class="text-amber-600 font-bold flex-shrink-0 mt-0.5">✦</span>
+                    <span>{rule}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Quick Etiquette Summary Banner -->
+      <div class="p-8 rounded-3xl bg-stone-900 border border-amber-500/30 text-white text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-xl font-serif font-bold text-amber-300">
+            Have Questions About Temple Darshan?
+          </h3>
+          <p class="text-xs sm:text-sm text-stone-300 mt-1 max-w-xl">
+            Our Devaswom office staff and temple volunteers are happy to assist first-time devotees with traditional attire and pooja enquiries.
+          </p>
+        </div>
+        <div class="flex gap-3 flex-shrink-0">
+          <Button href="/darshan-timings" variant="primary" size="md" class="font-bold">
+            Darshan Timings
+          </Button>
+          <Button href="/how-to-reach" variant="outline" size="md" class="border-stone-700 text-stone-200">
+            Route Map
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

@@ -1,0 +1,32 @@
+---
+export interface Props {
+  title: string;
+  malayalam?: string;
+  bgClass?: string;
+  className?: string;
+  icon?: string;
+}
+
+const {
+  title,
+  malayalam,
+  bgClass = 'bg-stone-50/80',
+  className = '',
+  icon = '🪔',
+} = Astro.props;
+---
+
+<div class:list={['p-6 sm:p-8 rounded-2xl border border-amber-200/80 shadow-sm hover:shadow-md hover:border-amber-400 transition-all duration-300 relative overflow-hidden group', bgClass, className]}>
+  <div class="flex items-center space-x-3 mb-4">
+    <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 transition-transform">
+      {icon}
+    </div>
+    <div>
+      <h3 class="text-xl font-serif font-bold text-stone-900 group-hover:text-amber-800 transition-colors leading-tight">{title}</h3>
+      {malayalam && <p class="text-xs font-malayalam text-amber-700 font-semibold">{malayalam}</p>}
+    </div>
+  </div>
+  <div class="text-stone-600 text-sm leading-relaxed">
+    <slot />
+  </div>
+</div>

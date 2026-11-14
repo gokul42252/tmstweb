@@ -1,0 +1,245 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { FESTIVALS_DATA } from "../data/templeData";
+import Button from "../components/UI/Button.astro";
+
+// 8-Day Utsavam Detailed Itinerary
+const utsavamDays = [
+  {
+    day: "Day 1 (കൊടിയേറ്റം)",
+    dateTitle: "Kodiyettam & Tantric Inception",
+    time: "Morning 07:30 AM",
+    description: "Ceremonial flag hoisting at the gold-clad Dwajasthambham by Kidangassery Thanthri. Consecration of Utsava vigraha and temple bells.",
+    events: ["Ganapathy Homam", "Kodiyettu Ritual", "Panchavadyam", "Devotional Ganamela"]
+  },
+  {
+    day: "Day 2 to 5 (ഉത്സവബലി)",
+    dateTitle: "Daily Utsavabali & Ezhunnallippu",
+    time: "Morning & Evening",
+    description: "Elaborate tantric food offerings (Utsavabali) to celestial guardians. Caparisoned elephant processions through the village borders.",
+    events: ["Utsavabali Darshan", "Thayambaka by Maestro Artists", "Kathakali Recital", "Nadaswaram"]
+  },
+  {
+    day: "Day 6 (വലിയ വിളക്ക്)",
+    dateTitle: "Valiya Vilakku (Grand Illumination)",
+    time: "Evening 06:30 PM – Night",
+    description: "Peak festival eve where thousands of oil lamps illuminate the entire complex. Midnight Pandi Melam with five caparisoned elephants.",
+    events: ["Mega Deeparadhana", "Pandi Melam", "Ottamthullal", "Classical Dance"]
+  },
+  {
+    day: "Day 7 (പള്ളിവേട്ട)",
+    dateTitle: "Pallivetta (Royal Divine Hunt)",
+    time: "Night 10:30 PM",
+    description: "Lord Shiva undertakes the solemn nighttime divine hunt to banish malevolent forces. Absolute silence followed by joyous fireworks.",
+    events: ["Pallivetta Procession", "Special Sandhya Pooja", "Devotional Bhajans", "Tantric Shanthi"]
+  },
+  {
+    day: "Day 8 (ആറാട്ട് & കൊടിയിറക്കം)",
+    dateTitle: "Holy Arattu on Thiruvathira Nakshatra",
+    time: "Evening 05:00 PM – Night",
+    description: "The culmination of the 8-day festival. Lord Shiva is taken in grand procession to the sacred waters for the holy cleansing bath.",
+    events: ["Thiruvathira Arattu Bath", "Grand Arattu Sadya", "Kodiyirakkam (Flag Lowering)", "Valiya Kanikka"]
+  }
+];
+---
+
+<BaseLayout
+  title="Festivals & Calendar | Thirumarady Sri Mahadeva Temple"
+  description="Annual 8-day Dhanu Thiruvathira Utsavam, Maha Shivaratri, and monthly Pradosham schedule. Downloadable PDF schedules for Arattu procession and cultural programs."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🎪</span>
+        <span>ക്ഷേത്ര ഉത്സവങ്ങളും തിരുനാളുകളും</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Festivals & Spiritual Calendar
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Witness the divine grandeur of the 8-day Annual Dhanu Utsavam culminating on Thiruvathira, the holy vigil of Maha Shivaratri, and monthly Pradosham observances.
+      </p>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="#dhanu-utsavam" class="btn btn-primary font-bold shadow-md">
+          8-Day Dhanu Utsavam Schedule ↓
+        </a>
+        <a href="#pdf-download" class="btn btn-outline-gold font-bold">
+          📄 Download PDF Itineraries
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Major Festivals Showcase -->
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Sacred Celebrations</span>
+        <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+          Principal Festivals of Thirumarady
+        </h2>
+      </div>
+
+      <div class="space-y-12 max-w-5xl mx-auto">
+        {FESTIVALS_DATA.map((fest, idx) => (
+          <div class="p-6 sm:p-10 rounded-3xl bg-white border border-stone-200/90 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-stone-100 gap-4">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+                  {fest.season}
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-serif font-bold text-stone-900 mt-2">
+                  {fest.title}
+                </h3>
+                <p class="text-xs sm:text-sm font-malayalam font-bold text-amber-900 mt-1">{fest.malayalam}</p>
+              </div>
+
+              <div class="sm:text-right flex-shrink-0">
+                <span class="px-4 py-1.5 rounded-xl bg-stone-900 text-amber-300 font-mono font-bold text-xs sm:text-sm">
+                  {fest.duration}
+                </span>
+              </div>
+            </div>
+
+            <p class="text-stone-700 text-sm sm:text-base leading-relaxed mb-6">
+              {fest.description}
+            </p>
+
+            <div class="p-5 rounded-2xl bg-amber-50/70 border border-amber-200/60">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-amber-900 mb-3">Ritual Highlights:</h4>
+              <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm text-stone-800">
+                {fest.highlights.map((h) => (
+                  <li class="flex items-start space-x-2">
+                    <span class="text-amber-600 font-bold">✦</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8-Day Dhanu Utsavam Day-by-Day Schedule -->
+  <section id="dhanu-utsavam" class="py-16 sm:py-20 bg-stone-900 text-white">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center mb-16">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-2 border border-amber-500/30">
+          <span>🐘</span>
+          <span>ധനു തിരുവാതിര ഉത്സവം ക്രമം</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mb-3">
+          8-Day Annual Festival Day-by-Day Itinerary
+        </h2>
+        <p class="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto font-light">
+          From the sacred Kodiyettam to the divine Thiruvathira Arattu, explore the daily schedule of melam, ezhunnallippu, and cultural performances.
+        </p>
+      </div>
+
+      <div class="space-y-6 max-w-4xl mx-auto">
+        {utsavamDays.map((item, idx) => (
+          <div class="p-6 rounded-2xl bg-stone-950/90 border border-amber-500/20 hover:border-amber-400/50 transition-all">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-4 border-b border-stone-800">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-500 text-stone-950 font-bold text-sm flex items-center justify-center flex-shrink-0">
+                  {idx + 1}
+                </span>
+                <div>
+                  <h3 class="text-lg font-serif font-bold text-white">{item.day}</h3>
+                  <p class="text-xs font-malayalam text-amber-400">{item.dateTitle}</p>
+                </div>
+              </div>
+              <span class="text-xs font-mono text-stone-400 bg-stone-900 px-3 py-1 rounded-full self-start sm:self-auto">
+                {item.time}
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-stone-300 leading-relaxed mb-4">
+              {item.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2">
+              {item.events.map((e) => (
+                <span class="text-[11px] px-2.5 py-1 rounded-lg bg-stone-900 border border-amber-500/20 text-stone-300">
+                  {e}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloadable PDF Schedules & Procession Program -->
+  <section id="pdf-download" class="py-16 sm:py-20 bg-stone-50 border-t border-stone-200">
+    <div class="container max-w-4xl">
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Devotee Documents</span>
+        <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+          Download Festival Schedules & Programs
+        </h2>
+        <p class="text-stone-600 text-sm max-w-xl mx-auto mt-2">
+          Keep the complete schedule of the Arattu procession, Panchavadyam artists, and cultural stage programs on your mobile phone.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- PDF 1: Arattu Procession Schedule -->
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-red-100 text-red-700 flex items-center justify-center text-2xl mb-4">
+              📄
+            </div>
+            <span class="text-[10px] uppercase font-bold text-stone-400">Official PDF Schedule</span>
+            <h3 class="text-lg font-serif font-bold text-stone-900 mt-1">
+              Thiruvathira Arattu Procession Route & Timings
+            </h3>
+            <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+              Complete village route map, stopping points (Para), elephant lineup, and Panchavadyam timings for the holy Arattu.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-stone-100">
+            <button
+              onclick="window.print()"
+              class="w-full py-2.5 px-4 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2"
+            >
+              <span>📥 Download / Print Arattu Schedule</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- PDF 2: Cultural Programs Schedule -->
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mb-4">
+              🎭
+            </div>
+            <span class="text-[10px] uppercase font-bold text-stone-400">Official PDF Schedule</span>
+            <h3 class="text-lg font-serif font-bold text-stone-900 mt-1">
+              8-Day Cultural & Spiritual Stage Programs
+            </h3>
+            <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+              Daily Kathakali stories, Thayambaka artists, Carnatic musical concerts, and devotional speeches.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-stone-100">
+            <button
+              onclick="window.print()"
+              class="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 text-xs font-bold transition-colors flex items-center justify-center gap-2"
+            >
+              <span>📥 Download / Print Cultural Schedule</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

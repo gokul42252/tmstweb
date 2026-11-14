@@ -1,0 +1,183 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { DARSHAN_SCHEDULE, SPECIAL_TIMINGS, TEMPLE_INFO } from "../data/templeData";
+import Button from "../components/UI/Button.astro";
+---
+
+<BaseLayout
+  title="Darshan & Puja Timings | Thirumarady Sri Mahadeva Temple"
+  description="Daily morning and evening darshan schedule, Nirmalyam, Usha Pooja, Deeparadhana, Athazha Pooja, and special festival timing variations at Thirumarady Shiva Temple."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 relative overflow-hidden">
+    <div class="container relative z-10 text-center">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🕒</span>
+        <span>ദർശനവും പൂജാ സമയങ്ങളും</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Darshan & Pooja Timings
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Detailed schedule of daily Vedic rituals, Nirmalyam darshan, three principal poojas, evening Deeparadhana, and auspicious festival day alterations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Live Status & Quick Timings Banner -->
+  <section class="bg-amber-500/10 border-b border-amber-500/30 py-6">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div class="p-4 rounded-xl bg-white border border-amber-200/80 shadow-sm">
+          <span class="text-xs font-bold uppercase text-amber-700 tracking-wider">Morning Hours</span>
+          <p class="text-xl sm:text-2xl font-serif font-bold text-stone-900 mt-1">05:00 AM – 10:30 AM</p>
+          <p class="text-xs text-stone-500">Nirmalyam, Usha Pooja & Ucha Pooja</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-white border border-amber-200/80 shadow-sm">
+          <span class="text-xs font-bold uppercase text-amber-700 tracking-wider">Evening Hours</span>
+          <p class="text-xl sm:text-2xl font-serif font-bold text-stone-900 mt-1">05:00 PM – 08:00 PM</p>
+          <p class="text-xs text-stone-500">Deeparadhana (6:30 PM) & Athazha Pooja</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-white border border-amber-200/80 shadow-sm">
+          <span class="text-xs font-bold uppercase text-amber-700 tracking-wider">Pooja Counter Timings</span>
+          <p class="text-xl sm:text-2xl font-serif font-bold text-stone-900 mt-1">06:00 AM – 10:30 AM</p>
+          <p class="text-xs text-stone-500">Evening: 05:00 PM – 07:45 PM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Daily Schedule -->
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container">
+      <div class="max-w-4xl mx-auto mb-16">
+        <div class="text-center mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Sacred Ritual Breakdown</span>
+          <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+            Morning Schedule (പ്രഭാത പൂജകൾ)
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          {DARSHAN_SCHEDULE.morning.map((item, idx) => (
+            <div class="p-5 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="flex items-start space-x-4">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-700 font-bold text-sm flex-shrink-0">
+                  {idx + 1}
+                </div>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h3 class="text-lg font-serif font-bold text-stone-900">{item.name}</h3>
+                    <span class="text-xs font-malayalam font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                      {item.malayalam}
+                    </span>
+                  </div>
+                  <p class="text-xs text-stone-600 mt-1 leading-relaxed">{item.description}</p>
+                  <p class="text-[11px] text-amber-900 font-medium mt-1">
+                    <span class="font-bold">Significance:</span> {item.significance}
+                  </p>
+                </div>
+              </div>
+
+              <div class="sm:text-right flex-shrink-0 pl-14 sm:pl-0">
+                <span class="inline-block px-3 py-1 rounded-full bg-stone-900 text-amber-300 font-mono font-bold text-xs sm:text-sm">
+                  {item.time}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Evening Schedule -->
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Sacred Ritual Breakdown</span>
+          <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+            Evening Schedule (സന്ധ്യാ പൂജകൾ)
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          {DARSHAN_SCHEDULE.evening.map((item, idx) => (
+            <div class={`p-5 sm:p-6 rounded-2xl bg-white border shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${item.name.includes("Deeparadhana") ? "border-amber-400 bg-amber-50/40 ring-1 ring-amber-400/30" : "border-stone-200"}`}>
+              <div class="flex items-start space-x-4">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-700 font-bold text-sm flex-shrink-0">
+                  {idx + 1}
+                </div>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h3 class="text-lg font-serif font-bold text-stone-900">{item.name}</h3>
+                    <span class="text-xs font-malayalam font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                      {item.malayalam}
+                    </span>
+                    {item.name.includes("Deeparadhana") && (
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-600 text-white uppercase tracking-wider">
+                        Prime Darshan
+                      </span>
+                    )}
+                  </div>
+                  <p class="text-xs text-stone-600 mt-1 leading-relaxed">{item.description}</p>
+                  <p class="text-[11px] text-amber-900 font-medium mt-1">
+                    <span class="font-bold">Significance:</span> {item.significance}
+                  </p>
+                </div>
+              </div>
+
+              <div class="sm:text-right flex-shrink-0 pl-14 sm:pl-0">
+                <span class="inline-block px-3 py-1 rounded-full bg-stone-900 text-amber-300 font-mono font-bold text-xs sm:text-sm">
+                  {item.time}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Festival Days Timing Variations -->
+  <section class="py-16 sm:py-20 bg-stone-900 text-white">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-2 border border-amber-500/30">
+          <span>✨</span>
+          <span>വിശേഷാൽ ദിവസങ്ങളിലെ മാറ്റങ്ങൾ</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mb-3">
+          Special Timing Changes on Festival Days
+        </h2>
+        <p class="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto font-light">
+          On auspicious tithis such as Pradosham, Maha Shivaratri, Somavaram, and the 8-day Dhanu Utsavam, pooja hours are extended with continuous Vedic rituals.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        {SPECIAL_TIMINGS.map((spec) => (
+          <div class="p-6 rounded-2xl bg-stone-950/80 border border-amber-500/20 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-lg font-serif font-bold text-amber-300">{spec.occasion}</h3>
+              </div>
+              <div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs font-mono font-bold text-amber-400 mb-3">
+                ⏰ {spec.timingChange}
+              </div>
+              <p class="text-xs text-stone-300 leading-relaxed">
+                <span class="text-amber-400 font-semibold">Special Rituals:</span> {spec.specialRituals}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <Button href="/vazhipadu#booking" variant="primary" size="lg" class="font-bold">
+          Book Vazhipadu for Upcoming Festival →
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

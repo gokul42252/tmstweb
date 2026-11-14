@@ -1,0 +1,160 @@
+---
+// Define the navigation items
+const navItems = [
+  { text: "Home", malayalam: "മുഖ്യം", href: "/" },
+  { text: "Darshan & Timings", malayalam: "ദർശനം", href: "/darshan-timings" },
+  { text: "Vazhipadu", malayalam: "വഴിപാടുകൾ", href: "/vazhipadu" },
+  { text: "Festivals", malayalam: "ഉത്സവങ്ങൾ", href: "/festivals" },
+  { text: "Heritage", malayalam: "ഐതിഹ്യം", href: "/heritage" },
+  { text: "Deities", malayalam: "പ്രതിഷ്ഠകൾ", href: "/deities" },
+  { text: "Gallery", malayalam: "ചിത്രശാല", href: "/gallery" },
+  { text: "Donations", malayalam: "സംഭാവന", href: "/administration" },
+  { text: "How to Reach", malayalam: "വഴികാട്ടി", href: "/how-to-reach" },
+  { text: "Etiquette", malayalam: "ആചാരങ്ങൾ", href: "/etiquette" },
+];
+
+const currentPath = Astro.url.pathname;
+const normalizedPath = currentPath.replace(/\/index\.html$/, "").replace(/\/$/, "") || "/";
+---
+
+<!-- Desktop Tier 2 Navigation Bar (Visible on lg and above) -->
+<nav class="hidden lg:block bg-stone-950 border-t border-amber-500/30 text-stone-200 shadow-md select-none" aria-label="Main Navigation">
+  <div class="container mx-auto px-4">
+    <ul class="flex items-center justify-between gap-1 py-1.5">
+      {
+        navItems.map((item) => {
+          const normalizedHref = item.href.replace(/\/$/, "") || "/";
+          const isActive = normalizedPath === normalizedHref || 
+                           (normalizedHref !== "/" && normalizedPath.startsWith(normalizedHref));
+          
+          return (
+            <li class="flex-1 text-center">
+              <a
+                href={item.href}
+                class={`w-full py-1.5 px-2 rounded-lg transition-all duration-150 flex flex-col items-center justify-center whitespace-nowrap group ${
+                  isActive 
+                    ? "bg-amber-500 text-stone-950 font-bold shadow-sm" 
+                    : "text-stone-300 hover:text-amber-300 hover:bg-stone-900/90 font-medium"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                <span class="text-xs xl:text-[13px] tracking-wide leading-tight">
+                  {item.text}
+                </span>
+                <span class={`text-[10px] font-malayalam leading-tight mt-0.5 ${
+                  isActive ? "text-stone-950 font-semibold opacity-90" : "text-amber-400/80 group-hover:text-amber-300"
+                }`}>
+                  {item.malayalam}
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</nav>
+
+<!-- Mobile Menu Dropdown Drawer (Visible on screens < lg) -->
+<div
+  id="mobile-menu"
+  class="absolute top-full left-0 right-0 w-full bg-white shadow-2xl border-t-2 border-amber-500 hidden lg:hidden z-50 max-h-[85vh] overflow-y-auto"
+  role="menu"
+  aria-labelledby="mobile-menu-button"
+>
+  <div class="p-4 bg-amber-50/80 border-b border-amber-100 flex items-center justify-between">
+    <div>
+      <span class="text-xs font-bold text-amber-950 block font-malayalam">തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം</span>
+      <span class="text-[11px] text-stone-600">Daily Darshan: 5:00 AM - 10:30 AM & 5:00 PM - 8:00 PM</span>
+    </div>
+    <a href="tel:+914852877300" class="text-xs font-bold text-red-700 bg-white px-2.5 py-1 rounded-md border border-amber-200 shadow-xs flex items-center space-x-1">
+      <span>📞</span>
+      <span>0485-2877300</span>
+    </a>
+  </div>
+
+  <div class="p-4 grid grid-cols-2 gap-2">
+    {
+      navItems.map((item) => {
+        const normalizedHref = item.href.replace(/\/$/, "") || "/";
+        const isActive = normalizedPath === normalizedHref || 
+                         (normalizedHref !== "/" && normalizedPath.startsWith(normalizedHref));
+        
+        return (
+          <a
+            href={item.href}
+            class={`p-3 text-sm rounded-xl transition-colors flex flex-col ${
+              isActive 
+                ? "bg-amber-100 text-amber-950 border border-amber-400 font-bold" 
+                : "text-stone-700 hover:bg-amber-50 hover:text-amber-900 border border-stone-100 font-medium"
+            }`}
+            role="menuitem"
+          >
+            <span>{item.text}</span>
+            <span class="text-xs font-malayalam text-stone-500 font-normal">{item.malayalam}</span>
+          </a>
+        );
+      })
+    }
+  </div>
+
+  <div class="p-4 bg-stone-50 border-t border-stone-200 flex flex-col gap-2">
+    <a
+      href="/vazhipadu#booking"
+      class="w-full text-center py-2.5 text-sm font-bold rounded-xl text-stone-950 bg-gradient-to-r from-amber-400 to-amber-500 shadow-sm"
+    >
+      🪔 Online Vazhipadu Booking
+    </a>
+    <a
+      href="/administration#donation"
+      class="w-full text-center py-2.5 text-sm font-semibold rounded-xl text-stone-700 bg-white border border-stone-300 hover:border-amber-400"
+    >
+      🍚 Annadanam & Temple Donations
+    </a>
+  </div>
+</div>
+
+<script>
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIconOpen = document.getElementById("menu-icon-open");
+  const menuIconClose = document.getElementById("menu-icon-close");
+
+  if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
+    function toggleMenu() {
+      const isExpanded = mobileMenuButton.getAttribute("aria-expanded") === "true";
+      mobileMenuButton.setAttribute("aria-expanded", (!isExpanded).toString());
+      mobileMenu.classList.toggle("hidden");
+      menuIconOpen.classList.toggle("hidden");
+      menuIconClose.classList.toggle("hidden");
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add("hidden");
+      mobileMenuButton.setAttribute("aria-expanded", "false");
+      menuIconOpen.classList.remove("hidden");
+      menuIconClose.classList.add("hidden");
+    }
+
+    mobileMenuButton.addEventListener("click", toggleMenu);
+
+    // Close on link click
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    // Close on click outside
+    document.addEventListener("click", (e) => {
+      if (!mobileMenu.contains(e.target as Node) && !mobileMenuButton.contains(e.target as Node)) {
+        closeMenu();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeMenu();
+      }
+    });
+  }
+</script>

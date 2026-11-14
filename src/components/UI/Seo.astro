@@ -1,0 +1,100 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image?: {
+    url: string;
+    alt: string;
+  };
+  type?: "website" | "article";
+  canonicalUrl?: string;
+}
+
+const {
+  title,
+  description,
+  image = {
+    url: "/uploads/temple/hero-temple.jpg",
+    alt: "Thirumarady Sri Mahadeva Temple",
+  },
+  type = "website",
+  canonicalUrl,
+} = Astro.props;
+
+// Get the canonical URL
+const canonicalURL = canonicalUrl || new URL(Astro.url.pathname, Astro.site || "https://thirumaradytemple.org");
+
+// Temple details
+const templeInfo = {
+  name: "Thirumarady Sri Mahadeva Temple (തിരുമാറാടി ശിവക്ഷേത്രം)",
+  alternateName: "Thirumarady Shiva Temple",
+  description: "Ancient heritage Hindu temple dedicated to Lord Shiva situated in Thirumarady, Ernakulam district, Kerala, along the Piravom–Koothattukulam route. Governed by Travancore Devaswom Board.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Piravom - Koothattukulam Road, Thirumarady",
+    addressLocality: "Thirumarady, Piravom",
+    addressRegion: "Ernakulam, Kerala",
+    postalCode: "686662",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 9.8732,
+    longitude: 76.5385,
+  },
+  telephone: "+91 485 2877300",
+  email: "devaswom@thirumaradytemple.org",
+  url: Astro.site?.toString() || "https://thirumaradytemple.org",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "05:00",
+      closes: "10:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "17:00",
+      closes: "20:00"
+    }
+  ]
+};
+---
+
+<!-- Basic SEO -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image.url} />
+<meta property="og:image:alt" content={image.alt} />
+<meta property="og:site_name" content="Thirumarady Sri Mahadeva Temple" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={image.url} />
+
+<!-- Structured Data (JSON-LD) for Hindu Temple -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "HinduTemple",
+  "name": templeInfo.name,
+  "alternateName": templeInfo.alternateName,
+  "description": templeInfo.description,
+  "url": templeInfo.url,
+  "telephone": templeInfo.telephone,
+  "email": templeInfo.email,
+  "address": templeInfo.address,
+  "geo": templeInfo.geo,
+  "openingHoursSpecification": templeInfo.openingHoursSpecification,
+  "image": image.url
+})} />

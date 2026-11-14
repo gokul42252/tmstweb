@@ -1,0 +1,241 @@
+---
+import Button from "../UI/Button.astro";
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  malayalamTitle?: string;
+  backgroundImage?: string;
+}
+
+const {
+  title = "Thirumarady Sri Mahadeva Temple",
+  subtitle = "Ancient Sanctum of Lord Shiva in Central Travancore",
+  malayalamTitle = "തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം",
+  backgroundImage = "/uploads/temple/hero-temple.jpg",
+} = Astro.props;
+
+// Live festival marquee items
+const tickerItems = [
+  "✨ ധനു തിരുവാതിര വാർഷിക ഉത്സവം (8 ദിവസത്തെ മഹോത്സവം)",
+  "🔔 പ്രദോഷ സന്ധ്യാ ദർശനം & വിശേഷാൽ അഭിഷേകം",
+  "🪔 കുംഭ മാസത്തിലെ മഹാ ശിവരാത്രി മഹോത്സവം - അഖണ്ഡ ദർശനം",
+  "🌿 നിത്യേന മൂന്ന് പൂജകൾ: ഉഷഃപൂജ, ഉച്ചപ്പൂജ, അത്താഴപ്പൂജ",
+  "🥥 ഓൺലൈൻ വഴിപാട് ബുക്കിംഗ് സൗകര്യം ലഭ്യമാണ്",
+  "🍲 പ്രതിദിന അന്നദാനം & ക്ഷേത്ര നവീകരണ സംഭാവനകൾ സ്വീകരിക്കുന്നു"
+];
+---
+
+<div class="relative overflow-hidden bg-stone-950 text-white">
+  <!-- Live Scrolling Marquee / Ticker -->
+  <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-stone-950 text-xs sm:text-sm font-bold py-2 overflow-hidden border-b border-amber-300">
+    <div class="flex items-center">
+      <div class="flex-shrink-0 px-4 bg-amber-700 text-amber-100 py-1 uppercase tracking-wider text-[11px] font-black flex items-center gap-1.5 shadow-sm z-10">
+        <span class="inline-block w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+        വിശേഷങ്ങൾ
+      </div>
+      
+      <div class="overflow-hidden whitespace-nowrap w-full">
+        <div class="inline-flex animate-marquee hover:pause-hover gap-8 pl-4">
+          {tickerItems.map((item) => (
+            <span class="inline-flex items-center gap-2 text-stone-950 font-semibold">
+              <span>{item}</span>
+              <span class="text-amber-800">✦</span>
+            </span>
+          ))}
+          {/* Duplicate for seamless infinite loop */}
+          {tickerItems.map((item) => (
+            <span class="inline-flex items-center gap-2 text-stone-950 font-semibold">
+              <span>{item}</span>
+              <span class="text-amber-800">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Visual Banner -->
+  <section
+    class="relative min-h-[75vh] lg:min-h-[82vh] flex items-center bg-cover bg-center py-16 sm:py-24"
+    style={`background-image: linear-gradient(to bottom, rgba(18, 14, 12, 0.75) 0%, rgba(18, 14, 12, 0.85) 60%, rgba(18, 14, 12, 0.95) 100%), url('${backgroundImage}');`}
+  >
+    <!-- Background overlay decorative glow -->
+    <div class="absolute inset-0 bg-radial-gradient from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+
+    <div class="container relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- Main Hero Text (7 cols) -->
+        <div class="lg:col-span-7 text-left space-y-6">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-medium backdrop-blur-md">
+            <span>🪔</span>
+            <span>തിരുവിതാംകൂർ ദേവസ്വം ബോർഡ് • എറണാകുളം ജില്ല</span>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-malayalam text-2xl sm:text-3xl lg:text-4xl text-amber-400 font-bold tracking-wide">
+              {malayalamTitle}
+            </h2>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-white leading-tight tracking-tight">
+              Thirumarady Sri <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-200">Mahadeva</span> Temple
+            </h1>
+          </div>
+
+          <p class="text-base sm:text-lg text-stone-300 max-w-2xl leading-relaxed font-light">
+            An ancient holy sanctuary where Lord Shiva presides facing East, surrounded by sub-deities Lord Ganapathy, Lord Ayyappan, and Lord Subrahmanian. Famous for its sacred 8-day Dhanu Thiruvathira Utsavam and centuries-old architectural heritage.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap gap-3 pt-2">
+            <Button href="/vazhipadu#booking" variant="primary" size="lg" class="shadow-amber-500/30 font-bold">
+              <span>🪔 Book Vazhipadu</span>
+            </Button>
+            
+            <Button href="/darshan-timings" variant="outline" size="lg" class="bg-stone-900/80 text-white border-amber-500/40 hover:bg-amber-500 hover:text-stone-950 hover:border-amber-500 backdrop-blur-md">
+              <span>🕒 Darshan Timings</span>
+            </Button>
+
+            <Button href="/festivals" variant="outline" size="lg" class="bg-stone-900/80 text-amber-300 border-amber-500/30 hover:bg-amber-950 backdrop-blur-md">
+              <span>🎪 Festivals & Utsavam</span>
+            </Button>
+          </div>
+
+          <!-- Quick Stats / Highlights -->
+          <div class="grid grid-cols-3 gap-3 pt-6 border-t border-stone-800/80 max-w-lg">
+            <div class="p-2.5 rounded-lg bg-stone-900/60 border border-amber-500/20">
+              <span class="block text-xl sm:text-2xl font-serif font-bold text-amber-400">8 Days</span>
+              <span class="text-[11px] sm:text-xs text-stone-400">Annual Dhanu Utsavam</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-stone-900/60 border border-amber-500/20">
+              <span class="block text-xl sm:text-2xl font-serif font-bold text-amber-400">3 Poojas</span>
+              <span class="text-[11px] sm:text-xs text-stone-400">Daily Vedic Rituals</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-stone-900/60 border border-amber-500/20">
+              <span class="block text-xl sm:text-2xl font-serif font-bold text-amber-400">East-Facing</span>
+              <span class="text-[11px] sm:text-xs text-stone-400">Sacred Shiva Sanctum</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick-Access Cards (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <!-- Card 1: Today's Darshan Timings Card with Live Status -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-stone-900/90 border border-amber-500/30 backdrop-blur-md shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
+
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-800">
+              <div class="flex items-center space-x-2">
+                <span class="text-xl">🕒</span>
+                <div>
+                  <h3 class="text-lg font-serif font-bold text-white leading-tight">Today's Darshan</h3>
+                  <p class="text-xs text-stone-400">ദർശന സമയം</p>
+                </div>
+              </div>
+              
+              <!-- Live Open/Closed Badge (JavaScript calculated) -->
+              <span id="temple-status-badge" class="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>OPEN NOW</span>
+              </span>
+            </div>
+
+            <div class="space-y-3 text-sm">
+              <div class="p-3 rounded-lg bg-stone-950/60 border border-stone-800 flex items-center justify-between">
+                <div>
+                  <span class="font-semibold text-amber-300 block">Morning (പ്രഭാതം)</span>
+                  <span class="text-xs text-stone-400">Nirmalyam, Usha & Ucha Pooja</span>
+                </div>
+                <span class="font-mono font-bold text-stone-200 text-sm">05:00 AM – 10:30 AM</span>
+              </div>
+
+              <div class="p-3 rounded-lg bg-stone-950/60 border border-stone-800 flex items-center justify-between">
+                <div>
+                  <span class="font-semibold text-amber-300 block">Evening (സന്ധ്യ)</span>
+                  <span class="text-xs text-stone-400">Deeparadhana & Athazha Pooja</span>
+                </div>
+                <span class="font-mono font-bold text-stone-200 text-sm">05:00 PM – 08:00 PM</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-stone-800 flex items-center justify-between text-xs text-stone-400">
+              <span>Deeparadhana daily at 6:30 PM</span>
+              <a href="/darshan-timings" class="text-amber-400 hover:text-amber-300 font-semibold">
+                Full Schedule →
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Emergency & Devaswom Quick Contact -->
+          <div class="p-5 rounded-2xl bg-gradient-to-br from-amber-950/50 via-stone-900/90 to-stone-900/90 border border-amber-500/30 backdrop-blur-md shadow-xl">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Devaswom Office & Helpline</span>
+                <h4 class="text-base font-serif font-bold text-white mt-0.5">Emergency & Pooja Enquiries</h4>
+                <p class="text-xs text-stone-300 mt-1">Piravom–Koothattukulam Road, Thirumarady</p>
+              </div>
+              <div class="w-10 h-10 rounded-full bg-red-600/20 border border-red-500/40 flex items-center justify-center text-red-400 flex-shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <a
+                href="tel:+914852877300"
+                class="flex-1 min-w-[140px] text-center py-2 px-3 rounded-lg bg-stone-950/80 hover:bg-stone-950 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold transition-colors"
+              >
+                📞 0485-2877300
+              </a>
+              <a
+                href="/how-to-reach"
+                class="py-2 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-stone-950 text-xs font-bold transition-colors"
+              >
+                📍 How to Reach
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Real-time temple opening status logic
+  function updateTempleStatus() {
+    const badge = document.getElementById("temple-status-badge");
+    if (!badge) return;
+
+    // Get current Indian Standard Time (IST)
+    const now = new Date();
+    // Convert to IST offset UTC+5:30
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const istTime = new Date(utc + (3600000 * 5.5));
+    const hours = istTime.getHours();
+    const minutes = istTime.getMinutes();
+    const currentMins = hours * 60 + minutes;
+
+    // Morning: 5:00 AM (300 mins) to 10:30 AM (630 mins)
+    const morningOpen = 5 * 60;
+    const morningClose = 10 * 60 + 30;
+
+    // Evening: 5:00 PM (1020 mins) to 8:00 PM (1200 mins)
+    const eveningOpen = 17 * 60;
+    const eveningClose = 20 * 60;
+
+    const isOpen = (currentMins >= morningOpen && currentMins <= morningClose) ||
+                   (currentMins >= eveningOpen && currentMins <= eveningClose);
+
+    if (isOpen) {
+      badge.className = "px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5";
+      badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>OPEN FOR DARSHAN</span>';
+    } else {
+      badge.className = "px-2.5 py-1 text-xs font-bold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1.5";
+      badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400"></span><span>NADA CLOSED</span>';
+    }
+  }
+
+  updateTempleStatus();
+  setInterval(updateTempleStatus, 60000);
+</script>

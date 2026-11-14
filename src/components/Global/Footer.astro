@@ -1,0 +1,149 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerNavs = [
+  {
+    title: "ക്ഷേത്ര ദർശനം (Visitor Info)",
+    items: [
+      { text: "Darshan & Pooja Timings", href: "/darshan-timings" },
+      { text: "Vazhipadu Offerings & Rates", href: "/vazhipadu" },
+      { text: "Online Vazhipadu Booking", href: "/vazhipadu#booking" },
+      { text: "Dress Code & Temple Etiquette", href: "/etiquette" },
+      { text: "How to Reach & Map", href: "/how-to-reach" },
+    ],
+  },
+  {
+    title: "ഐതിഹ്യവും പ്രതിഷ്ഠയും (Heritage)",
+    items: [
+      { text: "Sthala Puranam & Origin Legend", href: "/heritage" },
+      { text: "Traditional Kerala Architecture", href: "/heritage#architecture" },
+      { text: "Lord Shiva & Upa Devatas", href: "/deities" },
+      { text: "Proper Shiva Pradakshina Rules", href: "/deities#pradakshina" },
+      { text: "Temple Photo & Video Gallery", href: "/gallery" },
+    ],
+  },
+  {
+    title: "ഉത്സവങ്ങളും ഭരണവും (Administration)",
+    items: [
+      { text: "Annual Dhanu Thiruvathira Utsavam", href: "/festivals" },
+      { text: "Maha Shivaratri & Pradosham", href: "/festivals#shivaratri" },
+      { text: "Travancore Devaswom Board", href: "/administration" },
+      { text: "Kidangassery Illam (Thanthri)", href: "/administration#thanthri" },
+      { text: "Annadanam & Temple Donation", href: "/administration#donation" },
+    ],
+  },
+];
+---
+
+<footer class="bg-stone-950 text-stone-300 border-t-4 border-amber-600 pt-16 pb-8">
+  <div class="container">
+    <!-- Sacred Maha Mrityunjaya Mantra Banner -->
+    <div class="mb-12 p-6 rounded-2xl bg-gradient-to-r from-amber-950/60 via-stone-900 to-amber-950/60 border border-amber-500/30 text-center relative overflow-hidden">
+      <div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      
+      <p class="text-amber-400 font-serif text-lg sm:text-xl tracking-wider mb-1">
+        ॥ महामृत्युंजय मन्त्र ॥
+      </p>
+      <p class="text-stone-200 font-serif text-base sm:text-lg italic max-w-3xl mx-auto mb-2">
+        ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्। उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय मामृतात्॥
+      </p>
+      <p class="text-xs text-amber-300/80 max-w-2xl mx-auto font-sans">
+        "We worship the Three-Eyed Lord Shiva, who is fragrant and nourishes all beings. As the ripe cucumber is liberated from its bondage to the vine, may we be liberated from death for the sake of immortality."
+      </p>
+    </div>
+
+    <!-- Main Footer Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+      <!-- Temple Info (2 cols on lg) -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/40 p-2 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full text-amber-400">
+              <path d="M50 15 L50 78 M42 22 C36 28 35 40 43 46 M58 22 C64 28 65 40 57 46 M43 46 C48 48 52 48 57 46" stroke="currentColor" stroke-width="6" stroke-linecap="round" fill="none" />
+              <circle cx="50" cy="56" r="4" fill="#dc2626" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xl font-serif font-bold text-white leading-tight">
+              തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം
+            </h3>
+            <p class="text-xs text-amber-400 font-medium">Thirumarady Sri Mahadeva Temple</p>
+            <p class="text-[11px] text-stone-400">Travancore Devaswom Board</p>
+          </div>
+        </div>
+        
+        <p class="text-stone-400 text-sm mb-6 leading-relaxed">
+          An ancient holy abode of Lord Shiva located in Thirumarady along the Piravom–Koothattukulam route. Renowned for its eight-day annual Dhanu Thiruvathira Utsavam, profound spiritual vibrations, traditional Kerala woodwork, and sacred heritage.
+        </p>
+        
+        <div class="space-y-2 text-sm text-stone-300">
+          <div class="flex items-start space-x-2">
+            <svg class="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>Thirumarady P.O., Piravom – Koothattukulam Road, Ernakulam District, Kerala - 686662</span>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <a href="tel:+914852877300" class="hover:text-amber-400 transition-colors">0485-2877300 (Temple Office)</a>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-amber-300">Darshan: 5:00 AM - 10:30 AM | 5:00 PM - 8:00 PM</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Nav Groups -->
+      {
+        footerNavs.map((group) => (
+          <div>
+            <h4 class="text-white font-serif font-bold text-base mb-4 pb-2 border-b border-stone-800 text-amber-400">
+              {group.title}
+            </h4>
+            <ul class="space-y-2.5">
+              {group.items.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="text-stone-400 hover:text-amber-300 transition-colors text-sm flex items-center group"
+                  >
+                    <span class="text-amber-500 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">›</span>
+                    <span>{item.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    
+    <!-- Bottom Bar with Heritage & Devaswom Note -->
+    <div class="pt-8 border-t border-stone-900 flex flex-col md:flex-row items-center justify-between text-xs text-stone-500 gap-4">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span>© {currentYear} Thirumarady Sri Mahadeva Temple. All rights reserved.</span>
+        <span>•</span>
+        <span>Thanthri Lineage: Kidangassery Illam</span>
+        <span>•</span>
+        <span>PIN: 686662</span>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <a href="/etiquette" class="hover:text-amber-400 transition-colors">Temple Rules</a>
+        <span>•</span>
+        <a href="/how-to-reach" class="hover:text-amber-400 transition-colors">Route Map</a>
+        <span>•</span>
+        <a href="/administration" class="hover:text-amber-400 transition-colors">Devaswom Board</a>
+      </div>
+    </div>
+  </div>
+</footer>

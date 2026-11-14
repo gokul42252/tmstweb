@@ -1,0 +1,214 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { DISTANCES_INFO, TEMPLE_INFO } from "../data/templeData";
+import Button from "../components/UI/Button.astro";
+
+const nearbyPilgrimSpots = [
+  {
+    name: "Pazhoor Perumthrikkovil Shiva Temple",
+    distance: "9 km",
+    significance: "Renowned centuries-old Shiva temple along the Muvattupuzha river celebrated for Pazhoor Padippura astrology."
+  },
+  {
+    name: "Onakkoor Devi Temple",
+    distance: "6 km",
+    significance: "Ancient Bhadrakali shrine venerated for powerful blessings and traditional festivals."
+  },
+  {
+    name: "Velloor Vamana Temple",
+    distance: "14 km",
+    significance: "One of the rare temples in Kerala dedicated to Lord Vamana (Incarnation of Lord Vishnu)."
+  },
+  {
+    name: "Ramamangalam Perumthrikkovil Temple",
+    distance: "15 km",
+    significance: "Historic temple renowned for ancient classical music traditions and temple architecture."
+  },
+  {
+    name: "Chottanikkara Bhagavathy Temple",
+    distance: "26 km",
+    significance: "World-renowned mother goddess shrine for mental healing and spiritual solace."
+  }
+];
+---
+
+<BaseLayout
+  title="How to Reach & Route Map | Thirumarady Sri Mahadeva Temple"
+  description="Directions and distances from Cochin Airport, Piravom Road railway station, Koothattukulam. Interactive map along Piravom–Koothattukulam road near Thirumarady bus stop."
+>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>📍</span>
+        <span>ക്ഷേത്ര മാർഗ്ഗരേഖയും യാത്രാ വിവരങ്ങളും</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        How to Reach & Location
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Conveniently situated along the Piravom – Koothattukulam route near the Thirumarady Panchayath bus stop, Ernakulam district, Kerala.
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Map & Location Overview -->
+  <section class="py-16 sm:py-20 bg-stone-50 border-b border-stone-200">
+    <div class="container max-w-5xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Map Embed (7 cols) -->
+        <div class="lg:col-span-7">
+          <div class="rounded-3xl overflow-hidden shadow-xl border-2 border-amber-300/80 bg-stone-900 relative">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.5638843997637!2d76.53634127582498!3d9.873215575024466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07d6a5e12e11a7%3A0xb35aa2974cbdfad2!2sThirumarady%20Mahadeva%20Temple!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              width="100%"
+              height="400"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Thirumarady Mahadeva Temple Location Map"
+              class="w-full h-80 sm:h-96"
+            ></iframe>
+          </div>
+          <div class="mt-2 text-right">
+            <a
+              href="https://maps.google.com/?q=Thirumarady+Mahadeva+Temple+Ernakulam"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs text-amber-800 hover:text-amber-900 font-bold inline-flex items-center gap-1"
+            >
+              <span>Open in Google Maps App</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Address & Key Landmark Card (5 cols) -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="p-6 rounded-3xl bg-white border border-stone-200 shadow-sm space-y-4">
+            <div class="flex items-center space-x-3 pb-3 border-b border-stone-100">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center text-xl flex-shrink-0">
+                📍
+              </div>
+              <div>
+                <h3 class="font-serif font-bold text-stone-900 text-lg">Temple Address</h3>
+                <p class="text-xs text-stone-500">Official Devaswom Registry</p>
+              </div>
+            </div>
+
+            <address class="not-italic text-sm text-stone-700 space-y-1">
+              <p class="font-bold text-stone-900">Thirumarady Sri Mahadeva Temple</p>
+              <p>Piravom – Koothattukulam Road</p>
+              <p>Near Thirumarady Panchayath Bus Stop</p>
+              <p>Thirumarady P.O., Ernakulam District</p>
+              <p>Kerala – 686662, India</p>
+            </address>
+
+            <div class="pt-3 border-t border-stone-100 text-xs text-stone-600 space-y-2">
+              <p><strong>Primary Landmark:</strong> Thirumarady Grama Panchayath Office & Bus Stop (2 minutes walk).</p>
+              <p><strong>Phone:</strong> <a href="tel:+914852877300" class="text-amber-800 font-bold">0485-2877300</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Distance Matrix & Travel Modes -->
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container max-w-5xl">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Transit Matrix</span>
+        <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+          Distances from Major Transit Hubs
+        </h2>
+      </div>
+
+      <!-- Distance Table / Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {DISTANCES_INFO.map((item) => (
+          <div class="p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-bold text-amber-700 uppercase tracking-wider block mb-1">
+                {item.mode}
+              </span>
+              <h3 class="text-base font-serif font-bold text-stone-900">
+                {item.place}
+              </h3>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between">
+              <span class="text-xl font-serif font-extrabold text-stone-900">{item.distance}</span>
+              <span class="text-xs font-mono text-stone-500 bg-stone-100 px-2.5 py-0.5 rounded">{item.time}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- How to Reach by Air, Train, Bus -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mb-4">
+            ✈️
+          </div>
+          <h3 class="text-lg font-serif font-bold text-stone-900 mb-2">By Air</h3>
+          <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+            <strong>Cochin International Airport (COK)</strong> is 52 km away. Pre-paid airport taxis can reach Thirumarady in approximately 1 hour 30 minutes via MC Road / Kalady – Muvattupuzha – Piravom route.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mb-4">
+            🚆
+          </div>
+          <h3 class="text-lg font-serif font-bold text-stone-900 mb-2">By Train</h3>
+          <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+            <strong>Piravom Road Railway Station</strong> (Vaikom Road) is 16 km away. Major express trains also stop at Ernakulam Junction (ERS - 38 km) and Kottayam (36 km), from where regular buses and taxis are available.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mb-4">
+            🚌
+          </div>
+          <h3 class="text-lg font-serif font-bold text-stone-900 mb-2">By Bus & Road</h3>
+          <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+            Buses plying between Piravom and Koothattukulam halt directly at the <strong>Thirumarady Panchayath Bus Stop</strong> right in front of the temple road. Auto-rickshaws are available at the junction.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nearby Pilgrim Circuit -->
+  <section class="py-16 sm:py-20 bg-stone-900 text-white">
+    <div class="container max-w-5xl">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Sacred Pilgrimage Circuit</span>
+        <h2 class="text-3xl font-serif font-bold text-white mt-1">
+          Nearby Pilgrim Spots & Temples
+        </h2>
+        <p class="text-stone-300 text-sm max-w-2xl mx-auto mt-2 font-light">
+          Plan an enriching temple circuit tour in and around the historic Muvattupuzha – Piravom spiritual belt.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {nearbyPilgrimSpots.map((spot) => (
+          <div class="p-5 rounded-2xl bg-stone-950/80 border border-amber-500/20 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold font-mono text-amber-400 bg-amber-950/50 px-2 py-0.5 rounded border border-amber-500/30">
+                  {spot.distance}
+                </span>
+              </div>
+              <h3 class="text-base font-serif font-bold text-white mb-2">{spot.name}</h3>
+              <p class="text-xs text-stone-400 leading-relaxed">{spot.significance}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

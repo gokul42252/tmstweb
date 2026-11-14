@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/Cards/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+// Get all blog posts
+const allPosts = await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+// Sort by date (newest first)
+const posts = allPosts.sort((a, b) => 
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<BaseLayout
+  title="Spiritual Articles & Temple News | Thirumarady Sri Mahadeva Temple"
+  description="Read sacred articles on Sthala Puranam, spiritual benefits of Shiva Dhara, Pradakshina rules, and temple festival bulletins."
+>
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>📖</span>
+        <span>ആത്മീയ ലേഖനങ്ങളും വാർത്തകളും</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Temple Articles & Chronicles
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Explore deep spiritual insights, Sthala Puranam chronicles, and Vedic ritual significance.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container max-w-5xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post) => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

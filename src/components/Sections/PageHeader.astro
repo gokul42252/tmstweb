@@ -1,0 +1,34 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  malayalamSubtitle?: string;
+  backgroundImage?: string;
+}
+
+const { 
+  title, 
+  subtitle, 
+  malayalamSubtitle,
+  backgroundImage = "/uploads/temple/hero-temple.jpg" 
+} = Astro.props;
+---
+
+<section 
+  class="relative py-16 sm:py-20 bg-cover bg-center border-b border-amber-600/30"
+  style={`background-image: linear-gradient(to bottom, rgba(18, 14, 12, 0.8) 0%, rgba(18, 14, 12, 0.9) 100%), url('${backgroundImage}')`}
+>
+  <div class="container relative z-10">
+    <div class="max-w-3xl mx-auto text-center text-white space-y-2">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold border border-amber-500/30">
+        <span>🪔</span>
+        <span>തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight leading-tight">
+        {title}
+      </h1>
+      {subtitle && <p class="text-stone-300 text-base sm:text-lg font-light">{subtitle}</p>}
+      {malayalamSubtitle && <p class="text-amber-400 font-malayalam text-sm sm:text-base font-semibold">{malayalamSubtitle}</p>}
+    </div>
+  </div>
+</section>

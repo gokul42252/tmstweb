@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import EventCard from "../Cards/EventCard.astro";
+import Button from "../UI/Button.astro";
+
+export interface Props {
+  count?: number;
+  showViewAll?: boolean;
+}
+
+const { count = 3, showViewAll = true } = Astro.props;
+
+// Get events
+const allEvents = await getCollection("events", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+// Sort by date
+const events = allEvents
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime())
+  .slice(0, count);
+---
+
+<section class="py-16 sm:py-20 bg-stone-100/60 border-y border-amber-200/40">
+  <div class="container">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-800 text-xs font-semibold mb-2">
+        <span>🎪</span>
+        <span>ആണ്ടുവിശേഷങ്ങൾ & ഉത്സവങ്ങൾ</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-3">
+        Upcoming Festivals & Ceremonies
+      </h2>
+      <p class="text-base sm:text-lg text-stone-600 max-w-2xl mx-auto font-light">
+        Participate in the sacred 8-day Dhanu Thiruvathira Utsavam, Maha Shivaratri, and monthly Pradosham observances.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {events.map((event) => (
+        <EventCard event={event} variant="upcoming" />
+      ))}
+    </div>
+    
+    {showViewAll && (
+      <div class="mt-12 text-center">
+        <Button href="/festivals" variant="outline" class="font-bold border-amber-500/40 hover:bg-amber-50">
+          View Full Festival Calendar & Schedules →
+        </Button>
+      </div>
+    )}
+  </div>
+</section>

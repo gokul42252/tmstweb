@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import StaffCard from "../Cards/StaffCard.astro";
+
+const { showAll = true, limit = 6 } = Astro.props;
+
+const allStaff = await getCollection("staff", ({ data }) =>
+  import.meta.env.PROD ? !data.draft : true
+);
+const staffMembers = allStaff
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, showAll ? undefined : limit);
+---
+
+<section id="staff" class="py-16 sm:py-20 bg-stone-50">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <div class="text-center mb-12">
+      <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Spiritual & Administrative Leadership</span>
+      <h2 class="text-3xl font-serif font-bold text-stone-900 mt-1">
+        Temple Priests & Governing Committee
+      </h2>
+      <p class="text-stone-600 text-sm max-w-2xl mx-auto mt-2">
+        Meet the revered Thanthri, Melshanthi, Devaswom Board officials, and Samithi leaders serving Thirumarady Mahadeva Temple.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
+      {staffMembers.map(staff => (
+        <StaffCard staff={staff} />
+      ))}
+    </div>
+  </div>
+</section>

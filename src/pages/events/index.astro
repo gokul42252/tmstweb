@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EventCard from "../../components/Cards/EventCard.astro";
+import { getCollection } from "astro:content";
+
+// Get all events
+const allEvents = await getCollection("events", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+// Sort events
+const sortedEvents = allEvents.sort(
+  (a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime()
+);
+---
+
+<BaseLayout
+  title="Festivals & Pooja Calendar | Thirumarady Sri Mahadeva Temple"
+  description="Upcoming festival dates, Dhanu Thiruvathira Utsavam, Maha Shivaratri, and monthly Pradosham observances at Thirumarady Sri Mahadeva Temple."
+>
+  <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
+    <div class="container">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+        <span>🎪</span>
+        <span>ആണ്ടുവിശേഷങ്ങൾ & ഉത്സവങ്ങൾ</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-4">
+        Temple Festivals & Events
+      </h1>
+      <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        Mark your calendar for the sacred 8-day Dhanu Thiruvathira Utsavam, Maha Shivaratri, and auspicious Pradosham observances.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-stone-50">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedEvents.map((event) => (
+          <EventCard event={event} variant="upcoming" />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

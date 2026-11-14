@@ -1,0 +1,92 @@
+---
+import "../assets/styles/global.css";
+import Seo from "../components/UI/Seo.astro";
+import Header from "../components/Global/Header.astro";
+import Footer from "../components/Global/Footer.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: {
+    url: string;
+    alt: string;
+  };
+  type?: "website" | "article";
+  canonicalUrl?: string;
+}
+
+const {
+  title = "Thirumarady Sri Mahadeva Temple | തിരുമാറാടി ശിവക്ഷേത്രം, Ernakulam",
+  description = "Official portal of Thirumarady Sri Mahadeva Temple, an ancient heritage Shiva temple in Ernakulam, Kerala. Darshan timings, Vazhipadu booking, Dhanu Utsavam, and Devaswom information.",
+  image = {
+    url: "/uploads/temple/hero-temple.jpg",
+    alt: "Thirumarady Sri Mahadeva Temple Sreekovil and Gopuram",
+  },
+  type = "website",
+  canonicalUrl,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <Seo
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      canonicalUrl={canonicalUrl}
+    />
+    
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body class="bg-[#fcfaf5] text-stone-900 font-sans min-h-screen flex flex-col">
+    <!-- Top Devotional & Announcement Bar -->
+    <div class="bg-gradient-to-r from-stone-950 via-amber-950 to-stone-950 text-amber-200 text-xs sm:text-sm py-2 px-4 border-b border-amber-600/30">
+      <div class="container flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center space-x-2">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+            ക്ഷേത്ര സന്ദേശം
+          </span>
+          <span class="font-medium text-stone-200 hidden sm:inline">
+            ഓം നമഃ ശിവായ • ഓം നമോ നാരായണായ
+          </span>
+          <span class="text-amber-400 font-medium">
+            പ്രദോഷ വ്രതം & വാർഷിക ധനു തിരുവാതിര ഉത്സവം
+          </span>
+        </div>
+        <div class="flex items-center space-x-4 text-xs text-stone-300">
+          <span class="hidden md:inline-flex items-center">
+            <svg class="w-3.5 h-3.5 mr-1 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            ദർശനം: 5:00 AM - 10:30 AM & 5:00 PM - 8:00 PM
+          </span>
+          <a href="tel:+914852877300" class="hover:text-amber-300 transition-colors flex items-center text-amber-200">
+            <svg class="w-3.5 h-3.5 mr-1 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            0485-2877300
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Header -->
+    <Header />
+    
+    <!-- Page Content -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+    
+    <!-- Footer -->
+    <Footer />
+  </body>
+</html>

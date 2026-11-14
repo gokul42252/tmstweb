@@ -1,0 +1,79 @@
+---
+import Navigation from "./Navigation.astro";
+---
+
+<header class="sticky top-0 z-50 w-full bg-white shadow-sm border-b border-amber-200/80">
+  <!-- Tier 1: Main Brand & Action Strip -->
+  <div class="bg-white border-b border-stone-100">
+    <div class="container flex items-center justify-between py-2.5 sm:py-3.5">
+      <!-- Temple Logo & Titles -->
+      <a href="/" class="flex items-center space-x-3 sm:space-x-4 group text-left flex-shrink-0">
+        <!-- Sacred Emblem Badge -->
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-amber-500 via-amber-600 to-amber-800 p-0.5 shadow-md flex-shrink-0 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full rounded-full bg-stone-950 flex items-center justify-center p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full text-amber-400">
+              <path d="M50 15 L50 78 M42 22 C36 28 35 40 43 46 M58 22 C64 28 65 40 57 46 M43 46 C48 48 52 48 57 46" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none" />
+              <circle cx="50" cy="56" r="3.5" fill="#dc2626" />
+              <path d="M35 84 Q50 78 65 84 L60 88 L40 88 Z" fill="currentColor" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="min-w-0">
+          <div class="font-malayalam font-bold text-amber-950 text-sm sm:text-base md:text-lg lg:text-xl leading-snug tracking-wide truncate sm:whitespace-nowrap">
+            തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം
+          </div>
+          <div class="font-serif font-bold text-stone-800 text-xs sm:text-sm lg:text-[15px] tracking-wider uppercase leading-tight truncate sm:whitespace-nowrap">
+            Thirumarady Sri Mahadeva Temple
+          </div>
+          <div class="text-[10px] sm:text-xs text-stone-500 flex items-center space-x-1.5 mt-0.5 whitespace-nowrap">
+            <span class="text-red-700 font-semibold">തിരുവിതാംകൂർ ദേവസ്വം ബോർഡ്</span>
+            <span>•</span>
+            <span>Piravom, Ernakulam</span>
+            <span class="hidden sm:inline">•</span>
+            <span class="hidden sm:inline">PIN: 686662</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Right Side Utilities & CTAs -->
+      <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+        <!-- Direct Quick Link to Darshan Timings (Desktop) -->
+        <a
+          href="/darshan-timings"
+          class="hidden md:inline-flex items-center space-x-1.5 px-3 py-2 text-xs font-semibold rounded-lg text-stone-700 hover:text-amber-900 hover:bg-amber-50 border border-stone-200 transition-colors whitespace-nowrap"
+        >
+          <span class="text-amber-700">🕒</span>
+          <span>Darshan Schedule</span>
+        </a>
+
+        <!-- Direct Online Vazhipadu Button -->
+        <a
+          href="/vazhipadu#booking"
+          class="inline-flex items-center px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs uppercase tracking-wider font-bold rounded-xl text-stone-950 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 shadow-md shadow-amber-500/20 transition-all whitespace-nowrap"
+        >
+          <span class="mr-1.5">🪔</span>
+          <span class="hidden xs:inline">Online </span><span>Booking</span>
+        </a>
+
+        <!-- Mobile Menu Hamburger Button (Screens < lg) -->
+        <button
+          id="mobile-menu-button"
+          class="lg:hidden p-2 text-stone-700 hover:text-amber-700 hover:bg-amber-50 rounded-xl focus:outline-none transition-colors border border-stone-200"
+          aria-label="Toggle Navigation Menu"
+          aria-expanded="false"
+        >
+          <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 2: Dedicated Navigation Strip (Desktop) + Mobile Drawer -->
+  <Navigation />
+</header>
