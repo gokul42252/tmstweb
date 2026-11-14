@@ -113,7 +113,7 @@ import Button from "../components/UI/Button.astro";
           </h3>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
           {PRADAKSHINA_GUIDELINES.steps.map((st) => (
             <div class={`p-5 rounded-2xl bg-stone-950/80 border flex flex-col justify-between relative group hover:border-amber-400 transition-all ${
               st.step === 2 || st.step === 3

@@ -19,8 +19,8 @@ const normalizedPath = currentPath.replace(/\/index\.html$/, "").replace(/\/$/, 
 
 <!-- Desktop Tier 2 Navigation Bar (Visible on lg and above) -->
 <nav class="hidden lg:block bg-stone-950 border-t border-amber-500/30 text-stone-200 shadow-md select-none" aria-label="Main Navigation">
-  <div class="container mx-auto px-4">
-    <ul class="flex items-center justify-between gap-1 py-1.5">
+  <div class="container mx-auto px-2 sm:px-4">
+    <ul class="flex items-center justify-between gap-1 py-1 sm:py-1.5">
       {
         navItems.map((item) => {
           const normalizedHref = item.href.replace(/\/$/, "") || "/";
@@ -31,17 +31,17 @@ const normalizedPath = currentPath.replace(/\/index\.html$/, "").replace(/\/$/, 
             <li class="flex-1 text-center">
               <a
                 href={item.href}
-                class={`w-full py-1.5 px-2 rounded-lg transition-all duration-150 flex flex-col items-center justify-center whitespace-nowrap group ${
+                class={`w-full py-1.5 px-1.5 lg:px-2 xl:px-2.5 rounded-lg transition-all duration-150 flex flex-col items-center justify-center whitespace-nowrap group ${
                   isActive 
                     ? "bg-amber-500 text-stone-950 font-bold shadow-sm" 
                     : "text-stone-300 hover:text-amber-300 hover:bg-stone-900/90 font-medium"
                 }`}
                 aria-current={isActive ? "page" : undefined}
               >
-                <span class="text-xs xl:text-[13px] tracking-wide leading-tight">
+                <span class="text-[11px] xl:text-[13px] tracking-wide leading-tight">
                   {item.text}
                 </span>
-                <span class={`text-[10px] font-malayalam leading-tight mt-0.5 ${
+                <span class={`text-[9px] xl:text-[10px] font-malayalam leading-tight mt-0.5 ${
                   isActive ? "text-stone-950 font-semibold opacity-90" : "text-amber-400/80 group-hover:text-amber-300"
                 }`}>
                   {item.malayalam}
@@ -55,25 +55,25 @@ const normalizedPath = currentPath.replace(/\/index\.html$/, "").replace(/\/$/, 
   </div>
 </nav>
 
-<!-- Mobile Menu Dropdown Drawer (Visible on screens < lg) -->
+<!-- Mobile & Tablet Menu Dropdown Drawer (Visible on screens < lg) -->
 <div
   id="mobile-menu"
   class="absolute top-full left-0 right-0 w-full bg-white shadow-2xl border-t-2 border-amber-500 hidden lg:hidden z-50 max-h-[85vh] overflow-y-auto"
   role="menu"
   aria-labelledby="mobile-menu-button"
 >
-  <div class="p-4 bg-amber-50/80 border-b border-amber-100 flex items-center justify-between">
-    <div>
-      <span class="text-xs font-bold text-amber-950 block font-malayalam">തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം</span>
-      <span class="text-[11px] text-stone-600">Daily Darshan: 5:00 AM - 10:30 AM & 5:00 PM - 8:00 PM</span>
+  <div class="p-3 sm:p-4 bg-amber-50/80 border-b border-amber-100 flex items-center justify-between gap-2">
+    <div class="min-w-0">
+      <span class="text-xs sm:text-sm font-bold text-amber-950 block font-malayalam truncate">തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം</span>
+      <span class="text-[10px] sm:text-[11px] text-stone-600 block">Daily Darshan: 5:00–10:30 AM & 5:00–8:00 PM</span>
     </div>
-    <a href="tel:+914852877300" class="text-xs font-bold text-red-700 bg-white px-2.5 py-1 rounded-md border border-amber-200 shadow-xs flex items-center space-x-1">
+    <a href="tel:+914852877300" class="text-xs font-bold text-red-700 bg-white px-2.5 py-1 rounded-md border border-amber-200 shadow-xs flex items-center space-x-1 flex-shrink-0">
       <span>📞</span>
       <span>0485-2877300</span>
     </a>
   </div>
 
-  <div class="p-4 grid grid-cols-2 gap-2">
+  <div class="p-3 sm:p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-2.5">
     {
       navItems.map((item) => {
         const normalizedHref = item.href.replace(/\/$/, "") || "/";
@@ -83,31 +83,31 @@ const normalizedPath = currentPath.replace(/\/index\.html$/, "").replace(/\/$/, 
         return (
           <a
             href={item.href}
-            class={`p-3 text-sm rounded-xl transition-colors flex flex-col ${
+            class={`p-2.5 sm:p-3 text-xs sm:text-sm rounded-xl transition-colors flex flex-col justify-center min-h-[54px] sm:min-h-[60px] ${
               isActive 
                 ? "bg-amber-100 text-amber-950 border border-amber-400 font-bold" 
                 : "text-stone-700 hover:bg-amber-50 hover:text-amber-900 border border-stone-100 font-medium"
             }`}
             role="menuitem"
           >
-            <span>{item.text}</span>
-            <span class="text-xs font-malayalam text-stone-500 font-normal">{item.malayalam}</span>
+            <span class="leading-tight">{item.text}</span>
+            <span class="text-[11px] sm:text-xs font-malayalam text-stone-500 font-normal mt-0.5">{item.malayalam}</span>
           </a>
         );
       })
     }
   </div>
 
-  <div class="p-4 bg-stone-50 border-t border-stone-200 flex flex-col gap-2">
+  <div class="p-3 sm:p-4 bg-stone-50 border-t border-stone-200 flex flex-col sm:flex-row gap-2 sm:gap-3">
     <a
       href="/vazhipadu#booking"
-      class="w-full text-center py-2.5 text-sm font-bold rounded-xl text-stone-950 bg-gradient-to-r from-amber-400 to-amber-500 shadow-sm"
+      class="flex-1 text-center py-2.5 sm:py-3 text-xs sm:text-sm font-bold rounded-xl text-stone-950 bg-gradient-to-r from-amber-400 to-amber-500 shadow-sm"
     >
       🪔 Online Vazhipadu Booking
     </a>
     <a
       href="/administration#donation"
-      class="w-full text-center py-2.5 text-sm font-semibold rounded-xl text-stone-700 bg-white border border-stone-300 hover:border-amber-400"
+      class="flex-1 text-center py-2.5 sm:py-3 text-xs sm:text-sm font-semibold rounded-xl text-stone-700 bg-white border border-stone-300 hover:border-amber-400"
     >
       🍚 Annadanam & Temple Donations
     </a>

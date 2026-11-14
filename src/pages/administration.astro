@@ -271,46 +271,46 @@ const committeeMembers = [
   </section>
 
   <!-- Interactive Donation Receipt Modal -->
-  <div id="donation-receipt-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white text-stone-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-      <button id="close-don-modal-btn" class="absolute top-5 right-5 text-stone-400 hover:text-stone-800 text-2xl font-bold p-1">
+  <div id="donation-receipt-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-white text-stone-900 rounded-2xl sm:rounded-3xl max-w-xl w-full p-4 sm:p-6 md:p-8 shadow-2xl relative max-h-[92vh] overflow-y-auto">
+      <button id="close-don-modal-btn" class="absolute top-4 sm:top-5 right-4 sm:right-5 text-stone-400 hover:text-stone-800 text-2xl font-bold p-1">
         ✕
       </button>
 
       <!-- Printable Receipt -->
       <div id="printable-don-receipt" class="print-area space-y-4">
         <div class="text-center pb-4 border-b-2 border-stone-800">
-          <div class="w-12 h-12 mx-auto rounded-full bg-amber-600 text-white flex items-center justify-center text-xl mb-1">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-full bg-amber-600 text-white flex items-center justify-center text-lg sm:text-xl mb-1">
             🔱
           </div>
-          <h2 class="text-xl font-serif font-black text-stone-900">
+          <h2 class="text-lg sm:text-xl font-serif font-black text-stone-900">
             തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം
           </h2>
           <p class="text-xs font-serif uppercase tracking-wider font-bold text-amber-900">
             Thirumarady Sri Mahadeva Temple Devaswom
           </p>
-          <p class="text-[11px] text-stone-500">
+          <p class="text-[10px] sm:text-[11px] text-stone-500">
             Travancore Devaswom Board • Reg No: TDB/EKM/THIRU/1965
           </p>
-          <div class="inline-block mt-2 px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider border border-emerald-300">
+          <div class="inline-block mt-2 px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider border border-emerald-300">
             Official Donation Voucher (80G Tax-Exempt)
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3 text-xs">
-          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+        <div class="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3 text-xs">
+          <div class="p-2 sm:p-2.5 rounded bg-stone-50 border border-stone-200">
             <span class="text-stone-400 block text-[10px] uppercase">Voucher ID</span>
             <span id="don-receipt-no" class="font-mono font-bold text-stone-900">TDB-DON-2026-5521</span>
           </div>
-          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+          <div class="p-2 sm:p-2.5 rounded bg-stone-50 border border-stone-200">
             <span class="text-stone-400 block text-[10px] uppercase">Transaction Date</span>
             <span id="don-receipt-time" class="font-mono font-bold text-stone-900">15 Nov 2026, 01:35 AM</span>
           </div>
-          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+          <div class="p-2 sm:p-2.5 rounded bg-stone-50 border border-stone-200">
             <span class="text-stone-400 block text-[10px] uppercase">Donor Name</span>
             <span id="don-receipt-name" class="font-bold text-stone-900">Harikrishnan N.</span>
           </div>
-          <div class="p-2.5 rounded bg-stone-50 border border-stone-200">
+          <div class="p-2 sm:p-2.5 rounded bg-stone-50 border border-stone-200">
             <span class="text-stone-400 block text-[10px] uppercase">PAN Number</span>
             <span id="don-receipt-pan" class="font-bold text-stone-900">ABCDE1234F</span>
           </div>
@@ -323,29 +323,29 @@ const committeeMembers = [
 
         <div class="p-3 rounded-xl bg-amber-50 border border-amber-300 flex items-center justify-between">
           <span class="font-serif font-bold text-amber-900 text-sm">Donation Amount Received:</span>
-          <span id="don-receipt-amount" class="font-serif font-black text-amber-900 text-2xl">₹1,001</span>
+          <span id="don-receipt-amount" class="font-serif font-black text-amber-900 text-xl sm:text-2xl">₹1,001</span>
         </div>
 
-        <div class="pt-4 border-t border-stone-200 flex items-center justify-between text-[11px] text-stone-500">
+        <div class="pt-4 border-t border-stone-200 flex items-center justify-between text-[10px] sm:text-[11px] text-stone-500 gap-3">
           <p>This donation is eligible for income tax deduction under Section 80G of the Income Tax Act.</p>
-          <div class="text-center flex-shrink-0 pl-4">
-            <div class="w-16 h-16 rounded-full border-2 border-red-700/60 text-red-700 flex items-center justify-center text-[9px] font-bold uppercase tracking-tighter transform rotate-[-8deg] p-1">
+          <div class="text-center flex-shrink-0">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-red-700/60 text-red-700 flex items-center justify-center text-[8px] sm:text-[9px] font-bold uppercase tracking-tighter transform rotate-[-8deg] p-1">
               Devaswom Seal
             </div>
           </div>
         </div>
       </div>
 
-      <div class="mt-6 flex gap-3 no-print">
+      <div class="mt-5 sm:mt-6 flex flex-col xs:flex-row gap-2.5 sm:gap-3 no-print">
         <button
           onclick="window.print()"
-          class="flex-1 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-bold text-sm transition-colors flex items-center justify-center gap-2 print-include"
+          class="flex-1 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 print-include"
         >
           <span>🖨️ Print / Download 80G Receipt</span>
         </button>
         <button
           id="done-don-btn"
-          class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-sm transition-colors"
+          class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-xs sm:text-sm transition-colors text-center"
         >
           Done
         </button>
