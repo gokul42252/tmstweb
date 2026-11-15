@@ -6,6 +6,7 @@ export interface Props {
   subtitle?: string;
   malayalamTitle?: string;
   backgroundImage?: string;
+  backgroundVideo?: string;
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   subtitle = "Ancient Sanctum of Lord Shiva in Central Travancore",
   malayalamTitle = "തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം",
   backgroundImage = "/uploads/temple/hero-temple.jpg",
+  backgroundVideo = "/videos/hero-temple.mp4",
 } = Astro.props;
 
 // Live festival marquee items
@@ -55,13 +57,54 @@ const tickerItems = [
     </div>
   </div>
 
-  <!-- Hero Visual Banner -->
+  <!-- Hero Visual Banner with Sacred Video Background -->
   <section
-    class="relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-[82vh] flex items-center bg-cover bg-center py-10 sm:py-16 lg:py-20"
-    style={`background-image: linear-gradient(to bottom, rgba(18, 14, 12, 0.75) 0%, rgba(18, 14, 12, 0.85) 60%, rgba(18, 14, 12, 0.95) 100%), url('${backgroundImage}');`}
+    class="relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-[82vh] flex items-center bg-stone-950 py-10 sm:py-16 lg:py-20 overflow-hidden"
   >
-    <!-- Background overlay decorative glow -->
-    <div class="absolute inset-0 bg-radial-gradient from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+    <!-- Background Video Element -->
+    <video
+      id="hero-bg-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="auto"
+      poster={backgroundImage}
+      class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0"
+    >
+      <source src={backgroundVideo} type="video/mp4" />
+      <!-- Fallback image for browsers with disabled video autoplay -->
+      <img
+        src={backgroundImage}
+        alt="Thirumarady Sri Mahadeva Temple Sanctum"
+        class="w-full h-full object-cover object-center"
+      />
+    </video>
+
+    <!-- Dark gradient overlays for high contrast and sacred ambience -->
+    <div class="absolute inset-0 bg-gradient-to-b from-stone-950/85 via-stone-950/75 to-stone-950/95 pointer-events-none z-[1]"></div>
+    <div class="absolute inset-0 bg-radial-gradient from-amber-500/15 via-transparent to-transparent pointer-events-none z-[1]"></div>
+
+    <!-- Floating Video Control Badge (Audio & Play/Pause) -->
+    <div class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 flex items-center space-x-2 no-print">
+      <button
+        id="video-sound-toggle"
+        class="p-2 sm:px-3 sm:py-1.5 rounded-full bg-stone-950/70 hover:bg-stone-900 border border-amber-500/40 text-amber-300 text-xs font-semibold backdrop-blur-md transition-all flex items-center space-x-1.5 shadow-lg group cursor-pointer"
+        aria-label="Toggle Temple Video Sound"
+      >
+        <span id="sound-icon" class="text-sm">🔇</span>
+        <span id="sound-text" class="hidden sm:inline text-[11px] group-hover:text-amber-200">Temple Audio</span>
+      </button>
+
+      <button
+        id="video-play-toggle"
+        class="p-2 sm:px-3 sm:py-1.5 rounded-full bg-stone-950/70 hover:bg-stone-900 border border-amber-500/40 text-amber-300 text-xs font-semibold backdrop-blur-md transition-all flex items-center space-x-1.5 shadow-lg group cursor-pointer"
+        aria-label="Play or Pause Background Video"
+      >
+        <span id="play-icon" class="text-sm">⏸️</span>
+        <span id="play-text" class="hidden sm:inline text-[11px] group-hover:text-amber-200">Pause</span>
+      </button>
+    </div>
 
     <div class="container relative z-10">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -238,4 +281,40 @@ const tickerItems = [
 
   updateTempleStatus();
   setInterval(updateTempleStatus, 60000);
+
+  // Video control toggle logic
+  const bgVideo = document.getElementById("hero-bg-video") as HTMLVideoElement | null;
+  const soundToggle = document.getElementById("video-sound-toggle");
+  const soundIcon = document.getElementById("sound-icon");
+  const soundText = document.getElementById("sound-text");
+  const playToggle = document.getElementById("video-play-toggle");
+  const playIcon = document.getElementById("play-icon");
+  const playText = document.getElementById("play-text");
+
+  if (bgVideo && soundToggle && soundIcon) {
+    soundToggle.addEventListener("click", () => {
+      bgVideo.muted = !bgVideo.muted;
+      if (bgVideo.muted) {
+        soundIcon.textContent = "🔇";
+        if (soundText) soundText.textContent = "Temple Audio";
+      } else {
+        soundIcon.textContent = "🔊";
+        if (soundText) soundText.textContent = "Mute Audio";
+      }
+    });
+  }
+
+  if (bgVideo && playToggle && playIcon && playText) {
+    playToggle.addEventListener("click", () => {
+      if (bgVideo.paused) {
+        bgVideo.play();
+        playIcon.textContent = "⏸️";
+        playText.textContent = "Pause";
+      } else {
+        bgVideo.pause();
+        playIcon.textContent = "▶️";
+        playText.textContent = "Play";
+      }
+    });
+  }
 </script>
