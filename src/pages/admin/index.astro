@@ -323,6 +323,7 @@ import "../../assets/styles/global.css";
                 <option value="ALL">All Counters</option>
                 <option value="COUNTER-1">COUNTER-1 (Main)</option>
                 <option value="COUNTER-2">COUNTER-2</option>
+                <option value="ONLINE">ONLINE (Web Portal & UPI)</option>
               </select>
             </div>
 
@@ -1546,8 +1547,8 @@ import "../../assets/styles/global.css";
               ${payBadge}
             </td>
             <td class="py-3 px-4 text-[11px] text-stone-500 whitespace-nowrap">
-              <span class="font-bold text-stone-700 block">${bill.counter_id}</span>
-              <span>${bill.billed_by || "Operator"}</span>
+              ${bill.counter_id === 'ONLINE' ? '<span class="inline-block px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 font-bold text-[10px]">🌐 ONLINE</span>' : `<span class="font-bold text-stone-700 block">${bill.counter_id}</span>`}
+              <span class="block truncate max-w-[150px]" title="${bill.billed_by || 'Operator'}">${bill.billed_by || "Operator"}</span>
             </td>
             <td class="py-3 px-4 text-right font-serif font-black text-amber-900 text-sm whitespace-nowrap">
               ₹${Number(bill.total_amount).toLocaleString("en-IN")}

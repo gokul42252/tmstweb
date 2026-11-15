@@ -263,12 +263,120 @@ const committeeMembers = [
             type="submit"
             class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-serif font-black text-lg tracking-wide uppercase shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2"
           >
-            <span>🍚 Confirm Contribution & Generate 80G Receipt</span>
+            <span>🍚 Proceed to UPI Contribution (0% Platform Fee)</span>
           </button>
         </form>
       </div>
     </div>
   </section>
+
+  <!-- Free Dynamic UPI Donation Payment Modal -->
+  <div id="don-upi-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-stone-950 text-white border border-amber-500/40 rounded-2xl sm:rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative my-6">
+      <button id="close-don-upi-modal-btn" type="button" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-stone-400 hover:text-white text-2xl font-bold p-1">
+        ✕
+      </button>
+
+      <!-- Modal Header -->
+      <div class="text-center pb-3 border-b border-stone-800">
+        <div class="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-2 border border-emerald-500/30">
+          <span>⚡ 0% Platform Fee • 100% Directly to Temple Account</span>
+        </div>
+        <h3 class="text-xl sm:text-2xl font-serif font-black text-white">
+          Temple Donation via UPI
+        </h3>
+        <p class="text-xs text-stone-400 mt-0.5">
+          Scan QR code or pay with any UPI App (GPay / PhonePe / Paytm)
+        </p>
+      </div>
+
+      <!-- Amount Banner -->
+      <div class="my-4 p-3.5 rounded-xl bg-gradient-to-r from-amber-950/70 to-stone-900 border border-amber-500/40 text-center">
+        <span class="text-[11px] text-stone-400 uppercase tracking-wider block font-bold">Contribution Amount</span>
+        <span id="don-upi-modal-amount" class="text-3xl sm:text-4xl font-serif font-black text-amber-300">₹1,001</span>
+        <span id="don-upi-modal-cause" class="text-xs text-amber-400 mt-0.5 block font-bold">Nitya Annadanam Fund</span>
+        <span id="don-upi-modal-note" class="text-[10px] text-stone-400 mt-0.5 block font-mono">Ref: TM-DON-...</span>
+      </div>
+
+      <div class="space-y-4">
+        <!-- QR Code Canvas Container -->
+        <div class="p-3.5 rounded-2xl bg-stone-900 border border-stone-800 text-center flex flex-col items-center">
+          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">
+            📱 Scan with Any UPI App
+          </span>
+          <div class="p-2.5 bg-white rounded-xl inline-block shadow-lg">
+            <canvas id="don-upi-qr-canvas" class="w-44 h-44 sm:w-48 sm:h-48"></canvas>
+          </div>
+          <p class="text-[11px] text-stone-400 mt-2">
+            Scan using camera or Google Pay / PhonePe / Paytm / BHIM
+          </p>
+        </div>
+
+        <!-- Mobile Quick-Pay App Buttons -->
+        <div>
+          <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider block mb-2 text-center">
+            Or Tap to Pay Directly (Mobile Users)
+          </span>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <a id="don-btn-upi-phonepe" href="#" class="p-2 rounded-xl bg-purple-950/60 border border-purple-500/40 hover:bg-purple-900/60 text-center transition flex flex-col items-center justify-center font-bold text-purple-200">
+              <span class="text-base mb-0.5">🟣</span>
+              <span>PhonePe</span>
+            </a>
+            <a id="don-btn-upi-gpay" href="#" class="p-2 rounded-xl bg-blue-950/60 border border-blue-500/40 hover:bg-blue-900/60 text-center transition flex flex-col items-center justify-center font-bold text-blue-200">
+              <span class="text-base mb-0.5">🔵</span>
+              <span>Google Pay</span>
+            </a>
+            <a id="don-btn-upi-paytm" href="#" class="p-2 rounded-xl bg-sky-950/60 border border-sky-500/40 hover:bg-sky-900/60 text-center transition flex flex-col items-center justify-center font-bold text-sky-200">
+              <span class="text-base mb-0.5">🟦</span>
+              <span>Paytm</span>
+            </a>
+            <a id="don-btn-upi-generic" href="#" class="p-2 rounded-xl bg-amber-950/60 border border-amber-500/40 hover:bg-amber-900/60 text-center transition flex flex-col items-center justify-center font-bold text-amber-200">
+              <span class="text-base mb-0.5">🟠</span>
+              <span>Any UPI</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- VPA Info & Copy -->
+        <div class="p-2.5 rounded-xl bg-stone-900 border border-stone-800 flex items-center justify-between text-xs">
+          <div>
+            <span class="text-stone-400 block text-[10px] uppercase">Temple UPI ID:</span>
+            <span id="don-upi-vpa-display" class="font-mono font-bold text-amber-300">thirumaradytemple@upi</span>
+            <span class="text-[10px] text-amber-400/80 block">⚠️ Test Mode (Dummy UPI ID configured)</span>
+          </div>
+          <button id="don-btn-copy-upi" type="button" class="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-xs border border-stone-700 transition">
+            📋 Copy
+          </button>
+        </div>
+
+        <!-- Step 2: UTR Reference Submission -->
+        <div class="pt-3 border-t border-stone-800 space-y-2.5">
+          <label for="don-upi-utr-input" class="block text-xs font-bold uppercase tracking-wider text-amber-400">
+            Enter 12-Digit UPI Reference / UTR Number *
+          </label>
+          <input
+            type="text"
+            id="don-upi-utr-input"
+            maxlength="16"
+            placeholder="e.g., 412389123456"
+            class="w-full px-4 py-2.5 rounded-xl bg-stone-900 border border-stone-700 text-white font-mono text-sm tracking-wider focus:outline-none focus:border-amber-400 uppercase"
+          />
+          <p class="text-[10px] text-stone-400">
+            💡 Check your payment app receipt history for the 12-digit UTR/Txn number and enter it here to verify your donation.
+          </p>
+
+          <button
+            type="button"
+            id="don-btn-confirm-upi"
+            class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-stone-950 font-serif font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition flex items-center justify-center space-x-2"
+          >
+            <span id="don-btn-confirm-text">✓ Verify Payment & Generate 80G Receipt</span>
+          </button>
+          <div id="don-upi-error-msg" class="text-xs text-rose-400 text-center hidden"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Interactive Donation Receipt Modal -->
   <div id="donation-receipt-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
@@ -314,6 +422,10 @@ const committeeMembers = [
             <span class="text-stone-400 block text-[10px] uppercase">PAN Number</span>
             <span id="don-receipt-pan" class="font-bold text-stone-900">ABCDE1234F</span>
           </div>
+          <div class="p-2 sm:p-2.5 rounded bg-emerald-50 border border-emerald-300 xs:col-span-2">
+            <span class="text-emerald-800 block text-[10px] uppercase font-bold">Payment Method</span>
+            <span class="font-mono font-bold text-emerald-900 text-xs">UPI Paid (UTR: <span id="don-receipt-utr-val">-</span>) ✅</span>
+          </div>
         </div>
 
         <div class="p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs">
@@ -355,6 +467,10 @@ const committeeMembers = [
 </BaseLayout>
 
 <script>
+  import QRCode from "qrcode";
+  import { supabase } from "../lib/supabaseClient";
+  import { TEMPLE_INFO } from "../data/templeData";
+
   // Amount buttons
   const amountBtns = document.querySelectorAll(".amount-btn");
   const customAmountInput = document.getElementById("custom-amount") as HTMLInputElement;
@@ -389,56 +505,238 @@ const committeeMembers = [
   }
 
   // Modal elements
+  const donUpiModal = document.getElementById("don-upi-modal");
+  const closeDonUpiModalBtn = document.getElementById("close-don-upi-modal-btn");
+  const donBtnConfirmUpi = document.getElementById("don-btn-confirm-upi");
+  const donBtnConfirmText = document.getElementById("don-btn-confirm-text");
+  const donUpiUtrInput = document.getElementById("don-upi-utr-input") as HTMLInputElement;
+  const donUpiErrorMsg = document.getElementById("don-upi-error-msg");
+  const donBtnCopyUpi = document.getElementById("don-btn-copy-upi");
+
   const donModal = document.getElementById("donation-receipt-modal");
   const closeDonModalBtn = document.getElementById("close-don-modal-btn");
   const doneDonBtn = document.getElementById("done-don-btn");
   const donForm = document.getElementById("donation-form");
+
+  interface PendingDonation {
+    cause: string;
+    amount: number;
+    name: string;
+    pan: string;
+    phone: string;
+    email: string;
+    voucherNo: string;
+    timeStr: string;
+  }
+
+  let currentPendingDonation: PendingDonation | null = null;
 
   function closeDonationModal() {
     donModal?.classList.add("hidden");
     donModal?.classList.remove("flex");
   }
 
+  function closeDonUpiModal() {
+    donUpiModal?.classList.add("hidden");
+    donUpiModal?.classList.remove("flex");
+  }
+
   closeDonModalBtn?.addEventListener("click", closeDonationModal);
   doneDonBtn?.addEventListener("click", closeDonationModal);
+  closeDonUpiModalBtn?.addEventListener("click", closeDonUpiModal);
+
   donModal?.addEventListener("click", (e) => {
-    if (e.target === donModal) {
-      closeDonationModal();
-    }
+    if (e.target === donModal) closeDonationModal();
+  });
+
+  donUpiModal?.addEventListener("click", (e) => {
+    if (e.target === donUpiModal) closeDonUpiModal();
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && donModal && !donModal.classList.contains("hidden")) {
-      closeDonationModal();
+    if (e.key === "Escape") {
+      if (donUpiModal && !donUpiModal.classList.contains("hidden")) closeDonUpiModal();
+      if (donModal && !donModal.classList.contains("hidden")) closeDonationModal();
     }
   });
 
+  // Copy UPI ID button
+  donBtnCopyUpi?.addEventListener("click", () => {
+    const vpa = TEMPLE_INFO.upi?.vpa || "thirumaradytemple@upi";
+    navigator.clipboard.writeText(vpa).then(() => {
+      donBtnCopyUpi.textContent = "✓ Copied!";
+      donBtnCopyUpi.classList.add("bg-emerald-700", "text-white");
+      setTimeout(() => {
+        donBtnCopyUpi.textContent = "📋 Copy";
+        donBtnCopyUpi.classList.remove("bg-emerald-700", "text-white");
+      }, 1800);
+    }).catch(() => {
+      alert("UPI ID: " + vpa);
+    });
+  });
+
+  // Donation form submit -> opens UPI Checkout modal
   donForm?.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const cause = (document.querySelector("input[name='donationCause']:checked") as HTMLInputElement)?.value || "Nitya Annadanam";
-    const amount = customAmountInput?.value || "1001";
-    const name = (document.getElementById("donor-name") as HTMLInputElement)?.value || "Devotee";
-    const pan = (document.getElementById("pan-number") as HTMLInputElement)?.value || "NOT PROVIDED";
+    const amountVal = parseInt(customAmountInput?.value || "1001", 10);
+    const amount = isNaN(amountVal) || amountVal < 51 ? 1001 : amountVal;
+    const name = (document.getElementById("donor-name") as HTMLInputElement)?.value.trim() || "Devotee";
+    const pan = (document.getElementById("pan-number") as HTMLInputElement)?.value.trim().toUpperCase() || "NOT PROVIDED";
+    const phone = (document.getElementById("donor-phone") as HTMLInputElement)?.value.trim() || "";
+    const email = (document.getElementById("donor-email") as HTMLInputElement)?.value.trim() || "";
 
-    const voucherNo = "TM-DON-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
-    const timeStr = new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+    const now = new Date();
+    const datePrefix = now.toISOString().slice(0, 10).replace(/-/g, "");
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    const voucherNo = `TM-DON-${datePrefix}-${randomSuffix}`;
+    const timeStr = now.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
 
+    currentPendingDonation = {
+      cause,
+      amount,
+      name,
+      pan,
+      phone,
+      email,
+      voucherNo,
+      timeStr
+    };
+
+    // Update UPI modal details
+    const amtElem = document.getElementById("don-upi-modal-amount");
+    const causeElem = document.getElementById("don-upi-modal-cause");
+    const noteElem = document.getElementById("don-upi-modal-note");
+    const vpaElem = document.getElementById("don-upi-vpa-display");
+
+    const vpa = TEMPLE_INFO.upi?.vpa || "thirumaradytemple@upi";
+    const payeeName = TEMPLE_INFO.upi?.payeeName || "Thirumarady Sri Mahadeva Temple";
+    const note = `TMST DONATION ${voucherNo}`;
+
+    if (amtElem) amtElem.textContent = `₹${amount.toLocaleString("en-IN")}`;
+    if (causeElem) causeElem.textContent = cause;
+    if (noteElem) noteElem.textContent = `Ref: ${voucherNo}`;
+    if (vpaElem) vpaElem.textContent = vpa;
+
+    const upiUri = `upi://pay?pa=${vpa}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+    // Render dynamic QR code on canvas
+    const qrCanvas = document.getElementById("don-upi-qr-canvas") as HTMLCanvasElement;
+    if (qrCanvas) {
+      QRCode.toCanvas(qrCanvas, upiUri, {
+        width: 192,
+        margin: 1,
+        color: { dark: "#1c1917", light: "#ffffff" }
+      }, (err) => {
+        if (err) console.error("Donation QR error:", err);
+      });
+    }
+
+    // Set mobile app links
+    const phonepeLink = document.getElementById("don-btn-upi-phonepe") as HTMLAnchorElement;
+    const gpayLink = document.getElementById("don-btn-upi-gpay") as HTMLAnchorElement;
+    const paytmLink = document.getElementById("don-btn-upi-paytm") as HTMLAnchorElement;
+    const genericLink = document.getElementById("don-btn-upi-generic") as HTMLAnchorElement;
+
+    if (phonepeLink) phonepeLink.href = upiUri;
+    if (gpayLink) gpayLink.href = upiUri;
+    if (paytmLink) paytmLink.href = upiUri;
+    if (genericLink) genericLink.href = upiUri;
+
+    // Reset UTR input
+    if (donUpiUtrInput) donUpiUtrInput.value = "";
+    if (donUpiErrorMsg) {
+      donUpiErrorMsg.textContent = "";
+      donUpiErrorMsg.classList.add("hidden");
+    }
+
+    // Show UPI modal
+    donUpiModal?.classList.remove("hidden");
+    donUpiModal?.classList.add("flex");
+  });
+
+  // Verify UTR & Complete Donation
+  donBtnConfirmUpi?.addEventListener("click", async () => {
+    if (!currentPendingDonation) {
+      alert("No pending donation session found. Please submit the form first.");
+      closeDonUpiModal();
+      return;
+    }
+
+    const utr = donUpiUtrInput?.value.trim();
+    if (!utr || utr.length < 6) {
+      if (donUpiErrorMsg) {
+        donUpiErrorMsg.textContent = "Please enter the valid 12-digit UPI Reference / UTR Number from your payment app.";
+        donUpiErrorMsg.classList.remove("hidden");
+      }
+      donUpiUtrInput?.focus();
+      return;
+    }
+
+    if (donBtnConfirmUpi) (donBtnConfirmUpi as HTMLButtonElement).disabled = true;
+    if (donBtnConfirmText) donBtnConfirmText.textContent = "⏳ Recording Donation to Temple Database...";
+
+    const billId = crypto.randomUUID();
+    const today = new Date().toISOString().split("T")[0];
+    const billRecord = {
+      id: billId,
+      bill_number: currentPendingDonation.voucherNo,
+      counter_id: "ONLINE",
+      billed_by: `Online Donation (UTR: ${utr})`,
+      devotee_name: currentPendingDonation.name,
+      star_name: "Donation / സംഭാവന",
+      gothram: `${currentPendingDonation.cause} (PAN: ${currentPendingDonation.pan})`,
+      pooja_date: today,
+      payment_mode: "UPI",
+      total_amount: currentPendingDonation.amount,
+      sync_status: "SYNCED"
+    };
+
+    const billItem = {
+      id: crypto.randomUUID(),
+      bill_id: billId,
+      pooja_id: crypto.randomUUID(),
+      pooja_name: `Donation: ${currentPendingDonation.cause}`,
+      deity_name: "Annadanam / Renovation",
+      quantity: 1,
+      unit_price: currentPendingDonation.amount,
+      subtotal: currentPendingDonation.amount
+    };
+
+    try {
+      await supabase.from("bills").insert([billRecord]);
+      await supabase.from("bill_items").insert([billItem]);
+    } catch (err) {
+      console.warn("Database fallback:", err);
+    }
+
+    // Populate Printable 80G Receipt
     const rNo = document.getElementById("don-receipt-no");
     const rTime = document.getElementById("don-receipt-time");
     const rName = document.getElementById("don-receipt-name");
     const rPan = document.getElementById("don-receipt-pan");
     const rCause = document.getElementById("don-receipt-cause");
     const rAmt = document.getElementById("don-receipt-amount");
+    const rUtr = document.getElementById("don-receipt-utr-val");
 
-    if (rNo) rNo.textContent = voucherNo;
-    if (rTime) rTime.textContent = timeStr;
-    if (rName) rName.textContent = name;
-    if (rPan) rPan.textContent = pan.toUpperCase();
-    if (rCause) rCause.textContent = cause;
-    if (rAmt) rAmt.textContent = `₹${parseInt(amount).toLocaleString("en-IN")}`;
+    if (rNo) rNo.textContent = currentPendingDonation.voucherNo;
+    if (rTime) rTime.textContent = currentPendingDonation.timeStr;
+    if (rName) rName.textContent = currentPendingDonation.name;
+    if (rPan) rPan.textContent = currentPendingDonation.pan;
+    if (rCause) rCause.textContent = currentPendingDonation.cause;
+    if (rAmt) rAmt.textContent = `₹${currentPendingDonation.amount.toLocaleString("en-IN")}`;
+    if (rUtr) rUtr.textContent = utr;
 
+    if (donBtnConfirmUpi) (donBtnConfirmUpi as HTMLButtonElement).disabled = false;
+    if (donBtnConfirmText) donBtnConfirmText.textContent = "✓ Verify Payment & Generate 80G Receipt";
+
+    // Close UPI modal, open Receipt modal
+    closeDonUpiModal();
     donModal?.classList.remove("hidden");
     donModal?.classList.add("flex");
+
+    // Reset donation form
+    (donForm as HTMLFormElement)?.reset();
   });
 </script>

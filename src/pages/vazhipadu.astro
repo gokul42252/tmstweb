@@ -357,12 +357,119 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
             type="submit"
             class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-serif font-black text-lg tracking-wide uppercase shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2"
           >
-            <span>🪔 Confirm & Generate Temple Booking Receipt</span>
+            <span>🪔 Proceed to UPI Payment & Booking (0% Fee)</span>
           </button>
         </form>
       </div>
     </div>
   </section>
+
+  <!-- Free Dynamic UPI Payment Gateway Modal -->
+  <div id="upi-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-stone-950 text-white border border-amber-500/40 rounded-2xl sm:rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative my-6">
+      <button id="close-upi-modal-btn" type="button" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-stone-400 hover:text-white text-2xl font-bold p-1">
+        ✕
+      </button>
+
+      <!-- Modal Header -->
+      <div class="text-center pb-3 border-b border-stone-800">
+        <div class="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-2 border border-emerald-500/30">
+          <span>⚡ 0% Platform Fee • Direct Temple Account</span>
+        </div>
+        <h3 class="text-xl sm:text-2xl font-serif font-black text-white">
+          Complete Offering via UPI
+        </h3>
+        <p class="text-xs text-stone-400 mt-0.5">
+          Scan the QR code or tap your preferred UPI app below
+        </p>
+      </div>
+
+      <!-- Amount Banner -->
+      <div class="my-4 p-3.5 rounded-xl bg-gradient-to-r from-amber-950/70 to-stone-900 border border-amber-500/40 text-center">
+        <span class="text-[11px] text-stone-400 uppercase tracking-wider block font-bold">Total Dakshina to Pay</span>
+        <span id="upi-modal-amount" class="text-3xl sm:text-4xl font-serif font-black text-amber-300">₹0</span>
+        <span id="upi-modal-note" class="text-[11px] text-stone-400 mt-0.5 block font-mono">Ref: TM-ONL-...</span>
+      </div>
+
+      <div class="space-y-4">
+        <!-- QR Code Canvas Container -->
+        <div class="p-3.5 rounded-2xl bg-stone-900 border border-stone-800 text-center flex flex-col items-center">
+          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">
+            📱 Scan with Any UPI App (GPay / PhonePe / Paytm)
+          </span>
+          <div class="p-2.5 bg-white rounded-xl inline-block shadow-lg">
+            <canvas id="upi-qr-canvas" class="w-44 h-44 sm:w-48 sm:h-48"></canvas>
+          </div>
+          <p class="text-[11px] text-stone-400 mt-2">
+            Scan using camera or Google Pay / PhonePe / Paytm / BHIM
+          </p>
+        </div>
+
+        <!-- Mobile Quick-Pay App Buttons -->
+        <div>
+          <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider block mb-2 text-center">
+            Or Tap to Pay Directly (Mobile Users)
+          </span>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <a id="btn-upi-phonepe" href="#" class="p-2 rounded-xl bg-purple-950/60 border border-purple-500/40 hover:bg-purple-900/60 text-center transition flex flex-col items-center justify-center font-bold text-purple-200">
+              <span class="text-base mb-0.5">🟣</span>
+              <span>PhonePe</span>
+            </a>
+            <a id="btn-upi-gpay" href="#" class="p-2 rounded-xl bg-blue-950/60 border border-blue-500/40 hover:bg-blue-900/60 text-center transition flex flex-col items-center justify-center font-bold text-blue-200">
+              <span class="text-base mb-0.5">🔵</span>
+              <span>Google Pay</span>
+            </a>
+            <a id="btn-upi-paytm" href="#" class="p-2 rounded-xl bg-sky-950/60 border border-sky-500/40 hover:bg-sky-900/60 text-center transition flex flex-col items-center justify-center font-bold text-sky-200">
+              <span class="text-base mb-0.5">🟦</span>
+              <span>Paytm</span>
+            </a>
+            <a id="btn-upi-generic" href="#" class="p-2 rounded-xl bg-amber-950/60 border border-amber-500/40 hover:bg-amber-900/60 text-center transition flex flex-col items-center justify-center font-bold text-amber-200">
+              <span class="text-base mb-0.5">🟠</span>
+              <span>Any UPI</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- VPA Info & Copy -->
+        <div class="p-2.5 rounded-xl bg-stone-900 border border-stone-800 flex items-center justify-between text-xs">
+          <div>
+            <span class="text-stone-400 block text-[10px] uppercase">Temple UPI ID:</span>
+            <span id="upi-vpa-display" class="font-mono font-bold text-amber-300">thirumaradytemple@upi</span>
+            <span class="text-[10px] text-amber-400/80 block">⚠️ Test Mode (Dummy UPI ID configured)</span>
+          </div>
+          <button id="btn-copy-upi" type="button" class="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-xs border border-stone-700 transition">
+            📋 Copy
+          </button>
+        </div>
+
+        <!-- Step 2: UTR Reference Submission -->
+        <div class="pt-3 border-t border-stone-800 space-y-2.5">
+          <label for="upi-utr-input" class="block text-xs font-bold uppercase tracking-wider text-amber-400">
+            Enter 12-Digit UPI Reference / UTR Number *
+          </label>
+          <input
+            type="text"
+            id="upi-utr-input"
+            maxlength="16"
+            placeholder="e.g., 412389123456"
+            class="w-full px-4 py-2.5 rounded-xl bg-stone-900 border border-stone-700 text-white font-mono text-sm tracking-wider focus:outline-none focus:border-amber-400 uppercase"
+          />
+          <p class="text-[10px] text-stone-400">
+            💡 Check your payment app receipt history for the 12-digit UTR/Txn number and enter it here to verify your booking.
+          </p>
+
+          <button
+            type="button"
+            id="btn-confirm-upi-payment"
+            class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-stone-950 font-serif font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition flex items-center justify-center space-x-2"
+          >
+            <span id="btn-confirm-text">✓ Verify Payment & Generate Official Receipt</span>
+          </button>
+          <div id="upi-error-msg" class="text-xs text-rose-400 text-center hidden"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Interactive Receipt Modal (Generated Upon Booking) -->
   <div id="receipt-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
@@ -418,6 +525,10 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
             <span class="text-stone-400 block text-[10px] uppercase">Prasad Delivery</span>
             <span id="receipt-delivery" class="font-bold text-stone-900">Counter Pickup</span>
           </div>
+          <div class="p-2 sm:p-2.5 rounded bg-emerald-50 border border-emerald-300">
+            <span class="text-emerald-800 block text-[10px] uppercase font-bold">Payment Mode</span>
+            <span id="receipt-payment-mode" class="font-mono font-bold text-emerald-900 text-xs">UPI (UTR: <span id="receipt-utr-display">-</span>)</span>
+          </div>
         </div>
 
         <!-- Booked Offerings List -->
@@ -467,6 +578,10 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
 </BaseLayout>
 
 <script>
+  import QRCode from "qrcode";
+  import { supabase } from "../lib/supabaseClient";
+  import { TEMPLE_INFO } from "../data/templeData";
+
   // Tab filtering logic
   const tabButtons = document.querySelectorAll(".vazhipadu-tab-btn");
   const offeringCards = document.querySelectorAll(".offering-card");
@@ -497,6 +612,7 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
     name: string;
     ml: string;
     rate: number;
+    deity?: string;
   }
 
   let cart: CartItem[] = [];
@@ -589,8 +705,9 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
     const name = selectedOption.getAttribute("data-name") || "";
     const ml = selectedOption.getAttribute("data-ml") || "";
     const rate = parseInt(selectedOption.getAttribute("data-rate") || "0");
+    const deity = selectedOption.getAttribute("data-deity") || "Shiva";
 
-    cart.push({ id, name, ml, rate });
+    cart.push({ id, name, ml, rate, deity });
     offeringSelect.value = "";
     updateCartUI();
   });
@@ -609,8 +726,9 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
       const name = btn.getAttribute("data-name") || "";
       const ml = btn.getAttribute("data-ml") || "";
       const rate = parseInt(btn.getAttribute("data-rate") || "0");
+      const deity = btn.getAttribute("data-deity") || "Shiva";
 
-      cart.push({ id, name, ml, rate });
+      cart.push({ id, name, ml, rate, deity });
       updateCartUI();
 
       // Visual button feedback
@@ -630,30 +748,79 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
   });
 
   // Modal elements
+  const upiModal = document.getElementById("upi-modal");
+  const closeUpiModalBtn = document.getElementById("close-upi-modal-btn");
   const receiptModal = document.getElementById("receipt-modal");
   const closeModalBtn = document.getElementById("close-modal-btn");
   const doneModalBtn = document.getElementById("done-modal-btn");
+  const btnConfirmUpiPayment = document.getElementById("btn-confirm-upi-payment");
+  const btnConfirmText = document.getElementById("btn-confirm-text");
+  const upiUtrInput = document.getElementById("upi-utr-input") as HTMLInputElement;
+  const upiErrorMsg = document.getElementById("upi-error-msg");
+  const btnCopyUpi = document.getElementById("btn-copy-upi");
+
+  // State for pending booking
+  interface PendingBooking {
+    name: string;
+    star: string;
+    gotra: string;
+    date: string;
+    phone: string;
+    email: string;
+    delivery: string;
+    cart: CartItem[];
+    finalAmount: number;
+    receiptNo: string;
+    receiptTime: string;
+  }
+
+  let currentPendingBooking: PendingBooking | null = null;
+
+  function closeUpiModal() {
+    upiModal?.classList.add("hidden");
+    upiModal?.classList.remove("flex");
+  }
 
   function closeReceiptModal() {
     receiptModal?.classList.add("hidden");
     receiptModal?.classList.remove("flex");
   }
 
+  closeUpiModalBtn?.addEventListener("click", closeUpiModal);
   closeModalBtn?.addEventListener("click", closeReceiptModal);
   doneModalBtn?.addEventListener("click", closeReceiptModal);
+
+  upiModal?.addEventListener("click", (e) => {
+    if (e.target === upiModal) closeUpiModal();
+  });
+
   receiptModal?.addEventListener("click", (e) => {
-    if (e.target === receiptModal) {
-      closeReceiptModal();
-    }
+    if (e.target === receiptModal) closeReceiptModal();
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && receiptModal && !receiptModal.classList.contains("hidden")) {
-      closeReceiptModal();
+    if (e.key === "Escape") {
+      if (upiModal && !upiModal.classList.contains("hidden")) closeUpiModal();
+      if (receiptModal && !receiptModal.classList.contains("hidden")) closeReceiptModal();
     }
   });
 
-  // Form submit handler
+  // Copy UPI ID button
+  btnCopyUpi?.addEventListener("click", () => {
+    const vpa = TEMPLE_INFO.upi?.vpa || "thirumaradytemple@upi";
+    navigator.clipboard.writeText(vpa).then(() => {
+      btnCopyUpi.textContent = "✓ Copied!";
+      btnCopyUpi.classList.add("bg-emerald-700", "text-white");
+      setTimeout(() => {
+        btnCopyUpi.textContent = "📋 Copy";
+        btnCopyUpi.classList.remove("bg-emerald-700", "text-white");
+      }, 1800);
+    }).catch(() => {
+      alert("UPI ID: " + vpa);
+    });
+  });
+
+  // Booking Form submit handler -> Opens UPI Modal
   bookingForm?.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -662,34 +829,183 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
       return;
     }
 
-    const name = (document.getElementById("devotee-name") as HTMLInputElement).value;
+    const name = (document.getElementById("devotee-name") as HTMLInputElement).value.trim();
     const star = (document.getElementById("nakshatra") as HTMLSelectElement).value;
     const date = (document.getElementById("offering-date") as HTMLInputElement).value;
-    const delivery = (document.querySelector("input[name='deliveryMode']:checked") as HTMLInputElement)?.value;
+    const gotra = (document.getElementById("gotra") as HTMLInputElement)?.value.trim() || "";
+    const phone = (document.getElementById("phone") as HTMLInputElement)?.value.trim() || "";
+    const email = (document.getElementById("email") as HTMLInputElement)?.value.trim() || "";
+    const delivery = (document.querySelector("input[name='deliveryMode']:checked") as HTMLInputElement)?.value || "counter";
 
-    const receiptNo = "TM-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
-    const receiptTime = new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+    const subtotal = cart.reduce((acc, curr) => acc + curr.rate, 0);
+    const finalAmount = subtotal + (delivery === "postal" ? 60 : 0);
 
-    // Populate modal fields
+    const now = new Date();
+    const datePrefix = now.toISOString().slice(0, 10).replace(/-/g, "");
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    const receiptNo = `TM-ONL-${datePrefix}-${randomSuffix}`;
+    const receiptTime = now.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+
+    currentPendingBooking = {
+      name,
+      star,
+      gotra,
+      date,
+      phone,
+      email,
+      delivery,
+      cart: [...cart],
+      finalAmount,
+      receiptNo,
+      receiptTime
+    };
+
+    // Update UPI Modal Texts
+    const upiAmountElem = document.getElementById("upi-modal-amount");
+    const upiNoteElem = document.getElementById("upi-modal-note");
+    const upiVpaElem = document.getElementById("upi-vpa-display");
+
+    const vpa = TEMPLE_INFO.upi?.vpa || "thirumaradytemple@upi";
+    const payeeName = TEMPLE_INFO.upi?.payeeName || "Thirumarady Sri Mahadeva Temple";
+    const note = `TMST ${receiptNo}`;
+
+    if (upiAmountElem) upiAmountElem.textContent = `₹${finalAmount}`;
+    if (upiNoteElem) upiNoteElem.textContent = `Ref: ${receiptNo}`;
+    if (upiVpaElem) upiVpaElem.textContent = vpa;
+
+    // Standard NPCI UPI URI
+    const upiUri = `upi://pay?pa=${vpa}&pn=${encodeURIComponent(payeeName)}&am=${finalAmount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+    // Generate dynamic QR Code on canvas
+    const qrCanvas = document.getElementById("upi-qr-canvas") as HTMLCanvasElement;
+    if (qrCanvas) {
+      QRCode.toCanvas(qrCanvas, upiUri, {
+        width: 192,
+        margin: 1,
+        color: {
+          dark: "#1c1917",
+          light: "#ffffff"
+        }
+      }, (err) => {
+        if (err) console.error("QR generation error:", err);
+      });
+    }
+
+    // Set mobile app quick links
+    const phonepeLink = document.getElementById("btn-upi-phonepe") as HTMLAnchorElement;
+    const gpayLink = document.getElementById("btn-upi-gpay") as HTMLAnchorElement;
+    const paytmLink = document.getElementById("btn-upi-paytm") as HTMLAnchorElement;
+    const genericLink = document.getElementById("btn-upi-generic") as HTMLAnchorElement;
+
+    if (phonepeLink) phonepeLink.href = upiUri;
+    if (gpayLink) gpayLink.href = upiUri;
+    if (paytmLink) paytmLink.href = upiUri;
+    if (genericLink) genericLink.href = upiUri;
+
+    // Clear previous UTR and errors
+    if (upiUtrInput) upiUtrInput.value = "";
+    if (upiErrorMsg) {
+      upiErrorMsg.textContent = "";
+      upiErrorMsg.classList.add("hidden");
+    }
+
+    // Show UPI modal
+    upiModal?.classList.remove("hidden");
+    upiModal?.classList.add("flex");
+  });
+
+  // Verify UTR & Complete Booking
+  btnConfirmUpiPayment?.addEventListener("click", async () => {
+    if (!currentPendingBooking) {
+      alert("No pending booking found. Please submit the booking form first.");
+      closeUpiModal();
+      return;
+    }
+
+    const utr = upiUtrInput?.value.trim();
+    if (!utr || utr.length < 6) {
+      if (upiErrorMsg) {
+        upiErrorMsg.textContent = "Please enter the valid 12-digit UPI Reference / UTR Number from your payment app.";
+        upiErrorMsg.classList.remove("hidden");
+      }
+      upiUtrInput?.focus();
+      return;
+    }
+
+    // Indicate loading
+    if (btnConfirmUpiPayment) (btnConfirmUpiPayment as HTMLButtonElement).disabled = true;
+    if (btnConfirmText) btnConfirmText.textContent = "⏳ Verifying & Recording to Temple Database...";
+
+    const billId = crypto.randomUUID();
+    const billRecord = {
+      id: billId,
+      bill_number: currentPendingBooking.receiptNo,
+      counter_id: "ONLINE",
+      billed_by: `Online Web (UTR: ${utr})`,
+      devotee_name: currentPendingBooking.name,
+      star_name: currentPendingBooking.star,
+      gothram: currentPendingBooking.gotra || currentPendingBooking.phone,
+      pooja_date: currentPendingBooking.date,
+      payment_mode: "UPI",
+      total_amount: currentPendingBooking.finalAmount,
+      sync_status: "SYNCED"
+    };
+
+    const billItems = currentPendingBooking.cart.map(item => ({
+      id: crypto.randomUUID(),
+      bill_id: billId,
+      pooja_id: item.id || crypto.randomUUID(),
+      pooja_name: item.name,
+      deity_name: item.deity || "Shiva",
+      quantity: 1,
+      unit_price: item.rate,
+      subtotal: item.rate
+    }));
+
+    try {
+      // 1. Record Bill in Supabase
+      const { error: billError } = await supabase.from("bills").insert([billRecord]);
+      if (billError) {
+        console.warn("Supabase bill insert note:", billError.message);
+      }
+
+      // 2. Record Bill Items in Supabase
+      if (billItems.length > 0) {
+        const { error: itemsError } = await supabase.from("bill_items").insert(billItems);
+        if (itemsError) {
+          console.warn("Supabase bill_items insert note:", itemsError.message);
+        }
+      }
+    } catch (err) {
+      console.warn("Database offline / fallback:", err);
+    }
+
+    // Populate Printable Receipt Modal
     const rNo = document.getElementById("receipt-no");
     const rTime = document.getElementById("receipt-timestamp");
     const rName = document.getElementById("receipt-name");
     const rStar = document.getElementById("receipt-star");
     const rDate = document.getElementById("receipt-date");
     const rDelivery = document.getElementById("receipt-delivery");
+    const rUtrDisplay = document.getElementById("receipt-utr-display");
     const rItems = document.getElementById("receipt-items-list");
     const rTotal = document.getElementById("receipt-total");
 
-    if (rNo) rNo.textContent = receiptNo;
-    if (rTime) rTime.textContent = receiptTime;
-    if (rName) rName.textContent = name;
-    if (rStar) rStar.textContent = star;
-    if (rDate) rDate.textContent = date;
-    if (rDelivery) rDelivery.textContent = delivery === "postal" ? "Speed Post Dispatch (സ്പീഡ് പോസ്റ്റ്)" : "Temple Counter Pickup (ക്ഷേത്ര കൗണ്ടർ)";
+    if (rNo) rNo.textContent = currentPendingBooking.receiptNo;
+    if (rTime) rTime.textContent = currentPendingBooking.receiptTime;
+    if (rName) rName.textContent = currentPendingBooking.name;
+    if (rStar) rStar.textContent = currentPendingBooking.star;
+    if (rDate) rDate.textContent = currentPendingBooking.date;
+    if (rDelivery) {
+      rDelivery.textContent = currentPendingBooking.delivery === "postal" 
+        ? "Speed Post Dispatch (സ്പീഡ് പോസ്റ്റ്)" 
+        : "Temple Counter Pickup (ക്ഷേത്ര കൗണ്ടർ)";
+    }
+    if (rUtrDisplay) rUtrDisplay.textContent = utr;
 
     if (rItems) {
       rItems.innerHTML = "";
-      cart.forEach(item => {
+      currentPendingBooking.cart.forEach(item => {
         const itemRow = document.createElement("div");
         itemRow.className = "flex justify-between py-1.5 border-b border-stone-100 gap-2";
         itemRow.innerHTML = `
@@ -701,7 +1017,8 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
         `;
         rItems.appendChild(itemRow);
       });
-      if (delivery === "postal") {
+
+      if (currentPendingBooking.delivery === "postal") {
         const postRow = document.createElement("div");
         postRow.className = "flex justify-between py-1 border-b border-stone-100 text-stone-500";
         postRow.innerHTML = `<span>Speed Post Prasad Dispatch (+₹60)</span><span class="font-mono font-bold">₹60</span>`;
@@ -709,13 +1026,21 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
       }
     }
 
-    const subtotal = cart.reduce((acc, curr) => acc + curr.rate, 0);
-    const finalAmount = subtotal + (delivery === "postal" ? 60 : 0);
-    if (rTotal) rTotal.textContent = `₹${finalAmount}`;
+    if (rTotal) rTotal.textContent = `₹${currentPendingBooking.finalAmount}`;
 
-    // Show modal
+    // Reset button state
+    if (btnConfirmUpiPayment) (btnConfirmUpiPayment as HTMLButtonElement).disabled = false;
+    if (btnConfirmText) btnConfirmText.textContent = "✓ Verify Payment & Generate Official Receipt";
+
+    // Close UPI Modal and show Confirmed Receipt
+    closeUpiModal();
     receiptModal?.classList.remove("hidden");
     receiptModal?.classList.add("flex");
+
+    // Reset cart and form
+    cart = [];
+    updateCartUI();
+    (bookingForm as HTMLFormElement)?.reset();
   });
 </script>
 

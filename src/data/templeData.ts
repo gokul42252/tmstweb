@@ -66,6 +66,14 @@ export const TEMPLE_INFO = {
   },
   phone: "0485-2877300",
   email: "devaswom@thirumaradytemple.org",
+  upi: {
+    vpa: "thirumaradytemple@upi", // DUMMY / PLACEHOLDER - Replace with official Temple UPI ID (e.g. thirumaradytemple@sbi)
+    payeeName: "Thirumarady Sri Mahadeva Temple",
+    bankName: "State Bank of India (SBI)",
+    accountNumber: "000000000000",
+    ifsc: "SBIN0000000",
+    notePrefix: "TMST"
+  },
   darshanTimings: {
     morning: "05:00 AM – 10:30 AM",
     evening: "05:00 PM – 08:00 PM"
