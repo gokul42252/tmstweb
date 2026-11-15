@@ -46,7 +46,7 @@ export const TEMPLE_INFO = {
   name: "Thirumarady Sri Mahadeva Temple",
   malayalamName: "തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം",
   presidingDeity: "Lord Shiva (East-Facing Jyotirlinga / Mahadeva)",
-  devaswom: "Travancore Devaswom Board (തിരുവിതാംകൂർ ദേവസ്വം ബോർഡ്)",
+  devaswom: "Thirumarady Temple Managing Committee (തിരുമാറാടി ക്ഷേത്ര ഭരണ സമിതി)",
   governanceYear: 1965,
   thanthri: "Kidangassery Illam (കിടങ്ങശ്ശേരി ഇല്ലം)",
   hereditaryIllams: [
@@ -509,7 +509,7 @@ export const FESTIVALS_DATA: FestivalEvent[] = [
     malayalam: "മണ്ഡല-മകരവിളക്ക് മഹോത്സവം",
     season: "Vrichikam 1 to Dhanu 11 (Nov – Dec)",
     duration: "41 Sacred Days",
-    description: "Dedicated to Lord Ayyappan. The temple serves as an essential resting and worship sanctuary for hundreds of Sabarimala pilgrims travelling along the central Travancore route.",
+    description: "Dedicated to Lord Ayyappan. The temple serves as an essential resting and worship sanctuary for hundreds of Sabarimala pilgrims travelling along the Piravom–Koothattukulam route.",
     highlights: [
       "Special Kettunira (Irumudi Kettu) facilities for Sabarimala Ayyappa Swamis",
       "Daily Neeranjanam and Ayyappan Vilakku poojas at dusk",

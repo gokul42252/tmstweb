@@ -3,7 +3,7 @@ name: "Kshetra Upadeshaka Samithi"
 title: "Temple Advisory Committee (ക്ഷേത്ര ഉപദേശക സമിതി)"
 image: "/uploads/temple/festival-elephants.jpg"
 phone: "+91 485 2877300"
-bio: "Elected devotee committee working alongside the Devaswom Board to organize the grand Dhanu festival, coordinate Annadanam, and preserve heritage woodwork."
+bio: "Elected devotee committee working in dedicated coordination with the Thanthri and trustees to organize the grand Dhanu festival, coordinate Annadanam, and preserve heritage woodwork."
 order: 4
 draft: false
 ---

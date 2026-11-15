@@ -10,9 +10,9 @@ const committeeMembers = [
     desc: "Hereditary High Priest lineage guiding all Tantric rites, Utsavam rituals, and sacred consecrations."
   },
   {
-    role: "Devaswom Sub Group Officer",
-    name: "Travancore Devaswom Board",
-    desc: "Statutory governmental administration overseeing assets, accounting, and pilgrim infrastructure."
+    role: "Kshethra Administrative Officer",
+    name: "Temple Administrative Cell",
+    desc: "Overseeing day-to-day temple administration, assets, accounting, and devotee infrastructure."
   },
   {
     role: "Kshethra Melshanthi (മേൽശാന്തി)",
@@ -31,15 +31,15 @@ const committeeMembers = [
   },
   {
     role: "Devaswom Accounts & Auditor",
-    name: "Statutory Audit Cell, TDB",
-    desc: "Ensuring complete financial transparency, official donation vouchers, and statutory audits."
+    name: "Temple Audit & Accounts Cell",
+    desc: "Ensuring complete financial transparency, official donation vouchers, and verified accounts."
   }
 ];
 ---
 
 <BaseLayout
   title="Temple Administration & Donations | Thirumarady Sri Mahadeva Temple"
-  description="Travancore Devaswom Board governance, Kidangassery Thanthri lineage, Kshetra Samithi. Secure Annadanam & Renovation donation portal with instant receipt generation."
+  description="Temple Administration, Kidangassery Thanthri lineage, Kshetra Samithi. Secure Annadanam & Renovation donation portal with instant receipt generation."
 >
   <!-- Page Header -->
   <section class="bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white py-16 sm:py-20 border-b border-amber-600/30 text-center">
@@ -52,7 +52,7 @@ const committeeMembers = [
         Administration & Devotee Donations
       </h1>
       <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
-        Governed under the Travancore Devaswom Board with Tantric authority from Kidangassery Illam. Support sacred Annadanam and heritage temple conservation.
+        Administered under the guidance of the Temple Managing Committee with Tantric authority from Kidangassery Illam. Support sacred Annadanam and heritage temple conservation.
       </p>
 
       <div class="mt-8 flex justify-center gap-4">
@@ -72,7 +72,7 @@ const committeeMembers = [
           Governing Committee & Thanthri Lineage
         </h2>
         <p class="text-stone-600 text-sm max-w-2xl mx-auto mt-2">
-          Administered by the Travancore Devaswom Board since 1965 in close collaboration with the local Kshetra Upadeshaka Samithi.
+          Administered by the Temple Managing Committee in close collaboration with the hereditary trustees and local Kshetra Upadeshaka Samithi.
         </p>
       </div>
 
@@ -290,17 +290,17 @@ const committeeMembers = [
             Thirumarady Sri Mahadeva Temple Devaswom
           </p>
           <p class="text-[10px] sm:text-[11px] text-stone-500">
-            Travancore Devaswom Board • Reg No: TDB/EKM/THIRU/1965
+            Thirumarady Temple Managing Committee • Reg: TMST/EKM/686662
           </p>
           <div class="inline-block mt-2 px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider border border-emerald-300">
-            Official Donation Voucher (80G Tax-Exempt)
+            Official Donation Voucher
           </div>
         </div>
 
         <div class="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3 text-xs">
           <div class="p-2 sm:p-2.5 rounded bg-stone-50 border border-stone-200">
             <span class="text-stone-400 block text-[10px] uppercase">Voucher ID</span>
-            <span id="don-receipt-no" class="font-mono font-bold text-stone-900">TDB-DON-2026-5521</span>
+            <span id="don-receipt-no" class="font-mono font-bold text-stone-900">TM-DON-2026-5521</span>
           </div>
           <div class="p-2 sm:p-2.5 rounded bg-stone-50 border border-stone-200">
             <span class="text-stone-400 block text-[10px] uppercase">Transaction Date</span>
@@ -421,7 +421,7 @@ const committeeMembers = [
     const name = (document.getElementById("donor-name") as HTMLInputElement)?.value || "Devotee";
     const pan = (document.getElementById("pan-number") as HTMLInputElement)?.value || "NOT PROVIDED";
 
-    const voucherNo = "TDB-DON-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
+    const voucherNo = "TM-DON-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
     const timeStr = new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
 
     const rNo = document.getElementById("don-receipt-no");
