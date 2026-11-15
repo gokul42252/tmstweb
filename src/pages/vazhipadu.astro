@@ -85,18 +85,26 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
                 </span>
               </div>
 
-              <h3 class="text-lg font-serif font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
-                {item.name}
+              <h3 class="text-xl font-malayalam font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
+                {item.malayalam}
               </h3>
-              <p class="text-xs font-malayalam font-bold text-stone-500 mb-3">{item.malayalam}</p>
+              <p class="text-xs font-serif text-stone-600 mb-3">{item.name}</p>
 
-              <p class="text-xs text-stone-600 leading-relaxed mb-4">
+              <p class="text-xs font-malayalam text-stone-800 leading-relaxed mb-1">
+                {item.malayalamDesc}
+              </p>
+              <p class="text-[11px] text-stone-500 leading-relaxed mb-4">
                 {item.description}
               </p>
 
-              <div class="p-3 rounded-xl bg-amber-50/80 border border-amber-200/70 text-xs text-amber-950 leading-tight">
-                <strong class="font-bold text-amber-900 block mb-0.5">Spiritual Significance:</strong>
-                <span>{item.significance}</span>
+              <div class="p-3 rounded-xl bg-amber-50/80 border border-amber-200/70 text-xs text-amber-950 leading-relaxed space-y-1.5">
+                <div>
+                  <strong class="font-bold text-amber-900 block mb-0.5">ആത്മീയ ഫലം:</strong>
+                  <p class="font-malayalam text-stone-800">{item.malayalamSignificance}</p>
+                </div>
+                <div class="pt-1.5 border-t border-amber-200/60 text-[11px] text-stone-600">
+                  <strong class="font-semibold text-stone-700">Spiritual Significance:</strong> {item.significance}
+                </div>
               </div>
             </div>
 
@@ -106,6 +114,7 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
                 class="select-offering-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 hover:bg-amber-600 text-stone-950 transition-colors"
                 data-id={item.id}
                 data-name={item.name}
+                data-ml={item.malayalam}
                 data-rate={item.rate}
               >
                 + Select Offering
@@ -239,39 +248,39 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
                 id="offering-select"
                 class="flex-1 px-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white text-sm focus:outline-none focus:border-amber-400"
               >
-                <option value="">Choose an offering to add...</option>
+                <option value="">Choose an offering to add... (വഴിപാട് തിരഞ്ഞെടുക്കുക)</option>
                 <optgroup label="🔱 Lord Shiva (ശ്രീ മഹാദേവൻ)">
                   {shivaOfferings.map((item) => (
-                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
-                      {item.name} — ₹{item.rate}
+                    <option value={item.id} data-name={item.name} data-ml={item.malayalam} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.malayalam} ({item.name}) — ₹{item.rate}
                     </option>
                   ))}
                 </optgroup>
                 <optgroup label="🐘 Lord Ganapathy (ഗണപതി)">
                   {ganapathyOfferings.map((item) => (
-                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
-                      {item.name} — ₹{item.rate}
+                    <option value={item.id} data-name={item.name} data-ml={item.malayalam} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.malayalam} ({item.name}) — ₹{item.rate}
                     </option>
                   ))}
                 </optgroup>
                 <optgroup label="🏹 Lord Ayyappan (ശാസ്താവ്)">
                   {ayyappanOfferings.map((item) => (
-                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
-                      {item.name} — ₹{item.rate}
+                    <option value={item.id} data-name={item.name} data-ml={item.malayalam} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.malayalam} ({item.name}) — ₹{item.rate}
                     </option>
                   ))}
                 </optgroup>
                 <optgroup label="🦚 Lord Subrahmanian (സുബ്രഹ്മണ്യൻ)">
                   {subrahmanianOfferings.map((item) => (
-                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
-                      {item.name} — ₹{item.rate}
+                    <option value={item.id} data-name={item.name} data-ml={item.malayalam} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.malayalam} ({item.name}) — ₹{item.rate}
                     </option>
                   ))}
                 </optgroup>
                 <optgroup label="🐍 Nagaraja & Sarpam (നാഗങ്ങൾ)">
                   {serpentOfferings.map((item) => (
-                    <option value={item.id} data-name={item.name} data-rate={item.rate} data-deity={item.deityName}>
-                      {item.name} — ₹{item.rate}
+                    <option value={item.id} data-name={item.name} data-ml={item.malayalam} data-rate={item.rate} data-deity={item.deityName}>
+                      {item.malayalam} ({item.name}) — ₹{item.rate}
                     </option>
                   ))}
                 </optgroup>
@@ -486,6 +495,7 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
   interface CartItem {
     id: string;
     name: string;
+    ml: string;
     rate: number;
   }
 
@@ -530,12 +540,15 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
     cart.forEach((item, index) => {
       subtotal += item.rate;
       const row = document.createElement("div");
-      row.className = "cart-row flex items-center justify-between p-3 rounded-lg bg-stone-900 border border-stone-800 text-xs";
+      row.className = "cart-row flex items-center justify-between p-3 rounded-lg bg-stone-900 border border-stone-800 text-xs gap-3";
       row.innerHTML = `
-        <span class="font-semibold text-stone-200">${item.name}</span>
-        <div class="flex items-center space-x-3">
+        <div class="min-w-0">
+          <span class="font-malayalam font-bold text-amber-300 block text-xs truncate">${item.ml || item.name}</span>
+          <span class="text-[11px] text-stone-400 truncate block">${item.name}</span>
+        </div>
+        <div class="flex items-center space-x-3 flex-shrink-0">
           <span class="font-mono text-amber-400 font-bold">₹${item.rate}</span>
-          <button type="button" class="text-red-400 hover:text-red-300 remove-btn" data-index="${index}">✕</button>
+          <button type="button" class="text-red-400 hover:text-red-300 remove-btn p-1" data-index="${index}" title="Remove offering">✕</button>
         </div>
       `;
       cartContainer.appendChild(row);
@@ -574,9 +587,10 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
     const selectedOption = offeringSelect.selectedOptions[0];
     const id = offeringSelect.value;
     const name = selectedOption.getAttribute("data-name") || "";
+    const ml = selectedOption.getAttribute("data-ml") || "";
     const rate = parseInt(selectedOption.getAttribute("data-rate") || "0");
 
-    cart.push({ id, name, rate });
+    cart.push({ id, name, ml, rate });
     offeringSelect.value = "";
     updateCartUI();
   });
@@ -593,9 +607,10 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-id") || "";
       const name = btn.getAttribute("data-name") || "";
+      const ml = btn.getAttribute("data-ml") || "";
       const rate = parseInt(btn.getAttribute("data-rate") || "0");
 
-      cart.push({ id, name, rate });
+      cart.push({ id, name, ml, rate });
       updateCartUI();
 
       // Visual button feedback
@@ -670,20 +685,26 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
     if (rName) rName.textContent = name;
     if (rStar) rStar.textContent = star;
     if (rDate) rDate.textContent = date;
-    if (rDelivery) rDelivery.textContent = delivery === "postal" ? "Speed Post Dispatch" : "Temple Counter Pickup";
+    if (rDelivery) rDelivery.textContent = delivery === "postal" ? "Speed Post Dispatch (സ്പീഡ് പോസ്റ്റ്)" : "Temple Counter Pickup (ക്ഷേത്ര കൗണ്ടർ)";
 
     if (rItems) {
       rItems.innerHTML = "";
       cart.forEach(item => {
         const itemRow = document.createElement("div");
-        itemRow.className = "flex justify-between py-1 border-b border-stone-100";
-        itemRow.innerHTML = `<span>${item.name}</span><span class="font-mono font-bold">₹${item.rate}</span>`;
+        itemRow.className = "flex justify-between py-1.5 border-b border-stone-100 gap-2";
+        itemRow.innerHTML = `
+          <div>
+            <span class="font-malayalam font-bold text-stone-900 block text-xs">${item.ml || item.name}</span>
+            <span class="text-[10px] text-stone-500">${item.name}</span>
+          </div>
+          <span class="font-mono font-bold text-stone-800 flex-shrink-0">₹${item.rate}</span>
+        `;
         rItems.appendChild(itemRow);
       });
       if (delivery === "postal") {
         const postRow = document.createElement("div");
         postRow.className = "flex justify-between py-1 border-b border-stone-100 text-stone-500";
-        postRow.innerHTML = `<span>Postal Delivery Charge</span><span class="font-mono">₹60</span>`;
+        postRow.innerHTML = `<span>Speed Post Prasad Dispatch (+₹60)</span><span class="font-mono font-bold">₹60</span>`;
         rItems.appendChild(postRow);
       }
     }

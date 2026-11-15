@@ -69,15 +69,25 @@ import Button from "../components/UI/Button.astro";
                 </div>
                 <div class="min-w-0">
                   <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                    <h3 class="text-base sm:text-lg font-serif font-bold text-stone-900">{item.name}</h3>
-                    <span class="text-[11px] sm:text-xs font-malayalam font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                      {item.malayalam}
+                    <h3 class="text-base sm:text-lg font-malayalam font-bold text-amber-950">{item.malayalam}</h3>
+                    <span class="text-xs sm:text-sm font-serif font-semibold text-stone-700">
+                      ({item.name})
                     </span>
                   </div>
-                  <p class="text-xs text-stone-600 mt-1 leading-relaxed">{item.description}</p>
-                  <p class="text-[11px] text-amber-900 font-medium mt-1">
-                    <span class="font-bold">Significance:</span> {item.significance}
-                  </p>
+                  {item.malayalamDesc && (
+                    <p class="text-xs font-malayalam text-stone-800 mt-1 leading-relaxed">{item.malayalamDesc}</p>
+                  )}
+                  <p class="text-xs text-stone-500 mt-0.5 leading-relaxed">{item.description}</p>
+                  <div class="mt-2 p-2 sm:p-2.5 rounded-lg bg-amber-50/70 border border-amber-200/60 text-[11px] text-amber-950 space-y-0.5">
+                    {item.malayalamSignificance && (
+                      <p class="font-malayalam text-amber-900 font-medium">
+                        <span class="font-bold">ആത്മീയ ഫലം:</span> {item.malayalamSignificance}
+                      </p>
+                    )}
+                    <p class="text-stone-600">
+                      <span class="font-semibold text-stone-700">Significance:</span> {item.significance}
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -109,20 +119,30 @@ import Button from "../components/UI/Button.astro";
                 </div>
                 <div class="min-w-0">
                   <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                    <h3 class="text-base sm:text-lg font-serif font-bold text-stone-900">{item.name}</h3>
-                    <span class="text-[11px] sm:text-xs font-malayalam font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                      {item.malayalam}
+                    <h3 class="text-base sm:text-lg font-malayalam font-bold text-amber-950">{item.malayalam}</h3>
+                    <span class="text-xs sm:text-sm font-serif font-semibold text-stone-700">
+                      ({item.name})
                     </span>
                     {item.name.includes("Deeparadhana") && (
                       <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-600 text-white uppercase tracking-wider">
-                        Prime Darshan
+                        Prime Darshan (പ്രധാന ദർശനം)
                       </span>
                     )}
                   </div>
-                  <p class="text-xs text-stone-600 mt-1 leading-relaxed">{item.description}</p>
-                  <p class="text-[11px] text-amber-900 font-medium mt-1">
-                    <span class="font-bold">Significance:</span> {item.significance}
-                  </p>
+                  {item.malayalamDesc && (
+                    <p class="text-xs font-malayalam text-stone-800 mt-1 leading-relaxed">{item.malayalamDesc}</p>
+                  )}
+                  <p class="text-xs text-stone-500 mt-0.5 leading-relaxed">{item.description}</p>
+                  <div class="mt-2 p-2 sm:p-2.5 rounded-lg bg-amber-50/70 border border-amber-200/60 text-[11px] text-amber-950 space-y-0.5">
+                    {item.malayalamSignificance && (
+                      <p class="font-malayalam text-amber-900 font-medium">
+                        <span class="font-bold">ആത്മീയ ഫലം:</span> {item.malayalamSignificance}
+                      </p>
+                    )}
+                    <p class="text-stone-600">
+                      <span class="font-semibold text-stone-700">Significance:</span> {item.significance}
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -159,14 +179,23 @@ import Button from "../components/UI/Button.astro";
           <div class="p-6 rounded-2xl bg-stone-950/80 border border-amber-500/20 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
-                <h3 class="text-lg font-serif font-bold text-amber-300">{spec.occasion}</h3>
+                <h3 class="text-lg font-serif font-bold text-amber-300">
+                  {spec.malayalamOccasion}
+                  <span class="block text-xs font-sans text-stone-400 font-normal mt-0.5">{spec.occasion}</span>
+                </h3>
               </div>
-              <div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs font-mono font-bold text-amber-400 mb-3">
-                ⏰ {spec.timingChange}
+              <div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs text-amber-400 mb-3 space-y-1">
+                <div class="font-malayalam font-bold text-amber-300">⏰ {spec.malayalamTimingChange}</div>
+                <div class="font-mono text-[11px] text-stone-300">{spec.timingChange}</div>
               </div>
-              <p class="text-xs text-stone-300 leading-relaxed">
-                <span class="text-amber-400 font-semibold">Special Rituals:</span> {spec.specialRituals}
-              </p>
+              <div class="text-xs text-stone-300 leading-relaxed space-y-1">
+                <p class="font-malayalam text-amber-200/90 leading-relaxed">
+                  <span class="text-amber-400 font-semibold">പ്രത്യേക ചടങ്ങുകൾ:</span> {spec.malayalamSpecialRituals}
+                </p>
+                <p class="text-stone-400 text-[11px]">
+                  <span class="text-stone-300 font-semibold">Special Rituals:</span> {spec.specialRituals}
+                </p>
+              </div>
             </div>
           </div>
         ))}
