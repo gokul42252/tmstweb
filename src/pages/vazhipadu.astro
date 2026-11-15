@@ -365,103 +365,171 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
   </section>
 
   <!-- Free Dynamic UPI Payment Gateway Modal -->
-  <div id="upi-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
-    <div class="bg-stone-950 text-white border border-amber-500/40 rounded-2xl sm:rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative my-6">
-      <button id="close-upi-modal-btn" type="button" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-stone-400 hover:text-white text-2xl font-bold p-1">
+  <div id="upi-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-gradient-to-b from-stone-900 via-stone-950 to-stone-950 text-white border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative my-6 max-h-[92vh] overflow-y-auto">
+      <button id="close-upi-modal-btn" type="button" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-stone-400 hover:text-white text-2xl font-bold p-1 z-10 transition-colors">
         ✕
       </button>
 
       <!-- Modal Header -->
       <div class="text-center pb-3 border-b border-stone-800">
-        <div class="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-2 border border-emerald-500/30">
-          <span>⚡ 0% Platform Fee • Direct Temple Account</span>
+        <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-2 border border-emerald-500/40 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>0% Fee • Instant Direct Temple Bank Credit</span>
         </div>
         <h3 class="text-xl sm:text-2xl font-serif font-black text-white">
-          Complete Offering via UPI
+          Complete Vazhipadu Offering
         </h3>
         <p class="text-xs text-stone-400 mt-0.5">
-          Scan the QR code or tap your preferred UPI app below
+          Scan QR Code or tap your UPI App on mobile
         </p>
       </div>
 
       <!-- Amount Banner -->
-      <div class="my-4 p-3.5 rounded-xl bg-gradient-to-r from-amber-950/70 to-stone-900 border border-amber-500/40 text-center">
-        <span class="text-[11px] text-stone-400 uppercase tracking-wider block font-bold">Total Dakshina to Pay</span>
+      <div class="my-4 p-3.5 rounded-2xl bg-gradient-to-r from-amber-950/80 via-stone-900 to-amber-950/80 border border-amber-500/50 text-center shadow-inner">
+        <span class="text-[11px] text-amber-300/80 uppercase tracking-wider block font-bold">Total Dakshina to Pay</span>
         <span id="upi-modal-amount" class="text-3xl sm:text-4xl font-serif font-black text-amber-300">₹0</span>
         <span id="upi-modal-note" class="text-[11px] text-stone-400 mt-0.5 block font-mono">Ref: TM-ONL-...</span>
       </div>
 
       <div class="space-y-4">
-        <!-- QR Code Canvas Container -->
-        <div class="p-3.5 rounded-2xl bg-stone-900 border border-stone-800 text-center flex flex-col items-center">
-          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">
-            📱 Scan with Any UPI App (GPay / PhonePe / Paytm)
-          </span>
-          <div class="p-2.5 bg-white rounded-xl inline-block shadow-lg">
-            <canvas id="upi-qr-canvas" class="w-44 h-44 sm:w-48 sm:h-48"></canvas>
-          </div>
-          <p class="text-[11px] text-stone-400 mt-2">
-            Scan using camera or Google Pay / PhonePe / Paytm / BHIM
-          </p>
-        </div>
-
-        <!-- Mobile Quick-Pay App Buttons -->
+        <!-- 1. Direct App Payment on Mobile -->
         <div>
-          <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider block mb-2 text-center">
-            Or Tap to Pay Directly (Mobile Users)
-          </span>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-            <a id="btn-upi-phonepe" href="#" class="p-2 rounded-xl bg-purple-950/60 border border-purple-500/40 hover:bg-purple-900/60 text-center transition flex flex-col items-center justify-center font-bold text-purple-200">
-              <span class="text-base mb-0.5">🟣</span>
-              <span>PhonePe</span>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center space-x-1.5">
+              <span class="w-5 h-5 rounded-full bg-amber-500 text-stone-950 font-bold text-[11px] inline-flex items-center justify-center">1</span>
+              <span>Tap to Pay with App (Mobile)</span>
+            </span>
+            <span class="text-[10px] text-stone-400">Instant UPI Deep Link</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <!-- PhonePe Button -->
+            <a id="btn-upi-phonepe" href="#" class="group flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white hover:bg-purple-50 border border-purple-200 hover:border-purple-600 shadow-sm hover:shadow-md transition-all duration-150 transform hover:-translate-y-0.5 active:scale-95 text-center">
+              <div class="w-8 h-8 rounded-xl bg-[#5F259F] flex items-center justify-center shadow-sm mb-1 group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 40 40" fill="none">
+                  <path d="M26.5 13H18.2c-1.2 0-2.3.5-3.1 1.3l-4.5 4.8c-.9 1-.2 2.7 1.2 2.7H15v6.5c0 1.1.9 2 2 2s2-.9 2-2V21.8h6.8c1.1 0 2-.9 2-2V15c0-1.1-.9-2-2-2zm-2 5.5h-4.8v-3.5h4.8v3.5z" fill="currentColor"/>
+                  <circle cx="22" cy="9.5" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="text-xs font-bold text-stone-900 group-hover:text-[#5F259F]">PhonePe</span>
+              <span class="text-[9px] text-stone-400 font-medium">Tap to Pay</span>
             </a>
-            <a id="btn-upi-gpay" href="#" class="p-2 rounded-xl bg-blue-950/60 border border-blue-500/40 hover:bg-blue-900/60 text-center transition flex flex-col items-center justify-center font-bold text-blue-200">
-              <span class="text-base mb-0.5">🔵</span>
-              <span>Google Pay</span>
+
+            <!-- Google Pay Button -->
+            <a id="btn-upi-gpay" href="#" class="group flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white hover:bg-blue-50 border border-blue-200 hover:border-blue-600 shadow-sm hover:shadow-md transition-all duration-150 transform hover:-translate-y-0.5 active:scale-95 text-center">
+              <div class="w-8 h-8 rounded-xl bg-white flex items-center justify-center shadow-sm border border-stone-200 mb-1 group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <path d="M23.49 12.28c0-.82-.07-1.61-.21-2.37H12v4.48h6.44c-.28 1.48-1.12 2.73-2.38 3.58v2.98h3.86c2.26-2.08 3.57-5.15 3.57-8.67z" fill="#4285F4"/>
+                  <path d="M12 24c3.24 0 5.96-1.08 7.95-2.91l-3.86-2.98c-1.08.72-2.45 1.16-4.09 1.16-3.13 0-5.78-2.11-6.73-4.96H1.27v3.08C3.26 21.3 7.34 24 12 24z" fill="#34A853"/>
+                  <path d="M5.27 14.31c-.24-.72-.38-1.49-.38-2.31s.14-1.59.38-2.31V6.61H1.27C.46 8.23 0 10.06 0 12s.46 3.77 1.27 5.39l4-3.08z" fill="#FBBC05"/>
+                  <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.7 1.27 6.61l4 3.09c.95-2.85 3.6-4.95 6.73-4.95z" fill="#EA4335"/>
+                </svg>
+              </div>
+              <span class="text-xs font-bold text-stone-900 group-hover:text-blue-600">Google Pay</span>
+              <span class="text-[9px] text-stone-400 font-medium">Tap to Pay</span>
             </a>
-            <a id="btn-upi-paytm" href="#" class="p-2 rounded-xl bg-sky-950/60 border border-sky-500/40 hover:bg-sky-900/60 text-center transition flex flex-col items-center justify-center font-bold text-sky-200">
-              <span class="text-base mb-0.5">🟦</span>
-              <span>Paytm</span>
+
+            <!-- Paytm Button -->
+            <a id="btn-upi-paytm" href="#" class="group flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white hover:bg-sky-50 border border-sky-200 hover:border-[#00BAF2] shadow-sm hover:shadow-md transition-all duration-150 transform hover:-translate-y-0.5 active:scale-95 text-center">
+              <div class="h-8 flex items-center justify-center mb-1 group-hover:scale-105 transition-transform">
+                <svg class="w-12 h-6" viewBox="0 0 68 24" fill="none">
+                  <rect width="68" height="24" rx="5" fill="#002970"/>
+                  <text x="6" y="16.5" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="13" letter-spacing="0.5">Pay</text>
+                  <text x="35" y="16.5" fill="#00BAF2" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="13" letter-spacing="0.5">tm</text>
+                </svg>
+              </div>
+              <span class="text-xs font-bold text-stone-900 group-hover:text-[#002970]">Paytm UPI</span>
+              <span class="text-[9px] text-stone-400 font-medium">Tap to Pay</span>
             </a>
-            <a id="btn-upi-generic" href="#" class="p-2 rounded-xl bg-amber-950/60 border border-amber-500/40 hover:bg-amber-900/60 text-center transition flex flex-col items-center justify-center font-bold text-amber-200">
-              <span class="text-base mb-0.5">🟠</span>
-              <span>Any UPI</span>
+
+            <!-- Any UPI Button -->
+            <a id="btn-upi-generic" href="#" class="group flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white hover:bg-amber-50 border border-amber-200 hover:border-amber-600 shadow-sm hover:shadow-md transition-all duration-150 transform hover:-translate-y-0.5 active:scale-95 text-center">
+              <div class="h-8 flex items-center justify-center mb-1 group-hover:scale-105 transition-transform">
+                <svg class="w-12 h-6" viewBox="0 0 54 24" fill="none">
+                  <rect width="54" height="24" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+                  <path d="M12 4L6 20H2L8 4H12Z" fill="#757575"/>
+                  <path d="M19 4L13 20H9L15 4H19Z" fill="#F47920"/>
+                  <path d="M22 4L16 20H19.5L25.5 4H22Z" fill="#0F9D58"/>
+                  <text x="27" y="17" fill="#1C1917" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="11" letter-spacing="0.5">UPI</text>
+                </svg>
+              </div>
+              <span class="text-xs font-bold text-stone-900 group-hover:text-amber-800">Any UPI</span>
+              <span class="text-[9px] text-stone-400 font-medium">BHIM, Cred, etc.</span>
             </a>
           </div>
         </div>
 
-        <!-- VPA Info & Copy -->
-        <div class="p-2.5 rounded-xl bg-stone-900 border border-stone-800 flex items-center justify-between text-xs">
-          <div>
-            <span class="text-stone-400 block text-[10px] uppercase">Temple UPI ID:</span>
-            <span id="upi-vpa-display" class="font-mono font-bold text-amber-300">thirumaradytemple@upi</span>
-            <span class="text-[10px] text-amber-400/80 block">⚠️ Test Mode (Dummy UPI ID configured)</span>
+        <!-- 2. QR Code Canvas Container (Desktop & Cross-Device) -->
+        <div class="p-4 rounded-2xl bg-stone-900/90 border border-stone-800 text-center flex flex-col items-center shadow-md">
+          <div class="flex items-center space-x-1.5 text-xs font-bold text-amber-300 uppercase tracking-wider mb-2.5">
+            <span>📷 Scan to Pay (Desktop / Camera)</span>
           </div>
-          <button id="btn-copy-upi" type="button" class="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-xs border border-stone-700 transition">
-            📋 Copy
+
+          <div class="p-3 bg-white rounded-2xl inline-block shadow-xl border-2 border-amber-300">
+            <canvas id="upi-qr-canvas" class="w-44 h-44 sm:w-48 sm:h-48 block"></canvas>
+          </div>
+
+          <!-- Accepted Apps Badges Row under QR -->
+          <div class="flex items-center justify-center gap-2 mt-3 text-[10px] text-stone-400">
+            <span class="font-medium">Supported on:</span>
+            <span class="px-1.5 py-0.5 rounded bg-stone-800 font-bold text-white">GPay</span>
+            <span class="px-1.5 py-0.5 rounded bg-purple-900/60 font-bold text-purple-200">PhonePe</span>
+            <span class="px-1.5 py-0.5 rounded bg-sky-900/60 font-bold text-sky-200">Paytm</span>
+            <span class="px-1.5 py-0.5 rounded bg-emerald-900/60 font-bold text-emerald-200">BHIM</span>
+          </div>
+        </div>
+
+        <!-- 3. Temple UPI ID & Copy -->
+        <div class="p-3 rounded-2xl bg-gradient-to-r from-stone-900 to-stone-950 border border-amber-500/30 flex items-center justify-between gap-3 text-xs">
+          <div class="flex items-center space-x-2.5 min-w-0">
+            <div class="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-mono font-bold text-sm flex-shrink-0">
+              @
+            </div>
+            <div class="min-w-0">
+              <span class="text-[10px] text-stone-400 uppercase font-bold tracking-wider block">Official Temple UPI ID</span>
+              <span id="upi-vpa-display" class="font-mono font-bold text-amber-300 text-xs sm:text-sm truncate block">thirumaradytemple@upi</span>
+              <span class="text-[10px] text-amber-500/80 block mt-0.5">⚠️ Test Mode (Dummy VPA)</span>
+            </div>
+          </div>
+          <button id="btn-copy-upi" type="button" class="px-3 py-1.5 rounded-xl bg-stone-800 hover:bg-amber-500 hover:text-stone-950 text-stone-200 font-bold text-xs border border-stone-700 transition flex items-center space-x-1 flex-shrink-0 active:scale-95">
+            <span>📋</span>
+            <span id="copy-btn-label">Copy</span>
           </button>
         </div>
 
-        <!-- Step 2: UTR Reference Submission -->
-        <div class="pt-3 border-t border-stone-800 space-y-2.5">
-          <label for="upi-utr-input" class="block text-xs font-bold uppercase tracking-wider text-amber-400">
-            Enter 12-Digit UPI Reference / UTR Number *
-          </label>
-          <input
-            type="text"
-            id="upi-utr-input"
-            maxlength="16"
-            placeholder="e.g., 412389123456"
-            class="w-full px-4 py-2.5 rounded-xl bg-stone-900 border border-stone-700 text-white font-mono text-sm tracking-wider focus:outline-none focus:border-amber-400 uppercase"
-          />
-          <p class="text-[10px] text-stone-400">
-            💡 Check your payment app receipt history for the 12-digit UTR/Txn number and enter it here to verify your booking.
-          </p>
+        <!-- 4. Step 2: UTR Reference Submission -->
+        <div class="pt-4 border-t border-stone-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <label for="upi-utr-input" class="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center space-x-1.5">
+              <span class="w-5 h-5 rounded-full bg-amber-500 text-stone-950 font-bold text-[11px] inline-flex items-center justify-center">2</span>
+              <span>Enter 12-Digit UPI Reference (UTR) *</span>
+            </label>
+            <span class="text-[10px] text-stone-400">From payment receipt</span>
+          </div>
+
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-500 font-mono font-bold text-sm">
+              #
+            </div>
+            <input
+              type="text"
+              id="upi-utr-input"
+              maxlength="16"
+              placeholder="e.g. 412389123456"
+              class="w-full pl-9 pr-4 py-3 rounded-xl bg-stone-900 border border-stone-700 text-white font-mono text-base tracking-widest focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 uppercase placeholder:text-stone-600 placeholder:tracking-normal placeholder:font-sans"
+            />
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-stone-900/60 border border-stone-800 text-[11px] text-stone-300 flex items-start space-x-2">
+            <span class="text-amber-400 flex-shrink-0 mt-0.5">💡</span>
+            <span>After paying, find the <strong>12-digit UPI Transaction ID / UTR</strong> in your GPay, PhonePe, or Paytm receipt and enter it above to verify and generate your official receipt.</span>
+          </div>
 
           <button
             type="button"
             id="btn-confirm-upi-payment"
-            class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-stone-950 font-serif font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition flex items-center justify-center space-x-2"
+            class="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-500 text-stone-950 font-serif font-black text-base uppercase tracking-wider shadow-lg shadow-emerald-950/40 transition-all transform active:scale-[0.99] flex items-center justify-center space-x-2"
           >
             <span id="btn-confirm-text">✓ Verify Payment & Generate Official Receipt</span>
           </button>
