@@ -1,0 +1,1806 @@
+---
+import "../../assets/styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Billing Portal | Thirumarady Sri Mahadeva Temple</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Manjari:wght@400;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      @media print {
+        body {
+          background-color: #ffffff !important;
+          color: #000000 !important;
+          font-size: 11pt !important;
+        }
+        .no-print {
+          display: none !important;
+        }
+        .print-only {
+          display: block !important;
+        }
+        .print-break-inside-avoid {
+          break-inside: avoid;
+        }
+        .print-shadow-none {
+          box-shadow: none !important;
+          border: 1px solid #d1d5db !important;
+        }
+      }
+      .print-only {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-stone-100 text-stone-900 font-sans min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-white">
+
+    <!-- ========================================================================= -->
+    <!-- 1. LOGIN SCREEN (Visible when unauthenticated) -->
+    <!-- ========================================================================= -->
+    <div id="login-container" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-stone-950 via-stone-900 to-amber-950/80">
+      <div class="w-full max-w-md bg-stone-900/90 backdrop-blur-xl border border-amber-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl text-white relative overflow-hidden">
+        
+        <!-- Golden Decorative Glow -->
+        <div class="absolute -top-16 -right-16 w-36 h-36 bg-amber-500/15 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-amber-600/15 rounded-full blur-2xl pointer-events-none"></div>
+
+        <!-- Logo & Header -->
+        <div class="text-center mb-6">
+          <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-3xl mb-3 shadow-inner">
+            🔱
+          </div>
+          <h1 class="font-malayalam font-bold text-amber-300 text-lg sm:text-xl leading-tight">
+            തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം
+          </h1>
+          <p class="font-serif font-bold text-white text-base sm:text-lg mt-0.5 tracking-wide">
+            Counter Billing Admin Portal
+          </p>
+          <p class="text-xs text-stone-400 mt-1">
+            Poojas Collection, Real-Time Analytics & Audit Reports
+          </p>
+        </div>
+
+        <!-- Error Alert -->
+        <div id="login-error-alert" class="hidden mb-4 p-3 rounded-xl bg-red-950/80 border border-red-500/50 text-red-200 text-xs flex items-center space-x-2">
+          <span>⚠️</span>
+          <span id="login-error-msg">Invalid credentials. Please verify username and password.</span>
+        </div>
+
+        <!-- Login Form -->
+        <form id="admin-login-form" class="space-y-4">
+          <div>
+            <label for="login-username" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-1.5">
+              Staff Username (ഉപയോക്തൃ നാമം)
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 text-sm">
+                👤
+              </span>
+              <input
+                type="text"
+                id="login-username"
+                required
+                autocomplete="username"
+                placeholder="e.g. admin or counter1"
+                class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-stone-950 border border-stone-700 text-white placeholder-stone-500 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="login-password" class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-1.5">
+              Staff Password (പാസ്‌വേഡ്)
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 text-sm">
+                🔒
+              </span>
+              <input
+                type="password"
+                id="login-password"
+                required
+                autocomplete="current-password"
+                placeholder="••••••••"
+                class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-stone-950 border border-stone-700 text-white placeholder-stone-500 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            id="login-submit-btn"
+            class="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-stone-950 font-bold text-sm tracking-wide shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2"
+          >
+            <span>🔓 Sign In to Admin Portal</span>
+          </button>
+        </form>
+
+        <!-- Quick Credentials Hint for Temple Administration -->
+        <div class="mt-6 pt-5 border-t border-stone-800 text-[11px] text-stone-400">
+          <p class="font-bold text-amber-300 mb-1.5 flex items-center gap-1">
+            <span>🔑</span>
+            <span>Registered Staff Accounts:</span>
+          </p>
+          <div class="grid grid-cols-2 gap-2 text-[10px]">
+            <button
+              type="button"
+              onclick="fillCredentials('admin', 'admin')"
+              class="p-2 rounded-lg bg-stone-950 border border-stone-800 hover:border-amber-500/50 text-left transition-colors"
+            >
+              <span class="block font-bold text-stone-200">Admin Officer</span>
+              <span class="text-stone-400">User: admin / admin</span>
+            </button>
+            <button
+              type="button"
+              onclick="fillCredentials('counter1', '123')"
+              class="p-2 rounded-lg bg-stone-950 border border-stone-800 hover:border-amber-500/50 text-left transition-colors"
+            >
+              <span class="block font-bold text-stone-200">Counter Staff 1</span>
+              <span class="text-stone-400">User: counter1 / 123</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-5 text-center">
+          <a href="/" class="text-xs text-amber-400/80 hover:text-amber-300 transition-colors inline-flex items-center gap-1">
+            <span>← Back to Public Website</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 2. MAIN DASHBOARD APPLICATION SCREEN (Visible when authenticated) -->
+    <!-- ========================================================================= -->
+    <div id="dashboard-container" class="hidden min-h-screen flex-col bg-stone-100 text-stone-900">
+      
+      <!-- Top Navigation & Profile Bar -->
+      <header class="no-print sticky top-0 z-40 bg-stone-950 text-white border-b-2 border-amber-600 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16 gap-3">
+            
+            <!-- Left: Temple Brand & Portal Title -->
+            <div class="flex items-center space-x-3 min-w-0">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-xl flex-shrink-0">
+                🔱
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center space-x-2">
+                  <h1 class="font-serif font-black text-sm sm:text-base text-white truncate">
+                    Thirumarady Mahadeva Temple
+                  </h1>
+                  <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-stone-950 uppercase">
+                    Admin Portal
+                  </span>
+                </div>
+                <div class="flex items-center space-x-2 text-[10px] sm:text-xs text-stone-400">
+                  <span class="font-malayalam text-amber-300">ക്ഷേത്ര ബില്ലിംഗ് പോർട്ടൽ</span>
+                  <span>•</span>
+                  <span class="inline-flex items-center gap-1 text-emerald-400 font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Supabase Live</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Action Buttons & User Menu -->
+            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+              <!-- Live Data Refresh -->
+              <button
+                id="btn-refresh"
+                title="Refresh latest bills from Supabase"
+                class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-stone-900 hover:bg-stone-800 border border-stone-700 text-amber-300 font-semibold text-xs transition-colors flex items-center gap-1.5"
+              >
+                <span id="refresh-icon" class="inline-block transition-transform">🔄</span>
+                <span class="hidden md:inline">Refresh</span>
+              </button>
+
+              <!-- Export Excel -->
+              <button
+                id="btn-export-excel"
+                title="Export filtered collection to Excel (.xlsx)"
+                class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+              >
+                <span>📊</span>
+                <span class="hidden sm:inline">Export Excel</span>
+              </button>
+
+              <!-- Export / Print PDF -->
+              <button
+                id="btn-export-pdf"
+                title="Print or Save Official Audit PDF Report"
+                class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+              >
+                <span>🖨️</span>
+                <span class="hidden sm:inline">PDF Audit Report</span>
+              </button>
+
+              <!-- User Badge & Logout -->
+              <div class="flex items-center space-x-2 pl-2 border-l border-stone-800">
+                <div class="text-right hidden lg:block">
+                  <span id="user-display-name" class="block text-xs font-bold text-stone-200">Admin Officer</span>
+                  <span id="user-role-badge" class="block text-[10px] text-amber-400 font-mono font-semibold">ADMIN</span>
+                </div>
+                <button
+                  id="btn-logout"
+                  title="Logout from Admin Portal"
+                  class="p-2 rounded-lg bg-stone-900 hover:bg-red-950 hover:text-red-300 text-stone-400 border border-stone-800 text-xs transition-colors"
+                >
+                  🚪
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Dashboard Content Area -->
+      <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <!-- ===================================================================== -->
+        <!-- FILTER TOOLBAR (Quick Presets, Date Inputs, Counter, Payment, Search) -->
+        <!-- ===================================================================== -->
+        <section class="no-print bg-white rounded-2xl p-4 sm:p-5 border border-stone-200 shadow-sm space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-stone-100">
+            <div>
+              <h2 class="text-base sm:text-lg font-serif font-bold text-stone-900">
+                Collection Analytics & Report Filters
+              </h2>
+              <p class="text-xs text-stone-500">
+                Filter pooja revenue data uploaded from counter billing machines.
+              </p>
+            </div>
+
+            <!-- Quick Date Filter Preset Pills -->
+            <div class="flex flex-wrap items-center gap-1.5">
+              <button type="button" class="date-preset-btn active px-3 py-1 rounded-lg text-xs font-bold bg-amber-600 text-white transition-colors" data-preset="today">
+                Today
+              </button>
+              <button type="button" class="date-preset-btn px-3 py-1 rounded-lg text-xs font-bold bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors" data-preset="yesterday">
+                Yesterday
+              </button>
+              <button type="button" class="date-preset-btn px-3 py-1 rounded-lg text-xs font-bold bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors" data-preset="week">
+                This Week (7D)
+              </button>
+              <button type="button" class="date-preset-btn px-3 py-1 rounded-lg text-xs font-bold bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors" data-preset="month">
+                This Month
+              </button>
+              <button type="button" class="date-preset-btn px-3 py-1 rounded-lg text-xs font-bold bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors" data-preset="all">
+                All Time
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Controls Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            
+            <!-- From Date -->
+            <div>
+              <label for="filter-date-from" class="block text-[11px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                From Date
+              </label>
+              <input
+                type="date"
+                id="filter-date-from"
+                class="w-full px-3 py-2 rounded-xl bg-stone-50 border border-stone-300 text-stone-900 text-xs focus:outline-none focus:border-amber-500"
+              />
+            </div>
+
+            <!-- To Date -->
+            <div>
+              <label for="filter-date-to" class="block text-[11px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                To Date
+              </label>
+              <input
+                type="date"
+                id="filter-date-to"
+                class="w-full px-3 py-2 rounded-xl bg-stone-50 border border-stone-300 text-stone-900 text-xs focus:outline-none focus:border-amber-500"
+              />
+            </div>
+
+            <!-- Counter Selector -->
+            <div>
+              <label for="filter-counter" class="block text-[11px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                Counter Machine
+              </label>
+              <select
+                id="filter-counter"
+                class="w-full px-3 py-2 rounded-xl bg-stone-50 border border-stone-300 text-stone-900 text-xs focus:outline-none focus:border-amber-500"
+              >
+                <option value="ALL">All Counters</option>
+                <option value="COUNTER-1">COUNTER-1 (Main)</option>
+                <option value="COUNTER-2">COUNTER-2</option>
+              </select>
+            </div>
+
+            <!-- Payment Mode Selector -->
+            <div>
+              <label for="filter-payment-mode" class="block text-[11px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                Payment Mode
+              </label>
+              <select
+                id="filter-payment-mode"
+                class="w-full px-3 py-2 rounded-xl bg-stone-50 border border-stone-300 text-stone-900 text-xs focus:outline-none focus:border-amber-500"
+              >
+                <option value="ALL">All Payments (Cash + UPI + Card)</option>
+                <option value="CASH">CASH Only</option>
+                <option value="UPI">UPI / QR Code Only</option>
+                <option value="CARD">CARD Only</option>
+              </select>
+            </div>
+
+            <!-- Live Search -->
+            <div>
+              <label for="filter-search" class="block text-[11px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                Search Devotee / Bill / Star
+              </label>
+              <input
+                type="text"
+                id="filter-search"
+                placeholder="Search..."
+                class="w-full px-3 py-2 rounded-xl bg-stone-50 border border-stone-300 text-stone-900 text-xs focus:outline-none focus:border-amber-500"
+              />
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- KPI METRICS SUMMARY CARDS (Top Overview) -->
+        <!-- ===================================================================== -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          
+          <!-- Total Collection -->
+          <div class="p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-stone-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">Total Collection</span>
+              <span class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-sm">💰</span>
+            </div>
+            <div>
+              <div id="kpi-total-revenue" class="text-2xl sm:text-3xl font-serif font-black text-amber-950">
+                ₹0
+              </div>
+              <div class="text-[11px] text-stone-500 mt-1 flex items-center justify-between">
+                <span>Receipts Issued:</span>
+                <span id="kpi-total-bills" class="font-bold text-stone-800">0 bills</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cash Collected -->
+          <div class="p-5 rounded-2xl bg-white border border-emerald-200/80 shadow-sm flex flex-col justify-between bg-emerald-50/20">
+            <div class="flex items-center justify-between text-emerald-800 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">Cash Collection</span>
+              <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">💵</span>
+            </div>
+            <div>
+              <div id="kpi-cash-total" class="text-2xl sm:text-3xl font-serif font-black text-emerald-950">
+                ₹0
+              </div>
+              <div class="text-[11px] text-emerald-800 mt-1 flex items-center justify-between">
+                <span>Cash Share:</span>
+                <span id="kpi-cash-percent" class="font-bold">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- UPI Collected -->
+          <div class="p-5 rounded-2xl bg-white border border-blue-200/80 shadow-sm flex flex-col justify-between bg-blue-50/20">
+            <div class="flex items-center justify-between text-blue-800 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">UPI / QR Digital</span>
+              <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">📱</span>
+            </div>
+            <div>
+              <div id="kpi-upi-total" class="text-2xl sm:text-3xl font-serif font-black text-blue-950">
+                ₹0
+              </div>
+              <div class="text-[11px] text-blue-800 mt-1 flex items-center justify-between">
+                <span>UPI Share:</span>
+                <span id="kpi-upi-percent" class="font-bold">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Poojas Performed -->
+          <div class="p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-stone-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">Offerings Booked</span>
+              <span class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-sm">🥥</span>
+            </div>
+            <div>
+              <div id="kpi-poojas-count" class="text-2xl sm:text-3xl font-serif font-black text-stone-900">
+                0
+              </div>
+              <div class="text-[11px] text-stone-500 mt-1 flex items-center justify-between">
+                <span>Distinct Poojas:</span>
+                <span id="kpi-distinct-poojas" class="font-bold text-stone-800">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Average Bill Value -->
+          <div class="p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-stone-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">Avg. Devotee Bill</span>
+              <span class="w-8 h-8 rounded-lg bg-stone-100 text-stone-700 flex items-center justify-center font-bold text-sm">📊</span>
+            </div>
+            <div>
+              <div id="kpi-avg-bill" class="text-2xl sm:text-3xl font-serif font-black text-stone-900">
+                ₹0
+              </div>
+              <div class="text-[11px] text-stone-500 mt-1 flex items-center justify-between">
+                <span>Avg. Items/Bill:</span>
+                <span id="kpi-avg-items" class="font-bold text-stone-800">0</span>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PICTORIAL REPRESENTATION & ANALYTICAL CHARTS GRID -->
+        <!-- ===================================================================== -->
+        <section class="space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-serif font-bold text-stone-900 flex items-center gap-2">
+                <span>📊</span>
+                <span>Visual Pictorial Analysis & Revenue Trends</span>
+              </h2>
+              <p class="text-xs text-stone-500">
+                Graphical representation of daily cashflows, deity breakdown, top vazhipadu, and hourly trends.
+              </p>
+            </div>
+            <span class="text-xs font-mono font-semibold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full">
+              Chart.js Interactive
+            </span>
+          </div>
+
+          <!-- Charts Row 1: Daily Revenue Trend (8 cols) + Payment Mode Donut (4 cols) -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Chart 1: Daily Timeline Trend -->
+            <div class="lg:col-span-8 p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col">
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-stone-100">
+                <div>
+                  <h3 class="font-bold text-stone-900 text-sm sm:text-base">
+                    Daily Collection Trend (CASH vs UPI)
+                  </h3>
+                  <p class="text-[11px] text-stone-500">Revenue trajectory over the selected period</p>
+                </div>
+                <span class="text-xs font-mono font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded">
+                  Timeline
+                </span>
+              </div>
+              <div class="relative flex-1 min-h-[280px]">
+                <canvas id="chart-daily-revenue"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 2: Payment Mode Donut -->
+            <div class="lg:col-span-4 p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col">
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-stone-100">
+                <div>
+                  <h3 class="font-bold text-stone-900 text-sm sm:text-base">
+                    Payment Mode Share
+                  </h3>
+                  <p class="text-[11px] text-stone-500">Cash vs UPI digital split</p>
+                </div>
+                <span class="text-xs font-mono font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded">
+                  Ratio
+                </span>
+              </div>
+              <div class="relative flex-1 min-h-[280px] flex items-center justify-center">
+                <canvas id="chart-payment-mode"></canvas>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Charts Row 2: Top Poojas (6 cols) + Deity-wise Breakdown (6 cols) -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Chart 3: Top 10 Best-Selling Poojas (Horizontal Bar) -->
+            <div class="lg:col-span-6 p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col">
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-stone-100">
+                <div>
+                  <h3 class="font-bold text-stone-900 text-sm sm:text-base">
+                    Top 10 Offerings by Revenue (₹)
+                  </h3>
+                  <p class="text-[11px] text-stone-500">Most favored vazhipadus performed by devotees</p>
+                </div>
+                <span class="text-xs font-mono font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                  Ranking
+                </span>
+              </div>
+              <div class="relative flex-1 min-h-[300px]">
+                <canvas id="chart-top-poojas"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 4: Deity-wise Revenue Distribution -->
+            <div class="lg:col-span-6 p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col">
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-stone-100">
+                <div>
+                  <h3 class="font-bold text-stone-900 text-sm sm:text-base">
+                    Deity-wise Revenue Share
+                  </h3>
+                  <p class="text-[11px] text-stone-500">Lord Shiva, Ganapathy, Sastha, Parvathi</p>
+                </div>
+                <span class="text-xs font-mono font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded">
+                  Deity Split
+                </span>
+              </div>
+              <div class="relative flex-1 min-h-[300px] flex items-center justify-center">
+                <canvas id="chart-deity-revenue"></canvas>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Charts Row 3: Hourly Peak Hours (6 cols) + Devotee Stars (6 cols) -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Chart 5: Peak Hours Billing Distribution -->
+            <div class="lg:col-span-6 p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col">
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-stone-100">
+                <div>
+                  <h3 class="font-bold text-stone-900 text-sm sm:text-base">
+                    Hourly Peak Collection Timing
+                  </h3>
+                  <p class="text-[11px] text-stone-500">Morning (05:00 - 10:30 AM) vs Evening (05:00 - 08:00 PM)</p>
+                </div>
+                <span class="text-xs font-mono font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded">
+                  Hourly IST
+                </span>
+              </div>
+              <div class="relative flex-1 min-h-[250px]">
+                <canvas id="chart-hourly-distribution"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 6: Devotee Birth Stars (Nakshatra) Analysis -->
+            <div class="lg:col-span-6 p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col">
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-stone-100">
+                <div>
+                  <h3 class="font-bold text-stone-900 text-sm sm:text-base">
+                    Top Devotee Birth Stars (നക്ഷത്രങ്ങൾ)
+                  </h3>
+                  <p class="text-[11px] text-stone-500">Distribution of offerings by devotee Nakshatram</p>
+                </div>
+                <span class="text-xs font-mono font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded">
+                  Nakshatras
+                </span>
+              </div>
+              <div class="relative flex-1 min-h-[250px]">
+                <canvas id="chart-star-distribution"></canvas>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- DETAILED TRANSACTION LEDGER & POOJA LINE ITEMS TABLE -->
+        <!-- ===================================================================== -->
+        <section class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
+          
+          <!-- Table Header & Controls -->
+          <div class="p-4 sm:p-5 border-b border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center space-x-2">
+                <h3 class="text-base sm:text-lg font-serif font-bold text-stone-900">
+                  Devotee Receipts & Poojas Ledger
+                </h3>
+                <span id="table-count-badge" class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900">
+                  0 Records
+                </span>
+              </div>
+              <p class="text-xs text-stone-500">
+                Click any row to expand and inspect individual poojas, rates, and quantities.
+              </p>
+            </div>
+
+            <div class="flex items-center space-x-2">
+              <span class="text-xs text-stone-400">Total Filtered:</span>
+              <span id="table-filtered-sum" class="font-serif font-black text-amber-900 text-sm sm:text-base bg-amber-50 px-3 py-1 rounded-lg border border-amber-200">
+                ₹0
+              </span>
+            </div>
+          </div>
+
+          <!-- Table Element -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-stone-700">
+              <thead class="bg-stone-50 text-[11px] uppercase tracking-wider text-stone-500 border-b border-stone-200">
+                <tr>
+                  <th class="py-3 px-4 font-bold">Bill Number</th>
+                  <th class="py-3 px-4 font-bold">Date & Time</th>
+                  <th class="py-3 px-4 font-bold">Devotee Name</th>
+                  <th class="py-3 px-4 font-bold">Nakshatram (Star)</th>
+                  <th class="py-3 px-4 font-bold">Poojas (Items)</th>
+                  <th class="py-3 px-4 font-bold text-center">Payment</th>
+                  <th class="py-3 px-4 font-bold">Counter / Staff</th>
+                  <th class="py-3 px-4 font-bold text-right">Amount (₹)</th>
+                  <th class="py-3 px-3 font-bold text-center no-print">Details</th>
+                </tr>
+              </thead>
+              <tbody id="bills-table-body" class="divide-y divide-stone-100">
+                <!-- Dynamically populated rows -->
+                <tr>
+                  <td colspan="9" class="py-12 text-center text-stone-400 italic">
+                    Loading records from Supabase...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table Footer Pagination / Summary -->
+          <div class="p-3 bg-stone-50 border-t border-stone-200 flex items-center justify-between text-xs text-stone-500">
+            <div id="table-pagination-info">
+              Showing records
+            </div>
+            <div class="flex items-center space-x-2">
+              <button id="btn-prev-page" class="px-2.5 py-1 rounded bg-white border border-stone-300 hover:bg-stone-100 text-stone-700 disabled:opacity-50">
+                ← Prev
+              </button>
+              <span id="current-page-num" class="font-bold text-stone-800">1</span>
+              <button id="btn-next-page" class="px-2.5 py-1 rounded bg-white border border-stone-300 hover:bg-stone-100 text-stone-700 disabled:opacity-50">
+                Next →
+              </button>
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- Footer for Admin Portal -->
+      <footer class="no-print bg-stone-900 text-stone-400 text-xs py-4 border-t border-stone-800 text-center">
+        <p>Thirumarady Sri Mahadeva Temple Billing Admin Portal • Protected Cloud Gateway • Supabase Connected</p>
+      </footer>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 3. OFFICIAL PRINTABLE AUDIT REPORT (Triggered on Print / PDF Export) -->
+    <!-- ========================================================================= -->
+    <div id="printable-audit-report" class="print-only p-8 max-w-4xl mx-auto bg-white text-stone-950 font-sans">
+      <!-- Printable Header -->
+      <div class="text-center pb-6 border-b-2 border-stone-900 mb-6">
+        <div class="text-3xl mb-1">🔱</div>
+        <h1 class="text-2xl font-serif font-black uppercase tracking-wider text-stone-900">
+          തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം
+        </h1>
+        <h2 class="text-sm font-serif font-bold text-amber-900 uppercase tracking-widest mt-0.5">
+          Thirumarady Sri Mahadeva Temple — ക്ഷേത്ര ഭരണ സമിതി
+        </h2>
+        <p class="text-xs text-stone-600 mt-1">
+          Piravom – Koothattukulam Road, Thirumarady, Ernakulam, Kerala – 686662 | Phone: 0485-2877300
+        </p>
+        <div class="inline-block mt-3 px-4 py-1 rounded-full border border-stone-900 font-bold text-xs uppercase tracking-wider">
+          Official Daily / Periodic Collection Audit Statement
+        </div>
+      </div>
+
+      <!-- Report Metadata Box -->
+      <div class="grid grid-cols-2 gap-4 p-4 rounded-xl border border-stone-300 text-xs mb-6 bg-stone-50">
+        <div>
+          <p><strong>Reporting Period:</strong> <span id="print-date-range">All Time</span></p>
+          <p class="mt-1"><strong>Counter Machine:</strong> <span id="print-counter">All Counters</span></p>
+        </div>
+        <div class="text-right">
+          <p><strong>Generated On:</strong> <span id="print-timestamp">Current Date</span></p>
+          <p class="mt-1"><strong>Generated By:</strong> <span id="print-officer">Admin Officer</span></p>
+        </div>
+      </div>
+
+      <!-- Financial KPI Summary in Print -->
+      <div class="grid grid-cols-3 gap-4 mb-6 text-center text-xs">
+        <div class="p-3 rounded-xl border border-stone-300">
+          <span class="block text-stone-500 font-bold uppercase text-[10px]">Total Receipts Issued</span>
+          <span id="print-kpi-bills" class="text-lg font-black text-stone-900">0 bills</span>
+        </div>
+        <div class="p-3 rounded-xl border border-stone-300">
+          <span class="block text-stone-500 font-bold uppercase text-[10px]">Cash Collection (💵)</span>
+          <span id="print-kpi-cash" class="text-lg font-black text-emerald-900">₹0</span>
+        </div>
+        <div class="p-3 rounded-xl border border-stone-300">
+          <span class="block text-stone-500 font-bold uppercase text-[10px]">UPI / Digital Collection (📱)</span>
+          <span id="print-kpi-upi" class="text-lg font-black text-blue-900">₹0</span>
+        </div>
+      </div>
+
+      <div class="p-3 rounded-xl border-2 border-amber-600 mb-6 bg-amber-50/50 flex justify-between items-center text-sm font-bold">
+        <span>Grand Total Revenue Collected:</span>
+        <span id="print-kpi-total" class="text-xl font-serif font-black text-amber-950">₹0</span>
+      </div>
+
+      <!-- Pooja-wise Summary Breakdown Table -->
+      <div class="mb-6">
+        <h3 class="font-bold text-xs uppercase tracking-wider text-stone-800 mb-2 border-b border-stone-300 pb-1">
+          1. Offering-Wise Sales & Revenue Summary
+        </h3>
+        <table class="w-full text-xs text-left border-collapse border border-stone-300">
+          <thead class="bg-stone-100 text-[10px] uppercase font-bold text-stone-700">
+            <tr>
+              <th class="p-2 border border-stone-300">#</th>
+              <th class="p-2 border border-stone-300">Offering Name (Pooja)</th>
+              <th class="p-2 border border-stone-300">Deity</th>
+              <th class="p-2 border border-stone-300 text-center">Qty Sold</th>
+              <th class="p-2 border border-stone-300 text-right">Total Revenue (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="print-pooja-summary-body">
+            <!-- Injected -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Signatures Footer -->
+      <div class="mt-12 pt-8 border-t border-stone-400 grid grid-cols-3 gap-6 text-center text-xs">
+        <div>
+          <div class="h-10"></div>
+          <p class="font-bold text-stone-800">Counter Operator</p>
+          <p class="text-[10px] text-stone-500">Prepared & Entered</p>
+        </div>
+        <div>
+          <div class="h-10"></div>
+          <p class="font-bold text-stone-800">Accounts & Audit Officer</p>
+          <p class="text-[10px] text-stone-500">Verified & Reconciled</p>
+        </div>
+        <div>
+          <div class="h-10"></div>
+          <p class="font-bold text-stone-800">Administrative Officer</p>
+          <p class="text-[10px] text-stone-500">Temple Managing Committee</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Client-side Logic Script -->
+    <script>
+      import { supabase, authenticateStaff, type Bill, type BillItem, type StaffUser } from "../../lib/supabaseClient";
+      import { Chart, registerables } from "chart.js";
+      import * as XLSX from "xlsx";
+
+      Chart.register(...registerables);
+
+      // Global State
+      let currentUser: StaffUser | null = null;
+      let allBills: Bill[] = [];
+      let filteredBills: Bill[] = [];
+      let currentPage = 1;
+      const pageSize = 15;
+
+      // Chart Instances
+      let chartDaily: Chart | null = null;
+      let chartPayment: Chart | null = null;
+      let chartTopPoojas: Chart | null = null;
+      let chartDeity: Chart | null = null;
+      let chartHourly: Chart | null = null;
+      let chartStars: Chart | null = null;
+
+      // DOM Elements
+      const loginContainer = document.getElementById("login-container");
+      const dashboardContainer = document.getElementById("dashboard-container");
+      const loginForm = document.getElementById("admin-login-form");
+      const loginErrorAlert = document.getElementById("login-error-alert");
+      const loginErrorMsg = document.getElementById("login-error-msg");
+      const userDisplayName = document.getElementById("user-display-name");
+      const userRoleBadge = document.getElementById("user-role-badge");
+      const btnLogout = document.getElementById("btn-logout");
+      const btnRefresh = document.getElementById("btn-refresh");
+      const btnExportExcel = document.getElementById("btn-export-excel");
+      const btnExportPdf = document.getElementById("btn-export-pdf");
+
+      const filterDateFrom = document.getElementById("filter-date-from") as HTMLInputElement;
+      const filterDateTo = document.getElementById("filter-date-to") as HTMLInputElement;
+      const filterCounter = document.getElementById("filter-counter") as HTMLSelectElement;
+      const filterPaymentMode = document.getElementById("filter-payment-mode") as HTMLSelectElement;
+      const filterSearch = document.getElementById("filter-search") as HTMLInputElement;
+      const datePresetBtns = document.querySelectorAll(".date-preset-btn");
+
+      const tableBody = document.getElementById("bills-table-body");
+      const tableCountBadge = document.getElementById("table-count-badge");
+      const tableFilteredSum = document.getElementById("table-filtered-sum");
+      const btnPrevPage = document.getElementById("btn-prev-page") as HTMLButtonElement;
+      const btnNextPage = document.getElementById("btn-next-page") as HTMLButtonElement;
+      const currentPageNum = document.getElementById("current-page-num");
+      const paginationInfo = document.getElementById("table-pagination-info");
+
+      // Set default dates (Today)
+      const todayStr = new Date().toISOString().split("T")[0];
+      if (filterDateFrom && filterDateTo) {
+        filterDateFrom.value = todayStr;
+        filterDateTo.value = todayStr;
+      }
+
+      // Check session
+      checkExistingSession();
+
+      function checkExistingSession() {
+        const stored = localStorage.getItem("tm_admin_user");
+        if (stored) {
+          try {
+            currentUser = JSON.parse(stored);
+            showDashboard();
+            return;
+          } catch (e) {
+            localStorage.removeItem("tm_admin_user");
+          }
+        }
+        showLogin();
+      }
+
+      function showLogin() {
+        loginContainer?.classList.remove("hidden");
+        dashboardContainer?.classList.add("hidden");
+      }
+
+      function showDashboard() {
+        loginContainer?.classList.add("hidden");
+        dashboardContainer?.classList.remove("hidden");
+        dashboardContainer?.classList.add("flex");
+
+        if (userDisplayName && currentUser) {
+          userDisplayName.textContent = currentUser.full_name;
+        }
+        if (userRoleBadge && currentUser) {
+          userRoleBadge.textContent = currentUser.role;
+        }
+
+        fetchBillsData();
+        setupRealtimeSubscription();
+      }
+
+      // Helper function for quick demo credential filling
+      (window as any).fillCredentials = function(u: string, p: string) {
+        const uInput = document.getElementById("login-username") as HTMLInputElement;
+        const pInput = document.getElementById("login-password") as HTMLInputElement;
+        if (uInput) uInput.value = u;
+        if (pInput) pInput.value = p;
+      };
+
+      // Login handler
+      loginForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        loginErrorAlert?.classList.add("hidden");
+
+        const uInput = (document.getElementById("login-username") as HTMLInputElement).value;
+        const pInput = (document.getElementById("login-password") as HTMLInputElement).value;
+        const submitBtn = document.getElementById("login-submit-btn");
+
+        if (submitBtn) {
+          submitBtn.innerHTML = "<span>🔄 Verifying with Supabase...</span>";
+          (submitBtn as HTMLButtonElement).disabled = true;
+        }
+
+        const res = await authenticateStaff(uInput, pInput);
+
+        if (res.success && res.user) {
+          currentUser = res.user;
+          localStorage.setItem("tm_admin_user", JSON.stringify(currentUser));
+          showDashboard();
+        } else {
+          if (loginErrorAlert && loginErrorMsg) {
+            loginErrorMsg.textContent = res.error || "Authentication failed.";
+            loginErrorAlert.classList.remove("hidden");
+          }
+        }
+
+        if (submitBtn) {
+          submitBtn.innerHTML = "<span>🔓 Sign In to Admin Portal</span>";
+          (submitBtn as HTMLButtonElement).disabled = false;
+        }
+      });
+
+      // Logout handler
+      btnLogout?.addEventListener("click", () => {
+        if (confirm("Are you sure you want to sign out from the Admin Portal?")) {
+          localStorage.removeItem("tm_admin_user");
+          currentUser = null;
+          showLogin();
+        }
+      });
+
+      // Fetch all bills with nested bill_items from Supabase
+      async function fetchBillsData() {
+        const refreshIcon = document.getElementById("refresh-icon");
+        if (refreshIcon) refreshIcon.classList.add("animate-spin");
+
+        try {
+          const { data, error } = await supabase
+            .from("bills")
+            .select("*, bill_items(*)")
+            .order("created_at", { ascending: false });
+
+          if (error) {
+            console.error("Error fetching bills:", error);
+            alert("Error connecting to Supabase: " + error.message);
+            return;
+          }
+
+          allBills = data || [];
+          applyFilters();
+        } catch (err: any) {
+          console.error("Exception fetching bills:", err);
+        } finally {
+          if (refreshIcon) refreshIcon.classList.remove("animate-spin");
+        }
+      }
+
+      // Realtime subscription to live bills
+      function setupRealtimeSubscription() {
+        supabase
+          .channel("admin-bills-feed")
+          .on(
+            "postgres_changes",
+            { event: "*", schema: "public", table: "bills" },
+            () => {
+              fetchBillsData();
+            }
+          )
+          .subscribe();
+      }
+
+      btnRefresh?.addEventListener("click", fetchBillsData);
+
+      // Date Presets Handler
+      datePresetBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          datePresetBtns.forEach(b => {
+            b.classList.remove("active", "bg-amber-600", "text-white");
+            b.classList.add("bg-stone-100", "text-stone-700");
+          });
+          btn.classList.add("active", "bg-amber-600", "text-white");
+          btn.classList.remove("bg-stone-100", "text-stone-700");
+
+          const preset = btn.getAttribute("data-preset");
+          const now = new Date();
+          const today = now.toISOString().split("T")[0];
+
+          if (preset === "today") {
+            filterDateFrom.value = today;
+            filterDateTo.value = today;
+          } else if (preset === "yesterday") {
+            const y = new Date(now);
+            y.setDate(y.getDate() - 1);
+            const yStr = y.toISOString().split("T")[0];
+            filterDateFrom.value = yStr;
+            filterDateTo.value = yStr;
+          } else if (preset === "week") {
+            const w = new Date(now);
+            w.setDate(w.getDate() - 7);
+            filterDateFrom.value = w.toISOString().split("T")[0];
+            filterDateTo.value = today;
+          } else if (preset === "month") {
+            const m = new Date(now.getFullYear(), now.getMonth(), 1);
+            filterDateFrom.value = m.toISOString().split("T")[0];
+            filterDateTo.value = today;
+          } else if (preset === "all") {
+            filterDateFrom.value = "2020-01-01";
+            filterDateTo.value = "2030-12-31";
+          }
+          applyFilters();
+        });
+      });
+
+      // Filter change listeners
+      filterDateFrom?.addEventListener("change", applyFilters);
+      filterDateTo?.addEventListener("change", applyFilters);
+      filterCounter?.addEventListener("change", applyFilters);
+      filterPaymentMode?.addEventListener("change", applyFilters);
+      filterSearch?.addEventListener("input", applyFilters);
+
+      // Filter and compute stats
+      function applyFilters() {
+        const fromDate = filterDateFrom?.value || "2000-01-01";
+        const toDate = filterDateTo?.value || "2099-12-31";
+        const selectedCounter = filterCounter?.value || "ALL";
+        const selectedPayment = filterPaymentMode?.value || "ALL";
+        const searchVal = (filterSearch?.value || "").trim().toLowerCase();
+
+        filteredBills = allBills.filter(bill => {
+          // Date comparison (bill.pooja_date or bill.created_at)
+          const billDate = (bill.pooja_date || bill.created_at.split("T")[0]);
+          if (billDate < fromDate || billDate > toDate) {
+            return false;
+          }
+
+          // Counter
+          if (selectedCounter !== "ALL" && bill.counter_id !== selectedCounter) {
+            return false;
+          }
+
+          // Payment mode
+          if (selectedPayment !== "ALL" && bill.payment_mode !== selectedPayment) {
+            return false;
+          }
+
+          // Search
+          if (searchVal) {
+            const num = (bill.bill_number || "").toLowerCase();
+            const name = (bill.devotee_name || "").toLowerCase();
+            const star = (bill.star_name || "").toLowerCase();
+            const items = (bill.bill_items || []).map(i => i.pooja_name.toLowerCase()).join(" ");
+            if (!num.includes(searchVal) && !name.includes(searchVal) && !star.includes(searchVal) && !items.includes(searchVal)) {
+              return false;
+            }
+          }
+
+          return true;
+        });
+
+        currentPage = 1;
+        updateKpiMetrics();
+        updateCharts();
+        renderTable();
+        updatePrintReport();
+      }
+
+      // Update KPI metrics
+      function updateKpiMetrics() {
+        let totalRev = 0;
+        let cashRev = 0;
+        let upiRev = 0;
+        let totalPoojas = 0;
+        const distinctPoojasSet = new Set<string>();
+
+        filteredBills.forEach(b => {
+          const amt = Number(b.total_amount) || 0;
+          totalRev += amt;
+          if (b.payment_mode === "CASH") {
+            cashRev += amt;
+          } else if (b.payment_mode === "UPI") {
+            upiRev += amt;
+          }
+
+          (b.bill_items || []).forEach(item => {
+            totalPoojas += (item.quantity || 1);
+            if (item.pooja_name) distinctPoojasSet.add(item.pooja_name);
+          });
+        });
+
+        const billsCount = filteredBills.length;
+        const avgBill = billsCount > 0 ? Math.round(totalRev / billsCount) : 0;
+        const avgItems = billsCount > 0 ? (totalPoojas / billsCount).toFixed(1) : "0";
+
+        const cashPct = totalRev > 0 ? Math.round((cashRev / totalRev) * 100) : 0;
+        const upiPct = totalRev > 0 ? Math.round((upiRev / totalRev) * 100) : 0;
+
+        const revEl = document.getElementById("kpi-total-revenue");
+        const billsEl = document.getElementById("kpi-total-bills");
+        const cashEl = document.getElementById("kpi-cash-total");
+        const cashPctEl = document.getElementById("kpi-cash-percent");
+        const upiEl = document.getElementById("kpi-upi-total");
+        const upiPctEl = document.getElementById("kpi-upi-percent");
+        const poojasEl = document.getElementById("kpi-poojas-count");
+        const distinctEl = document.getElementById("kpi-distinct-poojas");
+        const avgBillEl = document.getElementById("kpi-avg-bill");
+        const avgItemsEl = document.getElementById("kpi-avg-items");
+
+        if (revEl) revEl.textContent = `₹${totalRev.toLocaleString("en-IN")}`;
+        if (billsEl) billsEl.textContent = `${billsCount} bills`;
+        if (cashEl) cashEl.textContent = `₹${cashRev.toLocaleString("en-IN")}`;
+        if (cashPctEl) cashPctEl.textContent = `${cashPct}% of total`;
+        if (upiEl) upiEl.textContent = `₹${upiRev.toLocaleString("en-IN")}`;
+        if (upiPctEl) upiPctEl.textContent = `${upiPct}% of total`;
+        if (poojasEl) poojasEl.textContent = totalPoojas.toLocaleString("en-IN");
+        if (distinctEl) distinctEl.textContent = `${distinctPoojasSet.size} varieties`;
+        if (avgBillEl) avgBillEl.textContent = `₹${avgBill.toLocaleString("en-IN")}`;
+        if (avgItemsEl) avgItemsEl.textContent = `${avgItems} poojas/bill`;
+
+        if (tableFilteredSum) tableFilteredSum.textContent = `₹${totalRev.toLocaleString("en-IN")}`;
+        if (tableCountBadge) tableCountBadge.textContent = `${billsCount} Records`;
+      }
+
+      // Update Charts
+      function updateCharts() {
+        renderDailyRevenueChart();
+        renderPaymentModeChart();
+        renderTopPoojasChart();
+        renderDeityRevenueChart();
+        renderHourlyChart();
+        renderStarsChart();
+      }
+
+      // Chart 1: Daily Revenue Trend (Stacked Bar)
+      function renderDailyRevenueChart() {
+        const canvas = document.getElementById("chart-daily-revenue") as HTMLCanvasElement;
+        if (!canvas) return;
+
+        // Group by Date
+        const dateMap: { [date: string]: { total: number; cash: number; upi: number } } = {};
+
+        filteredBills.forEach(b => {
+          const d = b.pooja_date || b.created_at.split("T")[0];
+          if (!dateMap[d]) dateMap[d] = { total: 0, cash: 0, upi: 0 };
+          const amt = Number(b.total_amount) || 0;
+          dateMap[d].total += amt;
+          if (b.payment_mode === "CASH") dateMap[d].cash += amt;
+          else if (b.payment_mode === "UPI") dateMap[d].upi += amt;
+        });
+
+        const sortedDates = Object.keys(dateMap).sort();
+        const cashData = sortedDates.map(d => dateMap[d].cash);
+        const upiData = sortedDates.map(d => dateMap[d].upi);
+
+        if (chartDaily) chartDaily.destroy();
+
+        chartDaily = new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: sortedDates.map(d => d.slice(5)), // MM-DD
+            datasets: [
+              {
+                label: "Cash Collection (₹)",
+                data: cashData,
+                backgroundColor: "#10b981",
+                borderRadius: 4
+              },
+              {
+                label: "UPI / QR (₹)",
+                data: upiData,
+                backgroundColor: "#3b82f6",
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "top", labels: { boxWidth: 12, font: { size: 11 } } },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => `${ctx.dataset.label}: ₹${(ctx.parsed.y || 0).toLocaleString("en-IN")}`
+                }
+              }
+            },
+            scales: {
+              x: { stacked: true, grid: { display: false } },
+              y: {
+                stacked: true,
+                ticks: {
+                  callback: (val) => "₹" + Number(val).toLocaleString("en-IN")
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 2: Payment Mode Share (Donut)
+      function renderPaymentModeChart() {
+        const canvas = document.getElementById("chart-payment-mode") as HTMLCanvasElement;
+        if (!canvas) return;
+
+        let cash = 0;
+        let upi = 0;
+        let card = 0;
+
+        filteredBills.forEach(b => {
+          const amt = Number(b.total_amount) || 0;
+          if (b.payment_mode === "CASH") cash += amt;
+          else if (b.payment_mode === "UPI") upi += amt;
+          else if (b.payment_mode === "CARD") card += amt;
+        });
+
+        if (chartPayment) chartPayment.destroy();
+
+        chartPayment = new Chart(canvas, {
+          type: "doughnut",
+          data: {
+            labels: ["Cash (💵)", "UPI Digital (📱)", "Card (💳)"],
+            datasets: [
+              {
+                data: [cash, upi, card],
+                backgroundColor: ["#10b981", "#3b82f6", "#f59e0b"],
+                borderWidth: 2,
+                borderColor: "#ffffff"
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => `${ctx.label}: ₹${Number(ctx.parsed || 0).toLocaleString("en-IN")}`
+                }
+              }
+            },
+            cutout: "65%"
+          }
+        });
+      }
+
+      // Chart 3: Top 10 High-Revenue Poojas (Horizontal Bar)
+      function renderTopPoojasChart() {
+        const canvas = document.getElementById("chart-top-poojas") as HTMLCanvasElement;
+        if (!canvas) return;
+
+        const poojaMap: { [name: string]: { rev: number; qty: number } } = {};
+
+        filteredBills.forEach(b => {
+          (b.bill_items || []).forEach(item => {
+            const name = item.pooja_name || "Unknown Offering";
+            if (!poojaMap[name]) poojaMap[name] = { rev: 0, qty: 0 };
+            poojaMap[name].rev += Number(item.subtotal) || 0;
+            poojaMap[name].qty += Number(item.quantity) || 1;
+          });
+        });
+
+        const sorted = Object.entries(poojaMap)
+          .sort((a, b) => b[1].rev - a[1].rev)
+          .slice(0, 10);
+
+        if (chartTopPoojas) chartTopPoojas.destroy();
+
+        chartTopPoojas = new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: sorted.map(s => s[0].length > 22 ? s[0].slice(0, 20) + "..." : s[0]),
+            datasets: [
+              {
+                label: "Revenue Generated (₹)",
+                data: sorted.map(s => s[1].rev),
+                backgroundColor: "#d97706",
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => {
+                    const idx = ctx.dataIndex;
+                    const item = sorted[idx];
+                    return `Revenue: ₹${item[1].rev.toLocaleString("en-IN")} (${item[1].qty} booked)`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: {
+                  callback: (val) => "₹" + Number(val).toLocaleString("en-IN")
+                }
+              },
+              y: {
+                ticks: { font: { size: 10 } }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 4: Deity-wise Revenue Distribution
+      function renderDeityRevenueChart() {
+        const canvas = document.getElementById("chart-deity-revenue") as HTMLCanvasElement;
+        if (!canvas) return;
+
+        const deityMap: { [deity: string]: number } = {
+          "Lord Shiva": 0,
+          "Lord Ganapathy": 0,
+          "Lord Sastha / Ayyappan": 0,
+          "Goddess Parvathi / Bhagavathi": 0,
+          "Nagas / Edaprakavu": 0
+        };
+
+        filteredBills.forEach(b => {
+          (b.bill_items || []).forEach(item => {
+            const rawDeity = (item.deity_name || "").toLowerCase();
+            const name = (item.pooja_name || "").toLowerCase();
+            const sub = Number(item.subtotal) || 0;
+
+            if (rawDeity.includes("ganapathy") || name.includes("ganapathy") || name.includes("karuka") || name.includes("modakam")) {
+              deityMap["Lord Ganapathy"] += sub;
+            } else if (rawDeity.includes("sastha") || rawDeity.includes("ayyappan") || name.includes("neerajanam") || name.includes("sastha")) {
+              deityMap["Lord Sastha / Ayyappan"] += sub;
+            } else if (rawDeity.includes("parvathi") || name.includes("bhagavathi") || name.includes("swayamvara")) {
+              deityMap["Goddess Parvathi / Bhagavathi"] += sub;
+            } else if (rawDeity.includes("serpent") || rawDeity.includes("naga") || name.includes("noor") || name.includes("sarpa")) {
+              deityMap["Nagas / Edaprakavu"] += sub;
+            } else {
+              deityMap["Lord Shiva"] += sub;
+            }
+          });
+        });
+
+        if (chartDeity) chartDeity.destroy();
+
+        chartDeity = new Chart(canvas, {
+          type: "polarArea",
+          data: {
+            labels: Object.keys(deityMap),
+            datasets: [
+              {
+                data: Object.values(deityMap),
+                backgroundColor: [
+                  "rgba(217, 119, 6, 0.75)",
+                  "rgba(239, 68, 68, 0.75)",
+                  "rgba(16, 185, 129, 0.75)",
+                  "rgba(168, 85, 247, 0.75)",
+                  "rgba(14, 165, 233, 0.75)"
+                ]
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "right", labels: { boxWidth: 10, font: { size: 10 } } },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => `${ctx.label}: ₹${Number(ctx.parsed.r || 0).toLocaleString("en-IN")}`
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 5: Peak Hours Distribution
+      function renderHourlyChart() {
+        const canvas = document.getElementById("chart-hourly-distribution") as HTMLCanvasElement;
+        if (!canvas) return;
+
+        // Group into 2-hour slots across 24h
+        const slots: { [slot: string]: number } = {
+          "04:00 - 06:00 (Nirmalyam)": 0,
+          "06:00 - 08:00 (Usha Pooja)": 0,
+          "08:00 - 10:30 (Ucha Pooja)": 0,
+          "10:30 - 17:00 (Afternoon)": 0,
+          "17:00 - 19:00 (Deeparadhana)": 0,
+          "19:00 - 21:00 (Athazha Pooja)": 0,
+          "Night / Other": 0
+        };
+
+        filteredBills.forEach(b => {
+          if (!b.created_at) return;
+          const dt = new Date(b.created_at);
+          const hr = dt.getHours();
+          const amt = Number(b.total_amount) || 0;
+
+          if (hr >= 4 && hr < 6) slots["04:00 - 06:00 (Nirmalyam)"] += amt;
+          else if (hr >= 6 && hr < 8) slots["06:00 - 08:00 (Usha Pooja)"] += amt;
+          else if (hr >= 8 && hr < 11) slots["08:00 - 10:30 (Ucha Pooja)"] += amt;
+          else if (hr >= 11 && hr < 17) slots["10:30 - 17:00 (Afternoon)"] += amt;
+          else if (hr >= 17 && hr < 19) slots["17:00 - 19:00 (Deeparadhana)"] += amt;
+          else if (hr >= 19 && hr < 21) slots["19:00 - 21:00 (Athazha Pooja)"] += amt;
+          else slots["Night / Other"] += amt;
+        });
+
+        if (chartHourly) chartHourly.destroy();
+
+        chartHourly = new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: Object.keys(slots),
+            datasets: [
+              {
+                label: "Billing Volume (₹)",
+                data: Object.values(slots),
+                backgroundColor: "#6366f1",
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => `Revenue: ₹${Number(ctx.parsed.y || 0).toLocaleString("en-IN")}`
+                }
+              }
+            },
+            scales: {
+              x: { ticks: { font: { size: 9 } } },
+              y: {
+                ticks: {
+                  callback: (val) => "₹" + Number(val).toLocaleString("en-IN")
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 6: Devotee Birth Stars (Nakshatra)
+      function renderStarsChart() {
+        const canvas = document.getElementById("chart-star-distribution") as HTMLCanvasElement;
+        if (!canvas) return;
+
+        const starMap: { [star: string]: number } = {};
+
+        filteredBills.forEach(b => {
+          const star = (b.star_name || "Not Specified").split("-")[0].trim();
+          if (!starMap[star]) starMap[star] = 0;
+          starMap[star]++;
+        });
+
+        const sorted = Object.entries(starMap)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 8);
+
+        if (chartStars) chartStars.destroy();
+
+        chartStars = new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: sorted.map(s => s[0]),
+            datasets: [
+              {
+                label: "Receipts Count",
+                data: sorted.map(s => s[1]),
+                backgroundColor: "#ec4899",
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              x: { ticks: { font: { size: 10 } } },
+              y: {
+                ticks: { stepSize: 1 }
+              }
+            }
+          }
+        });
+      }
+
+      // Render Transaction Ledger Table
+      function renderTable() {
+        if (!tableBody) return;
+
+        if (filteredBills.length === 0) {
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="9" class="py-12 text-center text-stone-400 italic">
+                No receipts found matching the selected filter criteria.
+              </td>
+            </tr>
+          `;
+          if (paginationInfo) paginationInfo.textContent = "0 of 0 records";
+          return;
+        }
+
+        const totalPages = Math.ceil(filteredBills.length / pageSize) || 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = Math.min(startIndex + pageSize, filteredBills.length);
+        const pageBills = filteredBills.slice(startIndex, endIndex);
+
+        tableBody.innerHTML = "";
+
+        pageBills.forEach(bill => {
+          const row = document.createElement("tr");
+          row.className = "hover:bg-amber-50/40 transition-colors border-b border-stone-100 group";
+
+          const itemsCount = (bill.bill_items || []).length;
+          const itemsSummary = (bill.bill_items || []).map(i => `${i.pooja_name} (x${i.quantity})`).join(", ");
+
+          // Payment mode badge
+          const payBadge = bill.payment_mode === "CASH" 
+            ? `<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px]">CASH</span>`
+            : `<span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px]">${bill.payment_mode}</span>`;
+
+          const dt = new Date(bill.created_at);
+          const timeFormatted = dt.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+          const dateFormatted = bill.pooja_date || dt.toISOString().split("T")[0];
+
+          row.innerHTML = `
+            <td class="py-3 px-4 font-mono font-bold text-amber-900 whitespace-nowrap">
+              ${bill.bill_number}
+            </td>
+            <td class="py-3 px-4 whitespace-nowrap text-stone-600">
+              <span class="block font-semibold text-stone-900">${dateFormatted}</span>
+              <span class="text-[10px] text-stone-400">${timeFormatted}</span>
+            </td>
+            <td class="py-3 px-4 font-bold text-stone-900">
+              ${bill.devotee_name}
+            </td>
+            <td class="py-3 px-4 font-malayalam text-stone-700">
+              ${bill.star_name}
+            </td>
+            <td class="py-3 px-4 max-w-xs">
+              <span class="inline-block px-1.5 py-0.5 rounded bg-stone-100 font-bold text-[10px] text-stone-700 mr-1.5">
+                ${itemsCount} pooja${itemsCount > 1 ? "s" : ""}
+              </span>
+              <span class="text-stone-500 truncate inline-block max-w-[200px] align-middle" title="${itemsSummary}">
+                ${itemsSummary}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-center whitespace-nowrap">
+              ${payBadge}
+            </td>
+            <td class="py-3 px-4 text-[11px] text-stone-500 whitespace-nowrap">
+              <span class="font-bold text-stone-700 block">${bill.counter_id}</span>
+              <span>${bill.billed_by || "Operator"}</span>
+            </td>
+            <td class="py-3 px-4 text-right font-serif font-black text-amber-900 text-sm whitespace-nowrap">
+              ₹${Number(bill.total_amount).toLocaleString("en-IN")}
+            </td>
+            <td class="py-3 px-3 text-center no-print whitespace-nowrap">
+              <button
+                type="button"
+                class="view-breakdown-btn px-2 py-1 rounded bg-stone-100 hover:bg-amber-100 text-stone-700 hover:text-amber-900 text-[10px] font-bold transition-colors"
+                data-id="${bill.id}"
+              >
+                Expand ↓
+              </button>
+            </td>
+          `;
+
+          // Expandable Line Items Details Row
+          const detailRow = document.createElement("tr");
+          detailRow.id = `detail-${bill.id}`;
+          detailRow.className = "hidden bg-stone-50/80 border-b border-stone-200 text-xs";
+          
+          let lineItemsHtml = "";
+          (bill.bill_items || []).forEach((item, i) => {
+            lineItemsHtml += `
+              <div class="flex items-center justify-between py-1.5 border-b border-stone-200/60 last:border-0 text-xs">
+                <div class="flex items-center space-x-2">
+                  <span class="w-5 h-5 rounded-full bg-amber-500/10 text-amber-800 font-bold text-[10px] flex items-center justify-center">${i + 1}</span>
+                  <div>
+                    <span class="font-bold text-stone-900">${item.pooja_name}</span>
+                    <span class="text-[10px] text-stone-500 ml-1">(${item.deity_name})</span>
+                  </div>
+                </div>
+                <div class="font-mono text-stone-700">
+                  <span>${item.quantity} × ₹${item.unit_price}</span>
+                  <span class="ml-3 font-bold text-amber-900">= ₹${item.subtotal}</span>
+                </div>
+              </div>
+            `;
+          });
+
+          detailRow.innerHTML = `
+            <td colspan="9" class="p-4 pl-12">
+              <div class="p-3.5 rounded-xl bg-white border border-stone-200 shadow-sm max-w-2xl">
+                <div class="flex items-center justify-between pb-2 mb-2 border-b border-stone-200 text-xs">
+                  <span class="font-bold text-stone-900 uppercase tracking-wider text-[11px]">
+                    Itemized Pooja Breakdown (Bill: ${bill.bill_number})
+                  </span>
+                  <span class="font-mono font-bold text-amber-900">
+                    Grand Total: ₹${bill.total_amount}
+                  </span>
+                </div>
+                <div class="space-y-1">
+                  ${lineItemsHtml || "<p class='text-stone-400 italic text-xs'>No line item records.</p>"}
+                </div>
+              </div>
+            </td>
+          `;
+
+          tableBody.appendChild(row);
+          tableBody.appendChild(detailRow);
+        });
+
+        // Add toggle listeners
+        tableBody.querySelectorAll(".view-breakdown-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-id");
+            const targetRow = document.getElementById(`detail-${id}`);
+            if (targetRow) {
+              const isHidden = targetRow.classList.contains("hidden");
+              if (isHidden) {
+                targetRow.classList.remove("hidden");
+                btn.textContent = "Collapse ↑";
+              } else {
+                targetRow.classList.add("hidden");
+                btn.textContent = "Expand ↓";
+              }
+            }
+          });
+        });
+
+        // Pagination UI update
+        if (paginationInfo) {
+          paginationInfo.textContent = `Showing ${startIndex + 1} to ${endIndex} of ${filteredBills.length} records`;
+        }
+        if (currentPageNum) currentPageNum.textContent = String(currentPage);
+        if (btnPrevPage) btnPrevPage.disabled = currentPage <= 1;
+        if (btnNextPage) btnNextPage.disabled = currentPage >= totalPages;
+      }
+
+      btnPrevPage?.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderTable();
+        }
+      });
+
+      btnNextPage?.addEventListener("click", () => {
+        const totalPages = Math.ceil(filteredBills.length / pageSize) || 1;
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderTable();
+        }
+      });
+
+      // =========================================================================
+      // EXCEL EXPORT HANDLER (.xlsx)
+      // =========================================================================
+      btnExportExcel?.addEventListener("click", () => {
+        if (filteredBills.length === 0) {
+          alert("No records to export.");
+          return;
+        }
+
+        // Sheet 1: Summary of Bills
+        const summaryData = filteredBills.map(b => ({
+          "Bill Number": b.bill_number,
+          "Date": b.pooja_date || b.created_at.split("T")[0],
+          "Time (IST)": new Date(b.created_at).toLocaleTimeString("en-IN"),
+          "Devotee Name": b.devotee_name,
+          "Birth Star (Nakshatra)": b.star_name,
+          "Gothram": b.gothram || "",
+          "Payment Mode": b.payment_mode,
+          "Counter Machine": b.counter_id,
+          "Billed By": b.billed_by || "Operator",
+          "Total Amount (INR)": Number(b.total_amount),
+          "Items Count": (b.bill_items || []).length
+        }));
+
+        // Sheet 2: Itemized Line Items
+        const itemizedData: any[] = [];
+        filteredBills.forEach(b => {
+          (b.bill_items || []).forEach(item => {
+            itemizedData.push({
+              "Bill Number": b.bill_number,
+              "Date": b.pooja_date || b.created_at.split("T")[0],
+              "Devotee Name": b.devotee_name,
+              "Offering Name": item.pooja_name,
+              "Deity": item.deity_name,
+              "Quantity": item.quantity,
+              "Unit Price (INR)": Number(item.unit_price),
+              "Subtotal (INR)": Number(item.subtotal),
+              "Payment Mode": b.payment_mode
+            });
+          });
+        });
+
+        // Sheet 3: Pooja-wise Totals
+        const poojaAggMap: { [name: string]: { deity: string; qty: number; rev: number } } = {};
+        filteredBills.forEach(b => {
+          (b.bill_items || []).forEach(item => {
+            const name = item.pooja_name;
+            if (!poojaAggMap[name]) poojaAggMap[name] = { deity: item.deity_name, qty: 0, rev: 0 };
+            poojaAggMap[name].qty += Number(item.quantity) || 1;
+            poojaAggMap[name].rev += Number(item.subtotal) || 0;
+          });
+        });
+
+        const poojaAggData = Object.entries(poojaAggMap).map(([name, data]) => ({
+          "Offering Name": name,
+          "Associated Deity": data.deity,
+          "Total Quantity Sold": data.qty,
+          "Total Revenue (INR)": data.rev
+        })).sort((a, b) => b["Total Revenue (INR)"] - a["Total Revenue (INR)"]);
+
+        // Create workbook
+        const wb = XLSX.utils.book_new();
+
+        const ws1 = XLSX.utils.json_to_sheet(summaryData);
+        const ws2 = XLSX.utils.json_to_sheet(itemizedData);
+        const ws3 = XLSX.utils.json_to_sheet(poojaAggData);
+
+        XLSX.utils.book_append_sheet(wb, ws1, "Bills Summary");
+        XLSX.utils.book_append_sheet(wb, ws2, "Itemized Poojas");
+        XLSX.utils.book_append_sheet(wb, ws3, "Pooja Aggregates");
+
+        const from = filterDateFrom?.value || "start";
+        const to = filterDateTo?.value || "end";
+        const fileName = `Thirumarady_Temple_Billing_Report_${from}_to_${to}.xlsx`;
+
+        XLSX.writeFile(wb, fileName);
+      });
+
+      // =========================================================================
+      // PDF AUDIT REPORT / PRINT HANDLER
+      // =========================================================================
+      btnExportPdf?.addEventListener("click", () => {
+        updatePrintReport();
+        window.print();
+      });
+
+      function updatePrintReport() {
+        const from = filterDateFrom?.value || "Start";
+        const to = filterDateTo?.value || "End";
+        const counter = filterCounter?.value || "All Counters";
+
+        const pRange = document.getElementById("print-date-range");
+        const pCounter = document.getElementById("print-counter");
+        const pTime = document.getElementById("print-timestamp");
+        const pOfficer = document.getElementById("print-officer");
+
+        if (pRange) pRange.textContent = `${from} to ${to}`;
+        if (pCounter) pCounter.textContent = counter;
+        if (pTime) pTime.textContent = new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+        if (pOfficer && currentUser) pOfficer.textContent = currentUser.full_name;
+
+        // KPI metrics for print
+        let total = 0;
+        let cash = 0;
+        let upi = 0;
+        const poojaMap: { [name: string]: { deity: string; qty: number; rev: number } } = {};
+
+        filteredBills.forEach(b => {
+          const amt = Number(b.total_amount) || 0;
+          total += amt;
+          if (b.payment_mode === "CASH") cash += amt;
+          else if (b.payment_mode === "UPI") upi += amt;
+
+          (b.bill_items || []).forEach(item => {
+            const name = item.pooja_name;
+            if (!poojaMap[name]) poojaMap[name] = { deity: item.deity_name, qty: 0, rev: 0 };
+            poojaMap[name].qty += Number(item.quantity) || 1;
+            poojaMap[name].rev += Number(item.subtotal) || 0;
+          });
+        });
+
+        const printBills = document.getElementById("print-kpi-bills");
+        const printCash = document.getElementById("print-kpi-cash");
+        const printUpi = document.getElementById("print-kpi-upi");
+        const printTotal = document.getElementById("print-kpi-total");
+
+        if (printBills) printBills.textContent = `${filteredBills.length} bills`;
+        if (printCash) printCash.textContent = `₹${cash.toLocaleString("en-IN")}`;
+        if (printUpi) printUpi.textContent = `₹${upi.toLocaleString("en-IN")}`;
+        if (printTotal) printTotal.textContent = `₹${total.toLocaleString("en-IN")}`;
+
+        // Populate pooja summary table in print
+        const printPoojaBody = document.getElementById("print-pooja-summary-body");
+        if (printPoojaBody) {
+          const sorted = Object.entries(poojaMap).sort((a, b) => b[1].rev - a[1].rev);
+          let rowsHtml = "";
+          sorted.forEach(([name, d], idx) => {
+            rowsHtml += `
+              <tr>
+                <td class="p-2 border border-stone-300">${idx + 1}</td>
+                <td class="p-2 border border-stone-300 font-bold">${name}</td>
+                <td class="p-2 border border-stone-300">${d.deity}</td>
+                <td class="p-2 border border-stone-300 text-center font-bold">${d.qty}</td>
+                <td class="p-2 border border-stone-300 text-right font-bold">₹${d.rev.toLocaleString("en-IN")}</td>
+              </tr>
+            `;
+          });
+          printPoojaBody.innerHTML = rowsHtml || `<tr><td colspan="5" class="p-4 text-center">No poojas booked in this period.</td></tr>`;
+        }
+      }
+    </script>
+  </body>
+</html>
