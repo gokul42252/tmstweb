@@ -647,12 +647,27 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
 
 <script>
   import QRCode from "qrcode";
-  import { supabase } from "../lib/supabaseClient";
+  import { supabase, fetchPoojas } from "../lib/supabaseClient";
   import { TEMPLE_INFO } from "../data/templeData";
 
   // Tab filtering logic
   const tabButtons = document.querySelectorAll(".vazhipadu-tab-btn");
-  const offeringCards = document.querySelectorAll(".offering-card");
+
+  function applyDeityFilter(target: string) {
+    const cards = document.querySelectorAll(".offering-card");
+    cards.forEach(card => {
+      const isInactive = card.getAttribute("data-active") === "false";
+      if (isInactive) {
+        (card as HTMLElement).style.display = "none";
+        return;
+      }
+      if (target === "all" || card.getAttribute("data-deity") === target) {
+        (card as HTMLElement).style.display = "flex";
+      } else {
+        (card as HTMLElement).style.display = "none";
+      }
+    });
+  }
 
   tabButtons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -663,14 +678,8 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
       btn.classList.add("active", "bg-amber-600", "text-white");
       btn.classList.remove("bg-white", "text-stone-700");
 
-      const target = btn.getAttribute("data-target");
-      offeringCards.forEach(card => {
-        if (target === "all" || card.getAttribute("data-deity") === target) {
-          (card as HTMLElement).style.display = "flex";
-        } else {
-          (card as HTMLElement).style.display = "none";
-        }
-      });
+      const target = btn.getAttribute("data-target") || "all";
+      applyDeityFilter(target);
     });
   });
 
@@ -693,6 +702,197 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
   const offeringSelect = document.getElementById("offering-select") as HTMLSelectElement;
   const addOfferingBtn = document.getElementById("add-offering-btn");
   const bookingForm = document.getElementById("vazhipadu-booking-form");
+
+  function mapDeityToSlug(deityName: string): string {
+    const d = (deityName || "").toLowerCase();
+    if (d.includes("shiva") || d.includes("parvath") || d.includes("devi")) return "shiva";
+    if (d.includes("ganapath")) return "ganapathy";
+    if (d.includes("sastha") || d.includes("ayyappan")) return "ayyappan";
+    if (d.includes("subrahman") || d.includes("murugan")) return "subrahmanian";
+    if (d.includes("naga") || d.includes("serpent")) return "serpent";
+    return "shiva";
+  }
+
+  function getDeityTitle(deityName: string): string {
+    const d = (deityName || "").toLowerCase();
+    if (d.includes("shiva")) return "Lord Shiva";
+    if (d.includes("parvath") || d.includes("devi")) return "Goddess Parvathi";
+    if (d.includes("ganapath")) return "Lord Ganapathy";
+    if (d.includes("sastha") || d.includes("ayyappan")) return "Lord Ayyappan";
+    if (d.includes("subrahman")) return "Lord Subrahmanian";
+    if (d.includes("naga") || d.includes("serpent")) return "Nagaraja";
+    return deityName;
+  }
+
+  // Sync live poojas and rates from Supabase into offering dropdown & cards grid
+  async function syncLiveOfferings() {
+    try {
+      const { success, data } = await fetchPoojas(true);
+      if (!success || !data || data.length === 0) return;
+
+      // 1. Populate Dropdown (<select id="offering-select">)
+      const deityGroups: { [group: string]: typeof data } = {};
+      data.forEach(p => {
+        let groupKey = "🔱 Lord Shiva (ശ്രീ മഹാദേവൻ)";
+        const d = (p.deity_name || "").toLowerCase();
+        if (d.includes("shiva")) groupKey = "🔱 Lord Shiva (ശ്രീ മഹാദേവൻ)";
+        else if (d.includes("parvath") || d.includes("devi")) groupKey = "🌸 Goddess Parvathi (ശ്രീ പാർവ്വതി)";
+        else if (d.includes("ganapath")) groupKey = "🐘 Lord Ganapathy (ഗണപതി)";
+        else if (d.includes("sastha") || d.includes("ayyappan")) groupKey = "🏹 Lord Ayyappan (ശാസ്താവ്)";
+        else if (d.includes("subrahman")) groupKey = "🦚 Lord Subrahmanian (സുബ്രഹ്മണ്യൻ)";
+        else if (d.includes("naga") || d.includes("serpent")) groupKey = "🐍 Nagaraja & Sarpam (നാഗങ്ങൾ)";
+        else groupKey = `🪔 Other Offerings (${p.deity_name})`;
+
+        if (!deityGroups[groupKey]) deityGroups[groupKey] = [];
+        deityGroups[groupKey].push(p);
+      });
+
+      let newHtml = '<option value="">Choose an offering to add... (വഴിപാട് തിരഞ്ഞെടുക്കുക)</option>';
+      for (const [groupName, items] of Object.entries(deityGroups)) {
+        newHtml += `<optgroup label="${groupName}">`;
+        items.forEach(p => {
+          const displayName = p.name_ml ? `${p.name_ml} (${p.name_en})` : p.name_en;
+          newHtml += `<option value="${p.id}" data-name="${p.name_en}" data-ml="${p.name_ml || p.name_en}" data-rate="${p.price}" data-deity="${p.deity_name}">${displayName} — ₹${p.price}</option>`;
+        });
+        newHtml += '</optgroup>';
+      }
+
+      if (offeringSelect) {
+        offeringSelect.innerHTML = newHtml;
+      }
+
+      // 2. Synchronize Cards Grid (#offerings-grid)
+      const grid = document.getElementById("offerings-grid");
+      if (grid) {
+        const existingCards = Array.from(grid.querySelectorAll(".offering-card")) as HTMLElement[];
+        const activeNames = new Set(data.map(p => p.name_en.trim().toLowerCase()));
+
+        // Hide cards that were deactivated or deleted
+        existingCards.forEach(card => {
+          const btn = card.querySelector(".select-offering-btn");
+          const cardName = (btn?.getAttribute("data-name") || "").trim().toLowerCase();
+          if (cardName && !activeNames.has(cardName)) {
+            card.style.display = "none";
+            card.setAttribute("data-active", "false");
+          }
+        });
+
+        // Update existing cards or create cards for new offerings
+        data.forEach(p => {
+          const pNameLower = p.name_en.trim().toLowerCase();
+          const existingCard = existingCards.find(card => {
+            const btn = card.querySelector(".select-offering-btn");
+            return (btn?.getAttribute("data-name") || "").trim().toLowerCase() === pNameLower;
+          });
+
+          if (existingCard) {
+            const priceEl = existingCard.querySelector(".rate-display") || existingCard.querySelector("span.text-lg");
+            if (priceEl) priceEl.textContent = `₹${p.price}`;
+
+            const btn = existingCard.querySelector(".select-offering-btn");
+            if (btn) {
+              btn.setAttribute("data-id", p.id);
+              btn.setAttribute("data-rate", String(p.price));
+              btn.setAttribute("data-name", p.name_en);
+              btn.setAttribute("data-ml", p.name_ml || p.name_en);
+              btn.setAttribute("data-deity", p.deity_name);
+            }
+          } else {
+            const deitySlug = mapDeityToSlug(p.deity_name);
+            const deityTitle = getDeityTitle(p.deity_name);
+            const cardEl = document.createElement("div");
+            cardEl.className = "offering-card p-6 rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group";
+            cardEl.setAttribute("data-deity", deitySlug);
+            cardEl.innerHTML = `
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[11px] uppercase tracking-wider font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                    ${deityTitle}
+                  </span>
+                  <span class="rate-display text-lg font-serif font-black text-amber-800">
+                    ₹${p.price}
+                  </span>
+                </div>
+
+                <h3 class="text-xl font-malayalam font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
+                  ${p.name_ml || p.name_en}
+                </h3>
+                <p class="text-xs font-serif text-stone-600 mb-3">${p.name_en}</p>
+
+                <p class="text-xs font-malayalam text-stone-700 leading-relaxed mb-4">
+                  ഭക്തന്റെ പേരും നക്ഷത്രവും സങ്കൽപ്പിച്ച് തിരുമാറാടി ക്ഷേത്രത്തിൽ നടത്തുന്ന വിശേഷാൽ പൂജ.
+                </p>
+
+                <div class="p-3 rounded-xl bg-amber-50/80 border border-amber-200/70 text-xs text-amber-950 leading-relaxed">
+                  <strong class="font-bold text-amber-900 block mb-0.5">ആത്മീയ ഫലം:</strong>
+                  <p class="font-malayalam text-stone-800">ആയുരാരോഗ്യ സൗഖ്യം, ഐശ്വര്യം, സർവ്വാഭീഷ്ടസിദ്ധി.</p>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between">
+                <span class="text-[11px] text-stone-400">Prasad Available</span>
+                <button
+                  class="select-offering-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 hover:bg-amber-600 text-stone-950 transition-colors"
+                  data-id="${p.id}"
+                  data-name="${p.name_en}"
+                  data-ml="${p.name_ml || p.name_en}"
+                  data-rate="${p.price}"
+                  data-deity="${p.deity_name}"
+                >
+                  + Select Offering
+                </button>
+              </div>
+            `;
+            grid.appendChild(cardEl);
+          }
+        });
+
+        attachCardListeners();
+        const activeTarget = document.querySelector(".vazhipadu-tab-btn.active")?.getAttribute("data-target") || "all";
+        applyDeityFilter(activeTarget);
+      }
+    } catch (e) {
+      console.warn("Using fallback static offerings:", e);
+    }
+  }
+
+  // Attach click listeners to cards
+  function attachCardListeners() {
+    document.querySelectorAll(".select-offering-btn").forEach(btn => {
+      const el = btn as HTMLElement;
+      if (el.dataset.listenerAttached === "true") return;
+      el.dataset.listenerAttached = "true";
+
+      el.addEventListener("click", () => {
+        const id = el.getAttribute("data-id") || "";
+        const name = el.getAttribute("data-name") || "";
+        const ml = el.getAttribute("data-ml") || "";
+        const rate = parseFloat(el.getAttribute("data-rate") || "0");
+        const deity = el.getAttribute("data-deity") || "Shiva";
+
+        cart.push({ id, name, ml, rate, deity });
+        updateCartUI();
+
+        // Visual button feedback
+        const originalText = el.innerHTML;
+        el.innerHTML = "✓ Added!";
+        el.classList.add("bg-emerald-500", "text-white");
+        el.classList.remove("bg-amber-500", "text-stone-950");
+        setTimeout(() => {
+          el.innerHTML = originalText;
+          el.classList.remove("bg-emerald-500", "text-white");
+          el.classList.add("bg-amber-500", "text-stone-950");
+        }, 1200);
+
+        // Scroll to booking form
+        document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+  }
+
+  // Initial attach and live sync
+  attachCardListeners();
+  syncLiveOfferings();
 
   // Toggle postal address field
   deliveryRadios.forEach(radio => {
@@ -786,34 +986,6 @@ const serpentOfferings = VAZHIPADU_OFFERINGS.filter(v => v.deity === "serpent");
     const today = new Date().toISOString().split("T")[0];
     offeringDateInput.min = today;
   }
-
-  // Add from cards
-  document.querySelectorAll(".select-offering-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-id") || "";
-      const name = btn.getAttribute("data-name") || "";
-      const ml = btn.getAttribute("data-ml") || "";
-      const rate = parseInt(btn.getAttribute("data-rate") || "0");
-      const deity = btn.getAttribute("data-deity") || "Shiva";
-
-      cart.push({ id, name, ml, rate, deity });
-      updateCartUI();
-
-      // Visual button feedback
-      const originalText = btn.innerHTML;
-      btn.innerHTML = "✓ Added!";
-      btn.classList.add("bg-emerald-500", "text-white");
-      btn.classList.remove("bg-amber-500", "text-stone-950");
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.classList.remove("bg-emerald-500", "text-white");
-        btn.classList.add("bg-amber-500", "text-stone-950");
-      }, 1200);
-
-      // Scroll to booking form
-      document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
-    });
-  });
 
   // Modal elements
   const upiModal = document.getElementById("upi-modal");

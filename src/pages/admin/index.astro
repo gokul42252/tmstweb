@@ -301,8 +301,57 @@ import "../../assets/styles/global.css";
         </div>
       </header>
 
+      <!-- Admin Portal Navigation Tabs -->
+      <nav class="no-print bg-stone-900 border-b border-stone-800 text-stone-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between py-2 overflow-x-auto">
+            <!-- Navigation Tabs -->
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button
+                id="tab-btn-billing"
+                type="button"
+                class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all bg-amber-500 text-stone-950 shadow-sm"
+              >
+                <span>📊</span>
+                <span>Billing & Accounts (കളക്ഷൻ & അക്കൗണ്ട്സ്)</span>
+              </button>
+
+              <button
+                id="tab-btn-poojas"
+                type="button"
+                class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white"
+              >
+                <span>🔱</span>
+                <span>Pooja Catalog (പൂജാ ക്രമീകരണങ്ങൾ)</span>
+                <span id="nav-pooja-count-badge" class="ml-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-stone-950 text-amber-400 border border-stone-700">12</span>
+              </button>
+            </div>
+
+            <!-- Right: Tab contextual info / actions -->
+            <div class="hidden md:flex items-center gap-3 text-xs flex-shrink-0">
+              <div id="billing-nav-actions" class="flex items-center gap-2">
+                <span class="text-stone-400">Counters:</span>
+                <span class="px-2 py-0.5 rounded bg-stone-800 text-emerald-400 font-mono font-bold border border-stone-700">COUNTER-01</span>
+                <span class="px-2 py-0.5 rounded bg-stone-800 text-blue-400 font-mono font-bold border border-stone-700">ONLINE</span>
+              </div>
+              <div id="pooja-nav-actions" class="hidden items-center gap-2">
+                <span class="text-emerald-400 font-semibold flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Supabase Catalog Live</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       <!-- Main Dashboard Content Area -->
       <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <!-- ===================================================================== -->
+        <!-- TAB 1: BILLING & FINANCIAL ACCOUNTS (Existing Dashboard View) -->
+        <!-- ===================================================================== -->
+        <div id="tab-content-billing" class="space-y-6">
 
         <!-- ===================================================================== -->
         <!-- FILTER TOOLBAR (Quick Presets, Date Inputs, Counter, Payment, Search) -->
@@ -722,6 +771,233 @@ import "../../assets/styles/global.css";
 
         </section>
 
+        </div>
+        <!-- END OF TAB 1: BILLING & FINANCIAL ACCOUNTS -->
+
+        <!-- ===================================================================== -->
+        <!-- TAB 2: POOJA & VAZHIPADU CATALOG MANAGEMENT SECTION -->
+        <!-- ===================================================================== -->
+        <div id="tab-content-poojas" class="space-y-6 hidden">
+
+          <!-- 1. Pooja Management Banner -->
+          <section class="bg-gradient-to-r from-stone-900 via-stone-850 to-amber-950 rounded-2xl p-5 sm:p-6 text-white border border-stone-800 shadow-md">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-2xl">🔱</span>
+                  <h2 class="text-lg sm:text-xl font-serif font-black text-amber-400">
+                    Pooja & Vazhipadu Catalog (പൂജാ വഴിപാടുകൾ & നിരക്കുകൾ)
+                  </h2>
+                </div>
+                <p class="text-xs sm:text-sm text-stone-300 max-w-2xl font-light">
+                  Add new offerings, update existing rates or deity assignments, and toggle visibility. All changes immediately sync with counter billing machines and the online booking portal.
+                </p>
+              </div>
+
+              <!-- Top Action Buttons -->
+              <div class="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+                <button
+                  id="btn-refresh-poojas"
+                  type="button"
+                  title="Reload poojas from Supabase"
+                  class="px-3 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-amber-300 font-bold text-xs transition-colors flex items-center gap-1.5"
+                >
+                  <span id="refresh-poojas-icon" class="inline-block transition-transform">🔄</span>
+                  <span>Refresh List</span>
+                </button>
+
+                <button
+                  id="btn-export-pooja-catalog"
+                  type="button"
+                  title="Export rate list to Excel (.xlsx)"
+                  class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+                >
+                  <span>📥</span>
+                  <span>Export Rate Card</span>
+                </button>
+
+                <button
+                  id="btn-open-add-pooja-modal"
+                  type="button"
+                  class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-xs sm:text-sm flex items-center gap-2 transition-transform active:scale-95 shadow-md"
+                >
+                  <span>➕</span>
+                  <span>Add New Pooja (പുതിയ പൂജ)</span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Pooja KPI Stat Cards -->
+          <section class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+            <!-- Total Offerings -->
+            <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex items-center justify-between">
+              <div>
+                <p class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Total Offerings</p>
+                <p id="pooja-kpi-total" class="text-xl sm:text-2xl font-serif font-black text-stone-900 mt-0.5">0</p>
+                <p class="text-[10px] text-stone-400 mt-0.5">ആകെ വഴിപാടുകൾ</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-lg text-amber-700">
+                📜
+              </div>
+            </div>
+
+            <!-- Active in Counters -->
+            <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex items-center justify-between">
+              <div>
+                <p class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Active in Billing</p>
+                <p id="pooja-kpi-active" class="text-xl sm:text-2xl font-serif font-black text-emerald-800 mt-0.5">0</p>
+                <p class="text-[10px] text-emerald-600 mt-0.5 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>സജീവമായവ</span>
+                </p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-lg text-emerald-700">
+                ✅
+              </div>
+            </div>
+
+            <!-- Inactive / Archived -->
+            <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex items-center justify-between">
+              <div>
+                <p class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Inactive / Hidden</p>
+                <p id="pooja-kpi-inactive" class="text-xl sm:text-2xl font-serif font-black text-stone-600 mt-0.5">0</p>
+                <p class="text-[10px] text-stone-400 mt-0.5">നിർജ്ജീവം</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-stone-100 border border-stone-200 flex items-center justify-center text-lg text-stone-500">
+                ⏸️
+              </div>
+            </div>
+
+            <!-- Deities Represented -->
+            <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex items-center justify-between">
+              <div>
+                <p class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Deities Represented</p>
+                <p id="pooja-kpi-deities" class="text-xl sm:text-2xl font-serif font-black text-stone-900 mt-0.5">0</p>
+                <p class="text-[10px] text-stone-400 mt-0.5">പ്രതിഷ്ഠകൾ</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center text-lg text-orange-700">
+                🪔
+              </div>
+            </div>
+
+            <!-- Price Range -->
+            <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex items-center justify-between col-span-2 sm:col-span-1">
+              <div>
+                <p class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Rate Range</p>
+                <p id="pooja-kpi-range" class="text-xs sm:text-sm font-serif font-black text-stone-900 mt-1 font-mono">₹0 - ₹0</p>
+                <p class="text-[10px] text-stone-400 mt-0.5">നിരക്കുകൾ</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-lg text-blue-700">
+                🏷️
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. Search & Filter Bar -->
+          <section class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm space-y-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <!-- Search Input -->
+              <div class="lg:col-span-2">
+                <label for="pooja-search-input" class="block text-[11px] font-bold text-stone-600 uppercase mb-1">
+                  Search Offerings (തിരയുക)
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="pooja-search-input"
+                    placeholder="Search by code (e.g. 101), English name, or Malayalam name..."
+                    class="w-full pl-9 pr-4 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  />
+                  <span class="absolute left-3 top-2.5 text-stone-400 text-xs">🔍</span>
+                </div>
+              </div>
+
+              <!-- Deity Filter -->
+              <div>
+                <label for="pooja-deity-filter" class="block text-[11px] font-bold text-stone-600 uppercase mb-1">
+                  Filter by Deity (പ്രതിഷ്ഠ)
+                </label>
+                <select
+                  id="pooja-deity-filter"
+                  class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  <option value="ALL">All Deities (എല്ലാ പ്രതിഷ്ഠകളും)</option>
+                  <option value="Shiva">🔱 Lord Shiva (ശ്രീ മഹാദേവൻ)</option>
+                  <option value="Parvathi">🌸 Goddess Parvathi (ശ്രീ പാർവ്വതി)</option>
+                  <option value="Ganapathy">🐘 Lord Ganapathy (ഗണപതി)</option>
+                  <option value="Sastha">🏹 Lord Sastha / Ayyappan (ശാസ്താവ്)</option>
+                  <option value="Subrahmanian">🦚 Lord Subrahmanian (സുബ്രഹ്മണ്യൻ)</option>
+                  <option value="Nagaraja">🐍 Nagaraja & Nagas (നാഗങ്ങൾ)</option>
+                  <option value="OTHER">Other / General Offerings</option>
+                </select>
+              </div>
+
+              <!-- Status Filter -->
+              <div>
+                <label for="pooja-status-filter" class="block text-[11px] font-bold text-stone-600 uppercase mb-1">
+                  Status (ലഭ്യത)
+                </label>
+                <select
+                  id="pooja-status-filter"
+                  class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  <option value="ALL">All Statuses (എല്ലാം)</option>
+                  <option value="ACTIVE">🟢 Active Only (സജീവം)</option>
+                  <option value="INACTIVE">⚪ Inactive / Hidden (നിർജ്ജീവം)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Matches count and quick sort -->
+            <div class="flex items-center justify-between pt-2 border-t border-stone-100 text-xs">
+              <div class="text-stone-500">
+                Showing <strong id="pooja-filtered-count" class="text-stone-800">0</strong> of <span id="pooja-total-count">0</span> poojas
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-stone-400 text-[11px]">Sort By:</span>
+                <select
+                  id="pooja-sort-by"
+                  class="px-2 py-1 rounded-lg border border-stone-300 text-xs text-stone-700 bg-white focus:outline-none"
+                >
+                  <option value="code-asc">Code (Ascending)</option>
+                  <option value="code-desc">Code (Descending)</option>
+                  <option value="price-asc">Price (Low to High)</option>
+                  <option value="price-desc">Price (High to Low)</option>
+                  <option value="name-asc">Name (A-Z)</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Pooja Catalog Table -->
+          <section class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table id="poojas-table" class="w-full text-left text-xs text-stone-700">
+                <thead class="bg-stone-50 border-b border-stone-200 text-stone-600 font-bold uppercase tracking-wider text-[10px]">
+                  <tr>
+                    <th class="p-3.5 text-center w-16">Code</th>
+                    <th class="p-3.5">Offering Name (വഴിപാടിന്റെ പേര്)</th>
+                    <th class="p-3.5">Presiding Deity (പ്രതിഷ്ഠ)</th>
+                    <th class="p-3.5 text-right">Rate / Price (നിരക്ക്)</th>
+                    <th class="p-3.5 text-center">Status</th>
+                    <th class="p-3.5 text-right w-44">Actions (ക്രമീകരണങ്ങൾ)</th>
+                  </tr>
+                </thead>
+                <tbody id="poojas-table-body" class="divide-y divide-stone-100">
+                  <tr>
+                    <td colspan="6" class="p-8 text-center text-stone-400">
+                      Loading poojas from Supabase...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+        </div>
+        <!-- END OF TAB 2: POOJA & VAZHIPADU CATALOG -->
+
       </main>
 
       <!-- Footer for Admin Portal -->
@@ -729,6 +1005,371 @@ import "../../assets/styles/global.css";
         <p>Thirumarady Sri Mahadeva Temple Billing Admin Portal • Protected Cloud Gateway • Supabase Connected</p>
       </footer>
     </div>
+
+    <!-- ========================================================================= -->
+    <!-- 4. MODALS FOR POOJA MANAGEMENT -->
+    <!-- ========================================================================= -->
+
+    <!-- Add Pooja Modal -->
+    <div id="modal-add-pooja" class="fixed inset-0 z-50 bg-stone-950/75 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+      <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-stone-200 relative my-8">
+        <!-- Close button -->
+        <button
+          type="button"
+          class="modal-close-btn absolute top-4 right-4 text-stone-400 hover:text-stone-700 p-1 rounded-lg"
+          data-modal="modal-add-pooja"
+        >
+          ✕
+        </button>
+
+        <div class="flex items-center space-x-3 pb-4 border-b border-stone-100 mb-5">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-xl">
+            🔱
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-stone-900">Add New Pooja / Offering</h3>
+            <p class="text-xs text-stone-500">പുതിയ പൂജ / വഴിപാട് ഡാറ്റാബേസിൽ ചേർക്കുക</p>
+          </div>
+        </div>
+
+        <form id="form-add-pooja" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label for="add-pooja-code" class="block text-xs font-bold text-stone-700 mb-1">
+                Pooja Code *
+              </label>
+              <input
+                type="text"
+                id="add-pooja-code"
+                required
+                placeholder="e.g. 113"
+                class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs font-mono font-bold text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+              <span class="text-[10px] text-stone-400">Unique counter code</span>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="add-pooja-name-en" class="block text-xs font-bold text-stone-700 mb-1">
+                Offering Name (English) *
+              </label>
+              <input
+                type="text"
+                id="add-pooja-name-en"
+                required
+                placeholder="e.g. Maha Mrityunjaya Homam"
+                class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="add-pooja-name-ml" class="block text-xs font-bold text-stone-700 mb-1">
+              Offering Name in Malayalam (മലയാളം പേര്)
+            </label>
+            <input
+              type="text"
+              id="add-pooja-name-ml"
+              placeholder="e.g. മഹാ മൃത്യുഞ്ജയ ഹോമം"
+              class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 font-malayalam focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="add-pooja-deity" class="block text-xs font-bold text-stone-700 mb-1">
+                Presiding Deity (പ്രതിഷ്ഠ) *
+              </label>
+              <select
+                id="add-pooja-deity"
+                required
+                class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+              >
+                <option value="Shiva">🔱 Shiva (ശ്രീ മഹാദേവൻ)</option>
+                <option value="Parvathi">🌸 Parvathi (ശ്രീ പാർവ്വതി)</option>
+                <option value="Ganapathy">🐘 Ganapathy (ഗണപതി)</option>
+                <option value="Sastha">🏹 Sastha / Ayyappan (ശാസ്താവ്)</option>
+                <option value="Subrahmanian">🦚 Subrahmanian (സുബ്രഹ്മണ്യൻ)</option>
+                <option value="Nagaraja">🐍 Nagaraja & Nagas (നാഗങ്ങൾ)</option>
+                <option value="General">General / All Deities (പൊതുവായത്)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="add-pooja-price" class="block text-xs font-bold text-stone-700 mb-1">
+                Rate / Price (₹) *
+              </label>
+              <div class="relative">
+                <span class="absolute left-3 top-2 text-stone-500 font-bold text-xs">₹</span>
+                <input
+                  type="number"
+                  id="add-pooja-price"
+                  required
+                  min="1"
+                  step="1"
+                  placeholder="50"
+                  class="w-full pl-7 pr-3 py-2 rounded-xl border border-stone-300 text-xs font-bold text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Active checkbox -->
+          <div class="pt-1">
+            <label class="inline-flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                id="add-pooja-active"
+                checked
+                class="w-4 h-4 text-amber-600 rounded border-stone-300 focus:ring-amber-500"
+              />
+              <span class="text-xs text-stone-700 font-medium">
+                Active immediately for counter billing and online booking
+              </span>
+            </label>
+          </div>
+
+          <div id="add-pooja-error" class="hidden p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200">
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center justify-end gap-2 pt-4 border-t border-stone-100">
+            <button
+              type="button"
+              class="modal-close-btn px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold"
+              data-modal="modal-add-pooja"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              id="btn-submit-add-pooja"
+              class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-xs flex items-center gap-2 shadow-sm transition-transform active:scale-95"
+            >
+              <span>💾</span>
+              <span>Save & Publish Pooja</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit / Modify Pooja Modal -->
+    <div id="modal-edit-pooja" class="fixed inset-0 z-50 bg-stone-950/75 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+      <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-stone-200 relative my-8">
+        <!-- Close button -->
+        <button
+          type="button"
+          class="modal-close-btn absolute top-4 right-4 text-stone-400 hover:text-stone-700 p-1 rounded-lg"
+          data-modal="modal-edit-pooja"
+        >
+          ✕
+        </button>
+
+        <div class="flex items-center space-x-3 pb-4 border-b border-stone-100 mb-5">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-xl">
+            ✏️
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-stone-900">Modify Pooja / Offering</h3>
+            <p class="text-xs text-stone-500">വഴിപാട് വിവരങ്ങളും നിരക്കും തിരുത്തുക</p>
+          </div>
+        </div>
+
+        <form id="form-edit-pooja" class="space-y-4">
+          <input type="hidden" id="edit-pooja-id" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label for="edit-pooja-code" class="block text-xs font-bold text-stone-700 mb-1">
+                Pooja Code *
+              </label>
+              <input
+                type="text"
+                id="edit-pooja-code"
+                required
+                class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs font-mono font-bold text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="edit-pooja-name-en" class="block text-xs font-bold text-stone-700 mb-1">
+                Offering Name (English) *
+              </label>
+              <input
+                type="text"
+                id="edit-pooja-name-en"
+                required
+                class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="edit-pooja-name-ml" class="block text-xs font-bold text-stone-700 mb-1">
+              Offering Name in Malayalam (മലയാളം പേര്)
+            </label>
+            <input
+              type="text"
+              id="edit-pooja-name-ml"
+              class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 font-malayalam focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="edit-pooja-deity" class="block text-xs font-bold text-stone-700 mb-1">
+                Presiding Deity (പ്രതിഷ്ഠ) *
+              </label>
+              <select
+                id="edit-pooja-deity"
+                required
+                class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-stone-900 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+              >
+                <option value="Shiva">🔱 Shiva (ശ്രീ മഹാദേവൻ)</option>
+                <option value="Parvathi">🌸 Parvathi (ശ്രീ പാർവ്വതി)</option>
+                <option value="Ganapathy">🐘 Ganapathy (ഗണപതി)</option>
+                <option value="Sastha">🏹 Sastha / Ayyappan (ശാസ്താവ്)</option>
+                <option value="Subrahmanian">🦚 Subrahmanian (സുബ്രഹ്മണ്യൻ)</option>
+                <option value="Nagaraja">🐍 Nagaraja & Nagas (നാഗങ്ങൾ)</option>
+                <option value="General">General / All Deities (പൊതുവായത്)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="edit-pooja-price" class="block text-xs font-bold text-stone-700 mb-1">
+                Rate / Price (₹) *
+              </label>
+              <div class="relative">
+                <span class="absolute left-3 top-2 text-stone-500 font-bold text-xs">₹</span>
+                <input
+                  type="number"
+                  id="edit-pooja-price"
+                  required
+                  min="1"
+                  step="1"
+                  class="w-full pl-7 pr-3 py-2 rounded-xl border border-stone-300 text-xs font-bold text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Active checkbox -->
+          <div class="pt-1">
+            <label class="inline-flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                id="edit-pooja-active"
+                class="w-4 h-4 text-amber-600 rounded border-stone-300 focus:ring-amber-500"
+              />
+              <span class="text-xs text-stone-700 font-medium">
+                Active for counter billing and online booking
+              </span>
+            </label>
+          </div>
+
+          <div id="edit-pooja-error" class="hidden p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200">
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center justify-end gap-2 pt-4 border-t border-stone-100">
+            <button
+              type="button"
+              class="modal-close-btn px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold"
+              data-modal="modal-edit-pooja"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              id="btn-submit-edit-pooja"
+              class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-xs flex items-center gap-2 shadow-sm transition-transform active:scale-95"
+            >
+              <span>💾</span>
+              <span>Update Offering Details</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete / Deactivate Confirmation Modal -->
+    <div id="modal-delete-pooja" class="fixed inset-0 z-50 bg-stone-950/75 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+      <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200 relative my-8">
+        <button
+          type="button"
+          class="modal-close-btn absolute top-4 right-4 text-stone-400 hover:text-stone-700 p-1 rounded-lg"
+          data-modal="modal-delete-pooja"
+        >
+          ✕
+        </button>
+
+        <div class="text-center space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-2xl mx-auto">
+            🗑️
+          </div>
+          <h3 class="font-serif font-bold text-lg text-stone-900">Remove Pooja / Offering</h3>
+          <p class="text-xs text-stone-500">
+            Choose whether to safely deactivate this offering or permanently remove it.
+          </p>
+        </div>
+
+        <div class="p-3.5 my-4 rounded-xl bg-stone-50 border border-stone-200 text-xs space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-stone-500">Pooja Code:</span>
+            <span id="del-pooja-code" class="font-mono font-bold text-stone-800">#101</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-stone-500">Offering:</span>
+            <span id="del-pooja-name" class="font-bold text-stone-900">Jala Dhara</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-stone-500">Deity:</span>
+            <span id="del-pooja-deity" class="text-stone-700">Shiva</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-stone-500">Rate:</span>
+            <span id="del-pooja-rate" class="font-bold text-amber-700">₹30</span>
+          </div>
+        </div>
+
+        <input type="hidden" id="del-pooja-id" />
+
+        <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-[11px] text-amber-900 mb-5 leading-relaxed">
+          <p><strong>💡 Recommendation:</strong> Deactivating preserves past accounting receipts and historical audit logs while removing it from counter screens.</p>
+        </div>
+
+        <div class="space-y-2">
+          <button
+            type="button"
+            id="btn-confirm-deactivate-pooja"
+            class="w-full py-2.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-amber-300 font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
+          >
+            <span>⏸️</span>
+            <span>Deactivate Only (നിർജ്ജീവമാക്കുക - ശുപാർശ ചെയ്യുന്നത്)</span>
+          </button>
+
+          <button
+            type="button"
+            id="btn-confirm-permanent-delete-pooja"
+            class="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
+          >
+            <span>🗑️</span>
+            <span>Permanently Delete from Database (പൂർണ്ണമായി നീക്കുക)</span>
+          </button>
+
+          <button
+            type="button"
+            class="modal-close-btn w-full py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 text-xs font-semibold transition-colors"
+            data-modal="modal-delete-pooja"
+          >
+            Cancel (റദ്ദാക്കുക)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none max-w-sm w-full"></div>
 
     <!-- ========================================================================= -->
     <!-- 3. OFFICIAL PRINTABLE AUDIT REPORT (Triggered on Print / PDF Export) -->
@@ -853,7 +1494,18 @@ import "../../assets/styles/global.css";
 
     <!-- Client-side Logic Script -->
     <script>
-      import { supabase, authenticateStaff, type Bill, type BillItem, type StaffUser } from "../../lib/supabaseClient";
+      import {
+        supabase,
+        authenticateStaff,
+        fetchPoojas,
+        createPooja,
+        updatePooja,
+        deletePooja,
+        type Bill,
+        type BillItem,
+        type StaffUser,
+        type Pooja
+      } from "../../lib/supabaseClient";
       import { Chart, registerables } from "chart.js";
       import * as XLSX from "xlsx";
 
@@ -866,6 +1518,12 @@ import "../../assets/styles/global.css";
       let currentPage = 1;
       const pageSize = 15;
 
+      // Pooja Catalog State
+      let allPoojas: Pooja[] = [];
+      let filteredPoojas: Pooja[] = [];
+      let currentTab: "billing" | "poojas" = "billing";
+      let deletingPoojaTarget: Pooja | null = null;
+
       // Chart Instances
       let chartDaily: Chart | null = null;
       let chartPayment: Chart | null = null;
@@ -874,7 +1532,7 @@ import "../../assets/styles/global.css";
       let chartHourly: Chart | null = null;
       let chartStars: Chart | null = null;
 
-      // DOM Elements
+      // DOM Elements - Auth & Core
       const loginContainer = document.getElementById("login-container");
       const dashboardContainer = document.getElementById("dashboard-container");
       const loginForm = document.getElementById("admin-login-form");
@@ -887,6 +1545,16 @@ import "../../assets/styles/global.css";
       const btnExportExcel = document.getElementById("btn-export-excel");
       const btnExportPdf = document.getElementById("btn-export-pdf");
 
+      // DOM Elements - Tab Navigation
+      const tabBtnBilling = document.getElementById("tab-btn-billing");
+      const tabBtnPoojas = document.getElementById("tab-btn-poojas");
+      const tabContentBilling = document.getElementById("tab-content-billing");
+      const tabContentPoojas = document.getElementById("tab-content-poojas");
+      const billingNavActions = document.getElementById("billing-nav-actions");
+      const poojaNavActions = document.getElementById("pooja-nav-actions");
+      const navPoojaCountBadge = document.getElementById("nav-pooja-count-badge");
+
+      // DOM Elements - Billing Filters & Table
       const filterDateFrom = document.getElementById("filter-date-from") as HTMLInputElement;
       const filterDateTo = document.getElementById("filter-date-to") as HTMLInputElement;
       const filterCounter = document.getElementById("filter-counter") as HTMLSelectElement;
@@ -901,6 +1569,34 @@ import "../../assets/styles/global.css";
       const btnNextPage = document.getElementById("btn-next-page") as HTMLButtonElement;
       const currentPageNum = document.getElementById("current-page-num");
       const paginationInfo = document.getElementById("table-pagination-info");
+
+      // DOM Elements - Pooja Management
+      const poojaSearchInput = document.getElementById("pooja-search-input") as HTMLInputElement;
+      const poojaDeityFilter = document.getElementById("pooja-deity-filter") as HTMLSelectElement;
+      const poojaStatusFilter = document.getElementById("pooja-status-filter") as HTMLSelectElement;
+      const poojaSortBy = document.getElementById("pooja-sort-by") as HTMLSelectElement;
+      const poojasTableBody = document.getElementById("poojas-table-body");
+      const poojaFilteredCount = document.getElementById("pooja-filtered-count");
+      const poojaTotalCount = document.getElementById("pooja-total-count");
+
+      const poojaKpiTotal = document.getElementById("pooja-kpi-total");
+      const poojaKpiActive = document.getElementById("pooja-kpi-active");
+      const poojaKpiInactive = document.getElementById("pooja-kpi-inactive");
+      const poojaKpiDeities = document.getElementById("pooja-kpi-deities");
+      const poojaKpiRange = document.getElementById("pooja-kpi-range");
+
+      const btnRefreshPoojas = document.getElementById("btn-refresh-poojas");
+      const btnExportPoojaCatalog = document.getElementById("btn-export-pooja-catalog");
+      const btnOpenAddPoojaModal = document.getElementById("btn-open-add-pooja-modal");
+
+      // DOM Elements - Modals
+      const modalAddPooja = document.getElementById("modal-add-pooja");
+      const modalEditPooja = document.getElementById("modal-edit-pooja");
+      const modalDeletePooja = document.getElementById("modal-delete-pooja");
+      const formAddPooja = document.getElementById("form-add-pooja") as HTMLFormElement;
+      const formEditPooja = document.getElementById("form-edit-pooja") as HTMLFormElement;
+      const btnConfirmDeactivatePooja = document.getElementById("btn-confirm-deactivate-pooja");
+      const btnConfirmPermanentDeletePooja = document.getElementById("btn-confirm-permanent-delete-pooja");
 
       // Set default dates (Today)
       const todayStr = new Date().toISOString().split("T")[0];
@@ -944,6 +1640,7 @@ import "../../assets/styles/global.css";
         }
 
         fetchBillsData();
+        loadPoojasData();
         setupRealtimeSubscription();
       }
 
@@ -1915,6 +2612,595 @@ import "../../assets/styles/global.css";
           printReceiptsBody.innerHTML = receiptsHtml || `<tr><td colspan="8" class="p-3 text-center text-stone-500">No receipts found for selected period.</td></tr>`;
         }
       }
+
+      // ============================================================================
+      // POOJA & VAZHIPADU CATALOG MANAGEMENT LOGIC
+      // ============================================================================
+
+      function showToast(message: string, type: "success" | "error" | "info" = "success") {
+        const container = document.getElementById("toast-container");
+        if (!container) return;
+        const toast = document.createElement("div");
+        toast.className = `pointer-events-auto p-3.5 rounded-xl text-xs font-semibold shadow-2xl border flex items-center gap-2.5 transition-all transform duration-200 ${
+          type === "success"
+            ? "bg-stone-900 text-emerald-300 border-emerald-500/50"
+            : type === "error"
+            ? "bg-red-950 text-red-200 border-red-500/50"
+            : "bg-stone-900 text-amber-300 border-amber-500/50"
+        }`;
+        const icon = type === "success" ? "✅" : type === "error" ? "❌" : "ℹ️";
+        toast.innerHTML = `<span class="text-base">${icon}</span><span class="flex-1">${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.classList.add("opacity-0", "translate-y-2");
+          setTimeout(() => toast.remove(), 300);
+        }, 4000);
+      }
+
+      function switchTab(tab: "billing" | "poojas") {
+        currentTab = tab;
+        if (tab === "billing") {
+          tabContentBilling?.classList.remove("hidden");
+          tabContentPoojas?.classList.add("hidden");
+
+          tabBtnBilling?.classList.add("bg-amber-500", "text-stone-950", "shadow-sm");
+          tabBtnBilling?.classList.remove("bg-stone-800", "text-stone-300");
+
+          tabBtnPoojas?.classList.add("bg-stone-800", "text-stone-300");
+          tabBtnPoojas?.classList.remove("bg-amber-500", "text-stone-950", "shadow-sm");
+
+          billingNavActions?.classList.remove("hidden");
+          billingNavActions?.classList.add("flex");
+          poojaNavActions?.classList.add("hidden");
+          poojaNavActions?.classList.remove("flex");
+        } else {
+          tabContentBilling?.classList.add("hidden");
+          tabContentPoojas?.classList.remove("hidden");
+
+          tabBtnPoojas?.classList.add("bg-amber-500", "text-stone-950", "shadow-sm");
+          tabBtnPoojas?.classList.remove("bg-stone-800", "text-stone-300");
+
+          tabBtnBilling?.classList.add("bg-stone-800", "text-stone-300");
+          tabBtnBilling?.classList.remove("bg-amber-500", "text-stone-950", "shadow-sm");
+
+          billingNavActions?.classList.add("hidden");
+          billingNavActions?.classList.remove("flex");
+          poojaNavActions?.classList.remove("hidden");
+          poojaNavActions?.classList.add("flex");
+
+          if (allPoojas.length === 0) {
+            loadPoojasData();
+          }
+        }
+      }
+
+      tabBtnBilling?.addEventListener("click", () => switchTab("billing"));
+      tabBtnPoojas?.addEventListener("click", () => switchTab("poojas"));
+
+      async function loadPoojasData() {
+        const icon = document.getElementById("refresh-poojas-icon");
+        if (icon) icon.classList.add("animate-spin");
+
+        const res = await fetchPoojas();
+        if (icon) icon.classList.remove("animate-spin");
+
+        if (res.success && res.data) {
+          allPoojas = res.data;
+          updatePoojaStats();
+          applyPoojaFilters();
+        } else {
+          showToast(res.error || "Failed to load poojas from database.", "error");
+        }
+      }
+
+      function updatePoojaStats() {
+        const total = allPoojas.length;
+        const active = allPoojas.filter(p => p.is_active).length;
+        const inactive = total - active;
+        const deities = new Set(allPoojas.map(p => p.deity_name.trim())).size;
+
+        let minRate = 0;
+        let maxRate = 0;
+        if (total > 0) {
+          const prices = allPoojas.map(p => Number(p.price) || 0);
+          minRate = Math.min(...prices);
+          maxRate = Math.max(...prices);
+        }
+
+        if (poojaKpiTotal) poojaKpiTotal.textContent = String(total);
+        if (poojaKpiActive) poojaKpiActive.textContent = String(active);
+        if (poojaKpiInactive) poojaKpiInactive.textContent = String(inactive);
+        if (poojaKpiDeities) poojaKpiDeities.textContent = String(deities);
+        if (poojaKpiRange) poojaKpiRange.textContent = total > 0 ? `₹${minRate} - ₹${maxRate}` : "₹0";
+
+        if (navPoojaCountBadge) navPoojaCountBadge.textContent = String(total);
+        if (poojaTotalCount) poojaTotalCount.textContent = String(total);
+      }
+
+      function applyPoojaFilters() {
+        const searchTerm = (poojaSearchInput?.value || "").toLowerCase().trim();
+        const deityVal = poojaDeityFilter?.value || "ALL";
+        const statusVal = poojaStatusFilter?.value || "ALL";
+        const sortBy = poojaSortBy?.value || "code-asc";
+
+        filteredPoojas = allPoojas.filter(p => {
+          if (searchTerm) {
+            const matchCode = (p.code || "").toLowerCase().includes(searchTerm);
+            const matchEn = (p.name_en || "").toLowerCase().includes(searchTerm);
+            const matchMl = (p.name_ml || "").toLowerCase().includes(searchTerm);
+            const matchDeity = (p.deity_name || "").toLowerCase().includes(searchTerm);
+            if (!matchCode && !matchEn && !matchMl && !matchDeity) return false;
+          }
+
+          if (deityVal !== "ALL") {
+            if (deityVal === "OTHER") {
+              const standard = ["shiva", "parvathi", "ganapathy", "sastha", "subrahmanian", "nagaraja"];
+              if (standard.includes(p.deity_name.toLowerCase())) return false;
+            } else {
+              if (p.deity_name.toLowerCase() !== deityVal.toLowerCase()) return false;
+            }
+          }
+
+          if (statusVal === "ACTIVE" && !p.is_active) return false;
+          if (statusVal === "INACTIVE" && p.is_active) return false;
+
+          return true;
+        });
+
+        filteredPoojas.sort((a, b) => {
+          if (sortBy === "code-asc") return (parseInt(a.code) || 0) - (parseInt(b.code) || 0);
+          if (sortBy === "code-desc") return (parseInt(b.code) || 0) - (parseInt(a.code) || 0);
+          if (sortBy === "price-asc") return Number(a.price) - Number(b.price);
+          if (sortBy === "price-desc") return Number(b.price) - Number(a.price);
+          if (sortBy === "name-asc") return a.name_en.localeCompare(b.name_en);
+          return 0;
+        });
+
+        if (poojaFilteredCount) poojaFilteredCount.textContent = String(filteredPoojas.length);
+
+        renderPoojasTable();
+      }
+
+      function getDeityBadge(deity: string) {
+        const d = (deity || "").toLowerCase();
+        if (d.includes("shiva")) {
+          return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">🔱 Shiva (ശിവൻ)</span>`;
+        } else if (d.includes("parvath") || d.includes("devi") || d.includes("bhagavathi")) {
+          return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-800 border border-rose-200">🌸 Parvathi (പാർവ്വതി)</span>`;
+        } else if (d.includes("ganapath") || d.includes("vinayak") || d.includes("vigneswara")) {
+          return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-900 border border-amber-200">🐘 Ganapathy (ഗണപതി)</span>`;
+        } else if (d.includes("sastha") || d.includes("ayyappan") || d.includes("dharmasastha")) {
+          return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-50 text-orange-900 border border-orange-200">🏹 Sastha (ശാസ്താവ്)</span>`;
+        } else if (d.includes("subrahman") || d.includes("murugan")) {
+          return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-900 border border-teal-200">🦚 Subrahmanian (സുബ്രഹ്മണ്യൻ)</span>`;
+        } else if (d.includes("naga") || d.includes("serpent") || d.includes("sarpa")) {
+          return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-900 border border-emerald-200">🐍 Nagaraja (നാഗങ്ങൾ)</span>`;
+        }
+        return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-700 border border-stone-200">🪔 ${deity}</span>`;
+      }
+
+      function renderPoojasTable() {
+        if (!poojasTableBody) return;
+
+        if (filteredPoojas.length === 0) {
+          poojasTableBody.innerHTML = `
+            <tr>
+              <td colspan="6" class="p-8 text-center">
+                <div class="max-w-sm mx-auto space-y-2 text-stone-500">
+                  <span class="text-3xl block">🔍</span>
+                  <p class="font-bold text-stone-800">No offerings match your search/filter.</p>
+                  <p class="text-xs text-stone-400">Try adjusting your keyword or reset filters.</p>
+                </div>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        let html = "";
+        filteredPoojas.forEach(p => {
+          const deityBadge = getDeityBadge(p.deity_name);
+          const statusBtn = p.is_active
+            ? `<button type="button" class="btn-toggle-active px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 hover:bg-emerald-200 text-emerald-800 border border-emerald-300 transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-2xs" data-id="${p.id}" data-active="true" title="Click to Deactivate offering">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Active (സജീവം)</span>
+              </button>`
+            : `<button type="button" class="btn-toggle-active px-2.5 py-1 rounded-full text-[11px] font-bold bg-stone-100 hover:bg-stone-200 text-stone-600 border border-stone-300 transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-2xs" data-id="${p.id}" data-active="false" title="Click to Activate offering">
+                <span class="w-1.5 h-1.5 rounded-full bg-stone-400"></span>
+                <span>Inactive (നിർജ്ജീവം)</span>
+              </button>`;
+
+          html += `
+            <tr class="hover:bg-amber-50/30 transition-colors group">
+              <!-- Code -->
+              <td class="p-3.5 text-center">
+                <span class="font-mono font-bold text-xs px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200">
+                  #${p.code}
+                </span>
+              </td>
+
+              <!-- Names -->
+              <td class="p-3.5">
+                <div class="font-bold text-stone-900 text-xs sm:text-sm">${p.name_en}</div>
+                ${p.name_ml ? `<div class="font-malayalam text-amber-800 text-[11px] font-medium mt-0.5">${p.name_ml}</div>` : ""}
+              </td>
+
+              <!-- Deity -->
+              <td class="p-3.5 whitespace-nowrap">
+                ${deityBadge}
+              </td>
+
+              <!-- Rate -->
+              <td class="p-3.5 text-right whitespace-nowrap">
+                <span class="font-mono font-black text-sm text-stone-900">₹${Number(p.price).toFixed(2)}</span>
+              </td>
+
+              <!-- Status -->
+              <td class="p-3.5 text-center whitespace-nowrap">
+                ${statusBtn}
+              </td>
+
+              <!-- Actions -->
+              <td class="p-3.5 text-right whitespace-nowrap">
+                <div class="flex items-center justify-end gap-1.5">
+                  <button
+                    type="button"
+                    class="btn-edit-pooja px-2.5 py-1.5 rounded-lg bg-white hover:bg-amber-100 text-stone-700 hover:text-amber-900 border border-stone-300 text-xs font-semibold flex items-center gap-1 transition-colors shadow-2xs"
+                    data-id="${p.id}"
+                    title="Modify offering details and rate"
+                  >
+                    <span>✏️</span>
+                    <span class="hidden sm:inline">Edit</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn-delete-pooja px-2.5 py-1.5 rounded-lg bg-white hover:bg-red-50 text-stone-600 hover:text-red-700 border border-stone-300 text-xs font-semibold flex items-center gap-1 transition-colors shadow-2xs"
+                    data-id="${p.id}"
+                    title="Remove offering"
+                  >
+                    <span>🗑️</span>
+                    <span class="hidden sm:inline">Remove</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        });
+
+        poojasTableBody.innerHTML = html;
+        attachPoojaRowListeners();
+      }
+
+      function attachPoojaRowListeners() {
+        // Toggle active status
+        document.querySelectorAll(".btn-toggle-active").forEach(btn => {
+          btn.addEventListener("click", async (e) => {
+            const el = e.currentTarget as HTMLElement;
+            const id = el.getAttribute("data-id");
+            const currentActive = el.getAttribute("data-active") === "true";
+            if (!id) return;
+
+            el.innerHTML = "<span>⏳ Updating...</span>";
+            (el as HTMLButtonElement).disabled = true;
+
+            const res = await updatePooja(id, { is_active: !currentActive });
+            if (res.success) {
+              showToast(
+                `Offering '${res.data?.name_en || id}' is now ${!currentActive ? "Active (സജീവം)" : "Inactive (നിർജ്ജീവം)"}.`,
+                "success"
+              );
+              loadPoojasData();
+            } else {
+              showToast(res.error || "Failed to update offering status.", "error");
+              renderPoojasTable();
+            }
+          });
+        });
+
+        // Edit button
+        document.querySelectorAll(".btn-edit-pooja").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            const id = (e.currentTarget as HTMLElement).getAttribute("data-id");
+            if (id) openEditPoojaModal(id);
+          });
+        });
+
+        // Delete button
+        document.querySelectorAll(".btn-delete-pooja").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            const id = (e.currentTarget as HTMLElement).getAttribute("data-id");
+            if (id) openDeletePoojaModal(id);
+          });
+        });
+      }
+
+      function openAddPoojaModal() {
+        let maxCode = 100;
+        allPoojas.forEach(p => {
+          const n = parseInt(p.code);
+          if (!isNaN(n) && n > maxCode) maxCode = n;
+        });
+
+        const codeInput = document.getElementById("add-pooja-code") as HTMLInputElement;
+        const nameEnInput = document.getElementById("add-pooja-name-en") as HTMLInputElement;
+        const nameMlInput = document.getElementById("add-pooja-name-ml") as HTMLInputElement;
+        const deitySelect = document.getElementById("add-pooja-deity") as HTMLSelectElement;
+        const priceInput = document.getElementById("add-pooja-price") as HTMLInputElement;
+        const activeInput = document.getElementById("add-pooja-active") as HTMLInputElement;
+        const errDiv = document.getElementById("add-pooja-error");
+
+        if (codeInput) codeInput.value = String(maxCode + 1);
+        if (nameEnInput) nameEnInput.value = "";
+        if (nameMlInput) nameMlInput.value = "";
+        if (deitySelect) deitySelect.value = "Shiva";
+        if (priceInput) priceInput.value = "";
+        if (activeInput) activeInput.checked = true;
+        if (errDiv) errDiv.classList.add("hidden");
+
+        modalAddPooja?.classList.remove("hidden");
+        nameEnInput?.focus();
+      }
+
+      function openEditPoojaModal(id: string) {
+        const p = allPoojas.find(item => item.id === id);
+        if (!p) return;
+
+        const idInput = document.getElementById("edit-pooja-id") as HTMLInputElement;
+        const codeInput = document.getElementById("edit-pooja-code") as HTMLInputElement;
+        const nameEnInput = document.getElementById("edit-pooja-name-en") as HTMLInputElement;
+        const nameMlInput = document.getElementById("edit-pooja-name-ml") as HTMLInputElement;
+        const deitySelect = document.getElementById("edit-pooja-deity") as HTMLSelectElement;
+        const priceInput = document.getElementById("edit-pooja-price") as HTMLInputElement;
+        const activeInput = document.getElementById("edit-pooja-active") as HTMLInputElement;
+        const errDiv = document.getElementById("edit-pooja-error");
+
+        if (idInput) idInput.value = p.id;
+        if (codeInput) codeInput.value = p.code;
+        if (nameEnInput) nameEnInput.value = p.name_en;
+        if (nameMlInput) nameMlInput.value = p.name_ml || "";
+        if (deitySelect) {
+          let match = false;
+          for (let i = 0; i < deitySelect.options.length; i++) {
+            if (deitySelect.options[i].value.toLowerCase() === p.deity_name.toLowerCase()) {
+              deitySelect.selectedIndex = i;
+              match = true;
+              break;
+            }
+          }
+          if (!match) deitySelect.value = "General";
+        }
+        if (priceInput) priceInput.value = String(p.price);
+        if (activeInput) activeInput.checked = p.is_active;
+        if (errDiv) errDiv.classList.add("hidden");
+
+        modalEditPooja?.classList.remove("hidden");
+        nameEnInput?.focus();
+      }
+
+      function openDeletePoojaModal(id: string) {
+        const p = allPoojas.find(item => item.id === id);
+        if (!p) return;
+        deletingPoojaTarget = p;
+
+        const idInput = document.getElementById("del-pooja-id") as HTMLInputElement;
+        const codeEl = document.getElementById("del-pooja-code");
+        const nameEl = document.getElementById("del-pooja-name");
+        const deityEl = document.getElementById("del-pooja-deity");
+        const rateEl = document.getElementById("del-pooja-rate");
+
+        if (idInput) idInput.value = p.id;
+        if (codeEl) codeEl.textContent = `#${p.code}`;
+        if (nameEl) nameEl.textContent = p.name_ml ? `${p.name_en} (${p.name_ml})` : p.name_en;
+        if (deityEl) deityEl.textContent = p.deity_name;
+        if (rateEl) rateEl.textContent = `₹${Number(p.price).toFixed(2)}`;
+
+        modalDeletePooja?.classList.remove("hidden");
+      }
+
+      function closeAllModals() {
+        modalAddPooja?.classList.add("hidden");
+        modalEditPooja?.classList.add("hidden");
+        modalDeletePooja?.classList.add("hidden");
+        deletingPoojaTarget = null;
+      }
+
+      // Submit Add Form
+      formAddPooja?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById("btn-submit-add-pooja") as HTMLButtonElement;
+        const errDiv = document.getElementById("add-pooja-error");
+
+        const code = (document.getElementById("add-pooja-code") as HTMLInputElement).value.trim();
+        const name_en = (document.getElementById("add-pooja-name-en") as HTMLInputElement).value.trim();
+        const name_ml = (document.getElementById("add-pooja-name-ml") as HTMLInputElement).value.trim();
+        const deity_name = (document.getElementById("add-pooja-deity") as HTMLSelectElement).value;
+        const price = parseFloat((document.getElementById("add-pooja-price") as HTMLInputElement).value);
+        const is_active = (document.getElementById("add-pooja-active") as HTMLInputElement).checked;
+
+        if (!code || !name_en || isNaN(price) || price <= 0) {
+          if (errDiv) {
+            errDiv.textContent = "Please fill in all required fields with a valid price.";
+            errDiv.classList.remove("hidden");
+          }
+          return;
+        }
+
+        const exists = allPoojas.some(p => p.code.toLowerCase() === code.toLowerCase());
+        if (exists) {
+          if (errDiv) {
+            errDiv.textContent = `Pooja code #${code} already exists. Please choose a different code.`;
+            errDiv.classList.remove("hidden");
+          }
+          return;
+        }
+
+        if (submitBtn) {
+          submitBtn.innerHTML = "<span>⏳ Saving...</span>";
+          submitBtn.disabled = true;
+        }
+
+        const res = await createPooja({ code, name_en, name_ml, deity_name, price, is_active });
+        if (submitBtn) {
+          submitBtn.innerHTML = "<span>💾</span><span>Save & Publish Pooja</span>";
+          submitBtn.disabled = false;
+        }
+
+        if (res.success && res.data) {
+          closeAllModals();
+          showToast(`New offering '${res.data.name_en}' added successfully!`, "success");
+          loadPoojasData();
+        } else {
+          if (errDiv) {
+            errDiv.textContent = res.error || "Failed to create pooja.";
+            errDiv.classList.remove("hidden");
+          }
+        }
+      });
+
+      // Submit Edit Form
+      formEditPooja?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById("btn-submit-edit-pooja") as HTMLButtonElement;
+        const errDiv = document.getElementById("edit-pooja-error");
+
+        const id = (document.getElementById("edit-pooja-id") as HTMLInputElement).value;
+        const code = (document.getElementById("edit-pooja-code") as HTMLInputElement).value.trim();
+        const name_en = (document.getElementById("edit-pooja-name-en") as HTMLInputElement).value.trim();
+        const name_ml = (document.getElementById("edit-pooja-name-ml") as HTMLInputElement).value.trim();
+        const deity_name = (document.getElementById("edit-pooja-deity") as HTMLSelectElement).value;
+        const price = parseFloat((document.getElementById("edit-pooja-price") as HTMLInputElement).value);
+        const is_active = (document.getElementById("edit-pooja-active") as HTMLInputElement).checked;
+
+        if (!id || !code || !name_en || isNaN(price) || price <= 0) {
+          if (errDiv) {
+            errDiv.textContent = "Please fill in all required fields with a valid price.";
+            errDiv.classList.remove("hidden");
+          }
+          return;
+        }
+
+        const duplicate = allPoojas.some(p => p.id !== id && p.code.toLowerCase() === code.toLowerCase());
+        if (duplicate) {
+          if (errDiv) {
+            errDiv.textContent = `Pooja code #${code} is already assigned to another offering.`;
+            errDiv.classList.remove("hidden");
+          }
+          return;
+        }
+
+        if (submitBtn) {
+          submitBtn.innerHTML = "<span>⏳ Updating...</span>";
+          submitBtn.disabled = true;
+        }
+
+        const res = await updatePooja(id, { code, name_en, name_ml, deity_name, price, is_active });
+        if (submitBtn) {
+          submitBtn.innerHTML = "<span>💾</span><span>Update Offering Details</span>";
+          submitBtn.disabled = false;
+        }
+
+        if (res.success && res.data) {
+          closeAllModals();
+          showToast(`Offering '${res.data.name_en}' updated successfully!`, "success");
+          loadPoojasData();
+        } else {
+          if (errDiv) {
+            errDiv.textContent = res.error || "Failed to update pooja.";
+            errDiv.classList.remove("hidden");
+          }
+        }
+      });
+
+      // Confirm Deactivate
+      btnConfirmDeactivatePooja?.addEventListener("click", async () => {
+        if (!deletingPoojaTarget) return;
+        const id = deletingPoojaTarget.id;
+        const name = deletingPoojaTarget.name_en;
+
+        const btn = btnConfirmDeactivatePooja as HTMLButtonElement;
+        btn.innerHTML = "<span>⏳ Deactivating...</span>";
+        btn.disabled = true;
+
+        const res = await deletePooja(id, false);
+        btn.innerHTML = "<span>⏸️</span><span>Deactivate Only (നിർജ്ജീവമാക്കുക - ശുപാർശ ചെയ്യുന്നത്)</span>";
+        btn.disabled = false;
+
+        if (res.success) {
+          closeAllModals();
+          showToast(`Offering '${name}' deactivated successfully.`, "info");
+          loadPoojasData();
+        } else {
+          showToast(res.error || "Failed to deactivate pooja.", "error");
+        }
+      });
+
+      // Confirm Permanent Delete
+      btnConfirmPermanentDeletePooja?.addEventListener("click", async () => {
+        if (!deletingPoojaTarget) return;
+        const id = deletingPoojaTarget.id;
+        const name = deletingPoojaTarget.name_en;
+
+        const btn = btnConfirmPermanentDeletePooja as HTMLButtonElement;
+        btn.innerHTML = "<span>⏳ Deleting...</span>";
+        btn.disabled = true;
+
+        const res = await deletePooja(id, true);
+        btn.innerHTML = "<span>🗑️</span><span>Permanently Delete from Database (പൂർണ്ണമായി നീക്കുക)</span>";
+        btn.disabled = false;
+
+        if (res.success) {
+          closeAllModals();
+          showToast(`Offering '${name}' permanently removed from database.`, "error");
+          loadPoojasData();
+        } else {
+          showToast(res.error || "Failed to permanently delete pooja.", "error");
+        }
+      });
+
+      // Modal close listeners
+      document.querySelectorAll(".modal-close-btn").forEach(btn => {
+        btn.addEventListener("click", closeAllModals);
+      });
+
+      [modalAddPooja, modalEditPooja, modalDeletePooja].forEach(modal => {
+        modal?.addEventListener("click", (e) => {
+          if (e.target === modal) closeAllModals();
+        });
+      });
+
+      // Search, Filter & Actions
+      poojaSearchInput?.addEventListener("input", applyPoojaFilters);
+      poojaDeityFilter?.addEventListener("change", applyPoojaFilters);
+      poojaStatusFilter?.addEventListener("change", applyPoojaFilters);
+      poojaSortBy?.addEventListener("change", applyPoojaFilters);
+      btnRefreshPoojas?.addEventListener("click", loadPoojasData);
+      btnOpenAddPoojaModal?.addEventListener("click", openAddPoojaModal);
+
+      // Export Pooja Catalog to Excel
+      btnExportPoojaCatalog?.addEventListener("click", () => {
+        if (allPoojas.length === 0) {
+          showToast("No poojas available to export.", "error");
+          return;
+        }
+
+        const exportData = allPoojas.map(p => ({
+          "Code": p.code,
+          "Offering Name (English)": p.name_en,
+          "Offering Name (Malayalam)": p.name_ml || "",
+          "Presiding Deity": p.deity_name,
+          "Rate (INR)": p.price,
+          "Status": p.is_active ? "Active" : "Inactive",
+          "Last Updated": p.updated_at ? new Date(p.updated_at).toLocaleString("en-IN") : ""
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(exportData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Pooja Rate List");
+        XLSX.writeFile(workbook, `Thirumarady_Temple_Pooja_Catalog_${new Date().toISOString().split("T")[0]}.xlsx`);
+        showToast("Pooja rate card exported to Excel.", "success");
+      });
+
     </script>
   </body>
 </html>

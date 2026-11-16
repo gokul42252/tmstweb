@@ -104,3 +104,85 @@ export async function authenticateStaff(username: string, passwordInput: string)
     return { success: false, error: err?.message || "An unexpected error occurred during login." };
   }
 }
+
+// ============================================================================
+// POOJAS CRUD OPERATIONS
+// ============================================================================
+
+export async function fetchPoojas(activeOnly: boolean = false): Promise<{ success: boolean; data?: Pooja[]; error?: string }> {
+  try {
+    let query = supabase.from("poojas").select("*").order("code", { ascending: true });
+    if (activeOnly) {
+      query = query.eq("is_active", true);
+    }
+    const { data, error } = await query;
+    if (error) throw error;
+    return { success: true, data: (data as Pooja[]) || [] };
+  } catch (err: any) {
+    console.error("fetchPoojas error:", err);
+    return { success: false, error: err?.message || "Failed to fetch poojas from database." };
+  }
+}
+
+export async function createPooja(newPooja: {
+  code: string;
+  name_en: string;
+  name_ml?: string;
+  deity_name: string;
+  price: number;
+  is_active?: boolean;
+}): Promise<{ success: boolean; data?: Pooja; error?: string }> {
+  try {
+    const payload = {
+      id: crypto.randomUUID(),
+      code: newPooja.code.trim(),
+      name_en: newPooja.name_en.trim(),
+      name_ml: newPooja.name_ml?.trim() || null,
+      deity_name: newPooja.deity_name.trim(),
+      price: Number(newPooja.price),
+      is_active: newPooja.is_active !== undefined ? newPooja.is_active : true,
+      updated_at: new Date().toISOString(),
+    };
+
+    const { data, error } = await supabase.from("poojas").insert([payload]).select();
+    if (error) throw error;
+    return { success: true, data: data?.[0] as Pooja };
+  } catch (err: any) {
+    console.error("createPooja error:", err);
+    return { success: false, error: err?.message || "Failed to add pooja to database." };
+  }
+}
+
+export async function updatePooja(
+  id: string,
+  updates: Partial<Pooja>
+): Promise<{ success: boolean; data?: Pooja; error?: string }> {
+  try {
+    const payload: any = { ...updates, updated_at: new Date().toISOString() };
+    delete payload.id; // Primary key must remain immutable
+
+    const { data, error } = await supabase.from("poojas").update(payload).eq("id", id).select();
+    if (error) throw error;
+    return { success: true, data: data?.[0] as Pooja };
+  } catch (err: any) {
+    console.error("updatePooja error:", err);
+    return { success: false, error: err?.message || "Failed to update pooja." };
+  }
+}
+
+export async function deletePooja(id: string, permanent: boolean = false): Promise<{ success: boolean; error?: string }> {
+  try {
+    if (permanent) {
+      const { error } = await supabase.from("poojas").delete().eq("id", id);
+      if (error) throw error;
+    } else {
+      const { error } = await supabase.from("poojas").update({ is_active: false, updated_at: new Date().toISOString() }).eq("id", id);
+      if (error) throw error;
+    }
+    return { success: true };
+  } catch (err: any) {
+    console.error("deletePooja error:", err);
+    return { success: false, error: err?.message || "Failed to remove pooja." };
+  }
+}
+
