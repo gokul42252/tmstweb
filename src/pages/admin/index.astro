@@ -12,31 +12,85 @@ import "../../assets/styles/global.css";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Manjari:wght@400;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
     <style>
       @media print {
-        body {
-          background-color: #ffffff !important;
-          color: #000000 !important;
-          font-size: 11pt !important;
+        @page {
+          size: A4 portrait;
+          margin: 10mm 12mm 12mm 12mm;
         }
+
+        html, body {
+          background-color: #ffffff !important;
+          background: #ffffff !important;
+          color: #000000 !important;
+          font-family: 'Noto Sans Malayalam', 'Nirmala UI', 'Manjari', 'Segoe UI', system-ui, -apple-system, sans-serif !important;
+          font-size: 10pt !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          width: 100% !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
+        /* CRUCIAL FIX: Completely hide login, dashboard, charts, tables, headers, footers during print */
+        #login-container,
+        #dashboard-container,
+        header,
+        footer,
+        nav,
         .no-print {
           display: none !important;
+          visibility: hidden !important;
+          height: 0 !important;
+          max-height: 0 !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow: hidden !important;
+          opacity: 0 !important;
         }
+
+        /* Show ONLY the official printable audit report */
+        #printable-audit-report,
         .print-only {
           display: block !important;
+          visibility: visible !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          opacity: 1 !important;
         }
-        .print-break-inside-avoid {
-          break-inside: avoid;
+
+        table {
+          width: 100% !important;
+          border-collapse: collapse !important;
         }
+
+        thead {
+          display: table-header-group !important;
+        }
+
+        tr {
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+
+        .print-break-inside-avoid,
+        .signature-block {
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+
         .print-shadow-none {
           box-shadow: none !important;
           border: 1px solid #d1d5db !important;
         }
       }
+
       .print-only {
         display: none;
       }
@@ -47,7 +101,7 @@ import "../../assets/styles/global.css";
     <!-- ========================================================================= -->
     <!-- 1. LOGIN SCREEN (Visible when unauthenticated) -->
     <!-- ========================================================================= -->
-    <div id="login-container" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-stone-950 via-stone-900 to-amber-950/80">
+    <div id="login-container" class="no-print min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-stone-950 via-stone-900 to-amber-950/80">
       <div class="w-full max-w-md bg-stone-900/90 backdrop-blur-xl border border-amber-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl text-white relative overflow-hidden">
         
         <!-- Golden Decorative Glow -->
@@ -162,7 +216,7 @@ import "../../assets/styles/global.css";
     <!-- ========================================================================= -->
     <!-- 2. MAIN DASHBOARD APPLICATION SCREEN (Visible when authenticated) -->
     <!-- ========================================================================= -->
-    <div id="dashboard-container" class="hidden min-h-screen flex-col bg-stone-100 text-stone-900">
+    <div id="dashboard-container" class="no-print hidden min-h-screen flex-col bg-stone-100 text-stone-900">
       
       <!-- Top Navigation & Profile Bar -->
       <header class="no-print sticky top-0 z-40 bg-stone-950 text-white border-b-2 border-amber-600 shadow-md">
@@ -679,94 +733,120 @@ import "../../assets/styles/global.css";
     <!-- ========================================================================= -->
     <!-- 3. OFFICIAL PRINTABLE AUDIT REPORT (Triggered on Print / PDF Export) -->
     <!-- ========================================================================= -->
-    <div id="printable-audit-report" class="print-only p-8 max-w-4xl mx-auto bg-white text-stone-950 font-sans">
+    <div id="printable-audit-report" class="print-only p-4 sm:p-8 max-w-4xl mx-auto bg-white text-stone-950 font-sans">
       <!-- Printable Header -->
-      <div class="text-center pb-6 border-b-2 border-stone-900 mb-6">
+      <div class="text-center pb-5 border-b-2 border-stone-900 mb-5">
         <div class="text-3xl mb-1">🔱</div>
-        <h1 class="text-2xl font-serif font-black uppercase tracking-wider text-stone-900">
+        <h1 class="text-2xl font-serif font-black uppercase tracking-wider text-stone-900" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;">
           തിരുമാറാടി ശ്രീ മഹാദേവ ക്ഷേത്രം
         </h1>
-        <h2 class="text-sm font-serif font-bold text-amber-900 uppercase tracking-widest mt-0.5">
+        <h2 class="text-xs sm:text-sm font-bold text-amber-900 uppercase tracking-widest mt-0.5" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;">
           Thirumarady Sri Mahadeva Temple — ക്ഷേത്ര ഭരണ സമിതി
         </h2>
         <p class="text-xs text-stone-600 mt-1">
           Piravom – Koothattukulam Road, Thirumarady, Ernakulam, Kerala – 686662 | Phone: 0485-2877300
         </p>
         <div class="inline-block mt-3 px-4 py-1 rounded-full border border-stone-900 font-bold text-xs uppercase tracking-wider">
-          Official Daily / Periodic Collection Audit Statement
+          OFFICIAL COLLECTION AUDIT STATEMENT
         </div>
       </div>
 
       <!-- Report Metadata Box -->
-      <div class="grid grid-cols-2 gap-4 p-4 rounded-xl border border-stone-300 text-xs mb-6 bg-stone-50">
+      <div class="grid grid-cols-2 gap-4 p-3.5 rounded-xl border border-stone-300 text-xs mb-5 bg-stone-50">
         <div>
           <p><strong>Reporting Period:</strong> <span id="print-date-range">All Time</span></p>
           <p class="mt-1"><strong>Counter Machine:</strong> <span id="print-counter">All Counters</span></p>
         </div>
         <div class="text-right">
           <p><strong>Generated On:</strong> <span id="print-timestamp">Current Date</span></p>
-          <p class="mt-1"><strong>Generated By:</strong> <span id="print-officer">Temple Treasurer (ട്രഷറർ)</span></p>
+          <p class="mt-1"><strong>Generated By:</strong> <span id="print-officer" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;">Temple Treasurer (ട്രഷറർ)</span></p>
         </div>
       </div>
 
       <!-- Financial KPI Summary in Print -->
-      <div class="grid grid-cols-3 gap-4 mb-6 text-center text-xs">
-        <div class="p-3 rounded-xl border border-stone-300">
+      <div class="grid grid-cols-3 gap-3 mb-5 text-center text-xs">
+        <div class="p-3 rounded-xl border border-stone-300 bg-white">
           <span class="block text-stone-500 font-bold uppercase text-[10px]">Total Receipts Issued</span>
           <span id="print-kpi-bills" class="text-lg font-black text-stone-900">0 bills</span>
         </div>
-        <div class="p-3 rounded-xl border border-stone-300">
+        <div class="p-3 rounded-xl border border-stone-300 bg-white">
           <span class="block text-stone-500 font-bold uppercase text-[10px]">Cash Collection (💵)</span>
           <span id="print-kpi-cash" class="text-lg font-black text-emerald-900">₹0</span>
         </div>
-        <div class="p-3 rounded-xl border border-stone-300">
+        <div class="p-3 rounded-xl border border-stone-300 bg-white">
           <span class="block text-stone-500 font-bold uppercase text-[10px]">UPI / Digital Collection (📱)</span>
           <span id="print-kpi-upi" class="text-lg font-black text-blue-900">₹0</span>
         </div>
       </div>
 
-      <div class="p-3 rounded-xl border-2 border-amber-600 mb-6 bg-amber-50/50 flex justify-between items-center text-sm font-bold">
-        <span>Grand Total Revenue Collected:</span>
-        <span id="print-kpi-total" class="text-xl font-serif font-black text-amber-950">₹0</span>
+      <div class="p-3 rounded-xl border-2 border-stone-900 mb-6 bg-stone-50 flex justify-between items-center text-sm font-bold">
+        <span class="uppercase tracking-wider">Grand Total Revenue Collected:</span>
+        <span id="print-kpi-total" class="text-xl font-serif font-black text-stone-950">₹0</span>
       </div>
 
-      <!-- Pooja-wise Summary Breakdown Table -->
+      <!-- Section 1: Pooja-wise Summary Breakdown Table -->
       <div class="mb-6">
-        <h3 class="font-bold text-xs uppercase tracking-wider text-stone-800 mb-2 border-b border-stone-300 pb-1">
-          1. Offering-Wise Sales & Revenue Summary
+        <h3 class="font-bold text-xs uppercase tracking-wider text-stone-900 mb-2 border-b border-stone-400 pb-1 flex justify-between items-center">
+          <span>1. Offering-Wise Sales & Revenue Summary (വഴിപാട് സംഗ്രഹം)</span>
+          <span class="text-[10px] text-stone-500 font-normal">Consolidated Offering Totals</span>
         </h3>
         <table class="w-full text-xs text-left border-collapse border border-stone-300">
-          <thead class="bg-stone-100 text-[10px] uppercase font-bold text-stone-700">
+          <thead class="bg-stone-100 text-[10px] uppercase font-bold text-stone-800">
             <tr>
-              <th class="p-2 border border-stone-300">#</th>
+              <th class="p-2 border border-stone-300 text-center w-8">#</th>
               <th class="p-2 border border-stone-300">Offering Name (Pooja)</th>
               <th class="p-2 border border-stone-300">Deity</th>
               <th class="p-2 border border-stone-300 text-center">Qty Sold</th>
               <th class="p-2 border border-stone-300 text-right">Total Revenue (₹)</th>
             </tr>
           </thead>
-          <tbody id="print-pooja-summary-body">
+          <tbody id="print-pooja-summary-body" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;">
+            <!-- Injected -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 2: Devotee Receipts Ledger Register -->
+      <div class="mb-6">
+        <h3 class="font-bold text-xs uppercase tracking-wider text-stone-900 mb-2 border-b border-stone-400 pb-1 flex justify-between items-center">
+          <span>2. Devotee Receipts Register (രസീത് ഓഡിറ്റ് രജിസ്റ്റർ)</span>
+          <span class="text-[10px] text-stone-500 font-normal">Itemized Transaction Audit Log</span>
+        </h3>
+        <table class="w-full text-[10px] text-left border-collapse border border-stone-300">
+          <thead class="bg-stone-100 uppercase font-bold text-stone-800">
+            <tr>
+              <th class="p-1.5 border border-stone-300 text-center w-7">#</th>
+              <th class="p-1.5 border border-stone-300 whitespace-nowrap">Receipt No</th>
+              <th class="p-1.5 border border-stone-300 whitespace-nowrap">Date & Time</th>
+              <th class="p-1.5 border border-stone-300">Devotee Name</th>
+              <th class="p-1.5 border border-stone-300 whitespace-nowrap">Star (നാൾ)</th>
+              <th class="p-1.5 border border-stone-300">Poojas Booked</th>
+              <th class="p-1.5 border border-stone-300 text-center">Mode</th>
+              <th class="p-1.5 border border-stone-300 text-right">Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="print-receipts-summary-body" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;">
             <!-- Injected -->
           </tbody>
         </table>
       </div>
 
       <!-- Signatures Footer -->
-      <div class="mt-12 pt-8 border-t border-stone-400 grid grid-cols-3 gap-6 text-center text-xs">
+      <div class="signature-block mt-8 pt-6 border-t-2 border-stone-800 grid grid-cols-3 gap-6 text-center text-xs">
         <div>
-          <div class="h-10"></div>
-          <p class="font-bold text-stone-800">Counter Operator</p>
+          <div class="h-12 border-b border-dashed border-stone-400 mb-2"></div>
+          <p class="font-bold text-stone-900">Counter Operator</p>
           <p class="text-[10px] text-stone-500">Prepared & Entered</p>
         </div>
         <div>
-          <div class="h-10"></div>
-          <p class="font-bold text-stone-800">Accounts & Audit Officer</p>
+          <div class="h-12 border-b border-dashed border-stone-400 mb-2"></div>
+          <p class="font-bold text-stone-900">Accounts & Audit Officer</p>
           <p class="text-[10px] text-stone-500">Verified & Reconciled</p>
         </div>
         <div>
-          <div class="h-10"></div>
-          <p class="font-bold text-stone-800">Temple Treasurer (ഖജാൻജി)</p>
-          <p class="text-[10px] text-stone-500">Temple Managing Committee</p>
+          <div class="h-12 border-b border-dashed border-stone-400 mb-2"></div>
+          <p class="font-bold text-stone-900" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;">Temple Treasurer (ഖജാൻജി / ട്രഷറർ)</p>
+          <p class="text-[10px] text-stone-500">Thirumarady Temple Managing Committee</p>
         </div>
       </div>
     </div>
@@ -1735,7 +1815,14 @@ import "../../assets/styles/global.css";
       // =========================================================================
       btnExportPdf?.addEventListener("click", () => {
         updatePrintReport();
+        const from = filterDateFrom?.value || "All";
+        const to = filterDateTo?.value || "Time";
+        const originalTitle = document.title;
+        document.title = `Thirumarady_Temple_Audit_Statement_${from}_to_${to}`;
         window.print();
+        setTimeout(() => {
+          document.title = originalTitle;
+        }, 1500);
       });
 
       function updatePrintReport() {
@@ -1762,8 +1849,9 @@ import "../../assets/styles/global.css";
         filteredBills.forEach(b => {
           const amt = Number(b.total_amount) || 0;
           total += amt;
-          if (b.payment_mode === "CASH") cash += amt;
-          else if (b.payment_mode === "UPI") upi += amt;
+          const mode = (b.payment_mode || "").toUpperCase();
+          if (mode === "CASH") cash += amt;
+          else if (mode === "UPI") upi += amt;
 
           (b.bill_items || []).forEach(item => {
             const name = item.pooja_name;
@@ -1783,16 +1871,16 @@ import "../../assets/styles/global.css";
         if (printUpi) printUpi.textContent = `₹${upi.toLocaleString("en-IN")}`;
         if (printTotal) printTotal.textContent = `₹${total.toLocaleString("en-IN")}`;
 
-        // Populate pooja summary table in print
+        // 1. Populate pooja summary table in print
         const printPoojaBody = document.getElementById("print-pooja-summary-body");
         if (printPoojaBody) {
           const sorted = Object.entries(poojaMap).sort((a, b) => b[1].rev - a[1].rev);
           let rowsHtml = "";
           sorted.forEach(([name, d], idx) => {
             rowsHtml += `
-              <tr>
-                <td class="p-2 border border-stone-300">${idx + 1}</td>
-                <td class="p-2 border border-stone-300 font-bold">${name}</td>
+              <tr class="even:bg-stone-50/50">
+                <td class="p-2 border border-stone-300 text-center">${idx + 1}</td>
+                <td class="p-2 border border-stone-300 font-bold" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;">${name}</td>
                 <td class="p-2 border border-stone-300">${d.deity}</td>
                 <td class="p-2 border border-stone-300 text-center font-bold">${d.qty}</td>
                 <td class="p-2 border border-stone-300 text-right font-bold">₹${d.rev.toLocaleString("en-IN")}</td>
@@ -1800,6 +1888,31 @@ import "../../assets/styles/global.css";
             `;
           });
           printPoojaBody.innerHTML = rowsHtml || `<tr><td colspan="5" class="p-4 text-center">No poojas booked in this period.</td></tr>`;
+        }
+
+        // 2. Populate devotee receipts audit register in print
+        const printReceiptsBody = document.getElementById("print-receipts-summary-body");
+        if (printReceiptsBody) {
+          let receiptsHtml = "";
+          filteredBills.forEach((b, idx) => {
+            const timeStr = b.created_at
+              ? new Date(b.created_at).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) + " " + new Date(b.created_at).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })
+              : (b.pooja_date || "-");
+            const itemsStr = (b.bill_items || []).map(i => `${i.pooja_name} (x${i.quantity})`).join(", ") || "General Offering";
+            receiptsHtml += `
+              <tr class="even:bg-stone-50/50">
+                <td class="p-1.5 border border-stone-300 text-center text-stone-500">${idx + 1}</td>
+                <td class="p-1.5 border border-stone-300 font-mono font-bold whitespace-nowrap">${b.bill_number}</td>
+                <td class="p-1.5 border border-stone-300 text-stone-600 whitespace-nowrap text-[9px]">${timeStr}</td>
+                <td class="p-1.5 border border-stone-300 font-bold">${b.devotee_name}</td>
+                <td class="p-1.5 border border-stone-300 whitespace-nowrap" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;">${b.star_name}</td>
+                <td class="p-1.5 border border-stone-300 max-w-[200px] truncate" style="font-family: 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;" title="${itemsStr}">${itemsStr}</td>
+                <td class="p-1.5 border border-stone-300 text-center font-bold text-[9px]">${b.payment_mode}</td>
+                <td class="p-1.5 border border-stone-300 text-right font-mono font-bold">₹${Number(b.total_amount).toLocaleString("en-IN")}</td>
+              </tr>
+            `;
+          });
+          printReceiptsBody.innerHTML = receiptsHtml || `<tr><td colspan="8" class="p-3 text-center text-stone-500">No receipts found for selected period.</td></tr>`;
         }
       }
     </script>
