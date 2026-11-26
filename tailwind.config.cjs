@@ -7,6 +7,17 @@ module.exports = {
         'xs': '480px',
       },
       colors: {
+        theme: {
+          primary: 'var(--theme-primary)',
+          'primary-dark': 'var(--theme-primary-dark)',
+          'primary-hover': 'var(--theme-primary-hover)',
+          'primary-light': 'var(--theme-primary-light)',
+          accent: 'var(--theme-accent)',
+          secondary: 'var(--theme-secondary)',
+          surface: 'var(--theme-surface)',
+          'surface-alt': 'var(--theme-surface-alt)',
+          'card-border': 'var(--theme-card-border)',
+        },
         primary: {
           50: '#fffbeb',
           100: '#fef3c7',

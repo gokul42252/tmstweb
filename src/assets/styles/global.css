@@ -4,6 +4,178 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   CLASSY THEMES - 6 DOPELY PALETTES ARCHITECTURE
+   ========================================================================== */
+
+:root {
+  /* Default: Neelakantha Teal & Iris (Dopely #16) */
+  --theme-primary: #09979D;
+  --theme-primary-dark: #055B5C;
+  --theme-primary-hover: #077C81;
+  --theme-primary-light: #46C6CA;
+  --theme-accent: #46C6CA;
+  --theme-accent-glow: rgba(70, 198, 202, 0.35);
+  --theme-secondary: #8475A1;
+  --theme-surface: #F4FAFA;
+  --theme-surface-alt: #E6F3F4;
+  --theme-card-border: rgba(9, 151, 157, 0.22);
+  --theme-gradient-start: #055B5C;
+  --theme-gradient-mid: #09979D;
+  --theme-gradient-end: #46C6CA;
+  --theme-banner-start: #054D4E;
+  --theme-banner-end: #097E83;
+  --theme-badge-bg: rgba(9, 151, 157, 0.12);
+  --theme-badge-text: #055B5C;
+  --theme-badge-border: rgba(9, 151, 157, 0.3);
+  --theme-btn-text: #FFFFFF;
+  --theme-ring-color: #09979D;
+}
+
+/* 1. Neelakantha Teal & Iris (Dopely #16) */
+[data-theme="neelakantha"] {
+  --theme-primary: #09979D;
+  --theme-primary-dark: #055B5C;
+  --theme-primary-hover: #077C81;
+  --theme-primary-light: #46C6CA;
+  --theme-accent: #46C6CA;
+  --theme-accent-glow: rgba(70, 198, 202, 0.35);
+  --theme-secondary: #8475A1;
+  --theme-surface: #F4FAFA;
+  --theme-surface-alt: #E6F3F4;
+  --theme-card-border: rgba(9, 151, 157, 0.22);
+  --theme-gradient-start: #055B5C;
+  --theme-gradient-mid: #09979D;
+  --theme-gradient-end: #46C6CA;
+  --theme-banner-start: #054D4E;
+  --theme-banner-end: #097E83;
+  --theme-badge-bg: rgba(9, 151, 157, 0.12);
+  --theme-badge-text: #055B5C;
+  --theme-badge-border: rgba(9, 151, 157, 0.3);
+  --theme-btn-text: #FFFFFF;
+  --theme-ring-color: #09979D;
+}
+
+/* 2. Sacred Vilvam & Forest (Dopely #19) */
+[data-theme="sacred-vilvam"] {
+  --theme-primary: #1E4755;
+  --theme-primary-dark: #273B02;
+  --theme-primary-hover: #153540;
+  --theme-primary-light: #31C3CC;
+  --theme-accent: #7EA205;
+  --theme-accent-glow: rgba(126, 162, 5, 0.35);
+  --theme-secondary: #31C3CC;
+  --theme-surface: #F5F8F6;
+  --theme-surface-alt: #E8F0EA;
+  --theme-card-border: rgba(30, 71, 85, 0.22);
+  --theme-gradient-start: #1E4755;
+  --theme-gradient-mid: #2C6377;
+  --theme-gradient-end: #31C3CC;
+  --theme-banner-start: #163844;
+  --theme-banner-end: #235566;
+  --theme-badge-bg: rgba(126, 162, 5, 0.12);
+  --theme-badge-text: #273B02;
+  --theme-badge-border: rgba(126, 162, 5, 0.35);
+  --theme-btn-text: #FFFFFF;
+  --theme-ring-color: #31C3CC;
+}
+
+/* 3. Usha Pooja Dawn (Dopely #17) */
+[data-theme="usha-dawn"] {
+  --theme-primary: #D4674B;
+  --theme-primary-dark: #9E3C24;
+  --theme-primary-hover: #BF553B;
+  --theme-primary-light: #F4957B;
+  --theme-accent: #68C4AE;
+  --theme-accent-glow: rgba(244, 149, 123, 0.35);
+  --theme-secondary: #A686BC;
+  --theme-surface: #FBF9F5;
+  --theme-surface-alt: #F4EFE6;
+  --theme-card-border: rgba(212, 103, 75, 0.2);
+  --theme-gradient-start: #B24C33;
+  --theme-gradient-mid: #D4674B;
+  --theme-gradient-end: #F4957B;
+  --theme-banner-start: #8C341F;
+  --theme-banner-end: #B24C33;
+  --theme-badge-bg: rgba(212, 103, 75, 0.12);
+  --theme-badge-text: #9E3C24;
+  --theme-badge-border: rgba(212, 103, 75, 0.3);
+  --theme-btn-text: #FFFFFF;
+  --theme-ring-color: #D4674B;
+}
+
+/* 4. Ananda Thandavam - Midnight Sapphire (Dopely #15) */
+[data-theme="ananda-thandavam"] {
+  --theme-primary: #018ABE;
+  --theme-primary-dark: #0A1B46;
+  --theme-primary-hover: #01709C;
+  --theme-primary-light: #97CADB;
+  --theme-accent: #018ABE;
+  --theme-accent-glow: rgba(1, 138, 190, 0.35);
+  --theme-secondary: #0A487A;
+  --theme-surface: #F2F7FA;
+  --theme-surface-alt: #E3EFF6;
+  --theme-card-border: rgba(1, 138, 190, 0.22);
+  --theme-gradient-start: #0A1B46;
+  --theme-gradient-mid: #0A487A;
+  --theme-gradient-end: #018ABE;
+  --theme-banner-start: #081538;
+  --theme-banner-end: #083B64;
+  --theme-badge-bg: rgba(1, 138, 190, 0.12);
+  --theme-badge-text: #0A487A;
+  --theme-badge-border: rgba(1, 138, 190, 0.3);
+  --theme-btn-text: #FFFFFF;
+  --theme-ring-color: #018ABE;
+}
+
+/* 5. Dhanu Utsavam - Saffron Terracotta (Dopely #18) */
+[data-theme="dhanu-utsavam"] {
+  --theme-primary: #DE432E;
+  --theme-primary-dark: #A62716;
+  --theme-primary-hover: #C43623;
+  --theme-primary-light: #F98557;
+  --theme-accent: #FAC352;
+  --theme-accent-glow: rgba(222, 67, 46, 0.35);
+  --theme-secondary: #F98557;
+  --theme-surface: #FDF8F5;
+  --theme-surface-alt: #FAEEE8;
+  --theme-card-border: rgba(222, 67, 46, 0.22);
+  --theme-gradient-start: #B32B1A;
+  --theme-gradient-mid: #DE432E;
+  --theme-gradient-end: #F98557;
+  --theme-banner-start: #8A1E11;
+  --theme-banner-end: #B32B1A;
+  --theme-badge-bg: rgba(222, 67, 46, 0.12);
+  --theme-badge-text: #A62716;
+  --theme-badge-border: rgba(222, 67, 46, 0.3);
+  --theme-btn-text: #FFFFFF;
+  --theme-ring-color: #DE432E;
+}
+
+/* 6. Nirmalyam Sandalwood - Rose & Sandal (Dopely #20) */
+[data-theme="nirmalyam-sandal"] {
+  --theme-primary: #C86F6E;
+  --theme-primary-dark: #8E3D3C;
+  --theme-primary-hover: #B05A59;
+  --theme-primary-light: #FFB084;
+  --theme-accent: #FFB084;
+  --theme-accent-glow: rgba(200, 111, 110, 0.35);
+  --theme-secondary: #FFC88B;
+  --theme-surface: #FCFAF6;
+  --theme-surface-alt: #F7F2EB;
+  --theme-card-border: rgba(200, 111, 110, 0.22);
+  --theme-gradient-start: #8E3D3C;
+  --theme-gradient-mid: #C86F6E;
+  --theme-gradient-end: #E79796;
+  --theme-banner-start: #6F2A29;
+  --theme-banner-end: #8E3D3C;
+  --theme-badge-bg: rgba(200, 111, 110, 0.12);
+  --theme-badge-text: #8E3D3C;
+  --theme-badge-border: rgba(200, 111, 110, 0.3);
+  --theme-btn-text: #FFFFFF;
+  --theme-ring-color: #C86F6E;
+}
+
 @layer base {
   html {
     @apply scroll-smooth;
@@ -12,9 +184,11 @@
   }
   
   body {
-    @apply font-sans text-stone-800 bg-temple-cream antialiased selection:bg-primary-500 selection:text-white;
+    @apply font-sans text-stone-800 antialiased selection:bg-amber-500 selection:text-white;
+    background-color: var(--theme-surface, #fcfaf5);
     overflow-x: hidden;
     width: 100%;
+    transition: background-color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -56,27 +230,52 @@
   }
 
   .btn-primary {
-    @apply text-stone-950 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 hover:text-white shadow-amber-500/20 shadow-md focus:ring-amber-500;
+    color: var(--theme-btn-text, #ffffff) !important;
+    background: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-mid), var(--theme-gradient-end)) !important;
+    box-shadow: 0 4px 14px 0 var(--theme-accent-glow, rgba(0, 0, 0, 0.2)) !important;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 6px 20px 0 var(--theme-accent-glow, rgba(0, 0, 0, 0.3)) !important;
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
-    @apply text-white bg-gradient-to-r from-red-700 to-red-800 hover:from-red-800 hover:to-red-900 shadow-red-700/20 shadow-md focus:ring-red-600;
+    @apply text-white bg-gradient-to-r from-stone-800 to-stone-900 hover:from-stone-900 hover:to-black shadow-md focus:ring-stone-600;
   }
 
   .btn-accent {
-    @apply text-white bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 shadow-orange-600/20 shadow-md focus:ring-orange-500;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, var(--theme-primary-dark), var(--theme-primary)) !important;
+    box-shadow: 0 4px 14px 0 var(--theme-accent-glow, rgba(0, 0, 0, 0.2)) !important;
   }
 
   .btn-outline {
-    @apply text-stone-800 bg-white/90 border border-stone-300 hover:bg-stone-50 hover:border-amber-500 hover:text-amber-700 focus:ring-amber-500 backdrop-blur-sm;
+    @apply text-stone-800 bg-white/90 border border-stone-300 hover:bg-stone-50 focus:ring-2 backdrop-blur-sm;
   }
 
   .btn-outline-gold {
-    @apply text-amber-400 border border-amber-400/60 bg-amber-950/20 hover:bg-amber-400 hover:text-stone-950 focus:ring-amber-400 backdrop-blur-sm;
+    color: var(--theme-primary);
+    border: 1px solid var(--theme-card-border);
+    background-color: var(--theme-badge-bg);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+  }
+
+  .btn-outline-gold:hover {
+    background-color: var(--theme-primary);
+    color: #ffffff;
   }
 
   .card {
-    @apply overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-sm border border-stone-200/80 hover:shadow-md hover:border-amber-300;
+    @apply overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-sm border border-stone-200/80;
+  }
+
+  .card:hover {
+    border-color: var(--theme-primary-light, #fbbf24) !important;
+    box-shadow: 0 10px 25px -5px var(--theme-accent-glow, rgba(0,0,0,0.1)) !important;
   }
 
   .temple-gradient-bg {
@@ -84,13 +283,37 @@
   }
 
   .temple-card-dark {
-    @apply bg-stone-900/90 border border-amber-500/20 rounded-xl backdrop-blur-md;
+    @apply bg-stone-900/90 rounded-xl backdrop-blur-md;
+    border: 1px solid var(--theme-card-border, rgba(245, 158, 11, 0.2));
   }
 
   .gold-shimmer {
-    background: linear-gradient(135deg, #d97706 0%, #fbbf24 50%, #b45309 100%);
+    background: linear-gradient(135deg, var(--theme-primary-dark) 0%, var(--theme-primary) 50%, var(--theme-primary-light) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Theme-specific Dynamic Utilities */
+  .theme-action-strip {
+    background: linear-gradient(to right, var(--theme-banner-start), var(--theme-banner-end));
+  }
+
+  .theme-badge {
+    background-color: var(--theme-badge-bg);
+    color: var(--theme-badge-text);
+    border: 1px solid var(--theme-badge-border);
+  }
+
+  .theme-card-border {
+    border-color: var(--theme-card-border);
+  }
+
+  .theme-accent-glow {
+    box-shadow: 0 4px 20px -2px var(--theme-accent-glow);
+  }
+
+  .theme-top-brand {
+    border-color: var(--theme-primary);
   }
 }
 
@@ -100,14 +323,14 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f5f0e6;
+  background: var(--theme-surface-alt, #f5f0e6);
 }
 ::-webkit-scrollbar-thumb {
-  background: #d97706;
+  background: var(--theme-primary, #09979D);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b45309;
+  background: var(--theme-primary-dark, #055B5C);
 }
 
 /* Marquee pause on hover */

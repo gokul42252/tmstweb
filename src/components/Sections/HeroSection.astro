@@ -30,26 +30,26 @@ const tickerItems = [
 
 <div class="relative overflow-hidden bg-stone-950 text-white">
   <!-- Live Scrolling Marquee / Ticker -->
-  <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-stone-950 text-xs sm:text-sm font-bold py-2 overflow-hidden border-b border-amber-300">
+  <div class="text-white text-xs sm:text-sm font-bold py-2 overflow-hidden border-b" style="background: linear-gradient(to right, var(--theme-banner-start), var(--theme-banner-end)); border-bottom-color: var(--theme-card-border);">
     <div class="flex items-center">
-      <div class="flex-shrink-0 px-4 bg-amber-700 text-amber-100 py-1 uppercase tracking-wider text-[11px] font-black flex items-center gap-1.5 shadow-sm z-10">
-        <span class="inline-block w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+      <div class="flex-shrink-0 px-4 py-1 uppercase tracking-wider text-[11px] font-black flex items-center gap-1.5 shadow-sm z-10 text-white" style="background-color: var(--theme-primary-dark);">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
         വിശേഷങ്ങൾ
       </div>
       
       <div class="overflow-hidden whitespace-nowrap w-full">
         <div class="inline-flex animate-marquee hover:pause-hover gap-8 pl-4">
           {tickerItems.map((item) => (
-            <span class="inline-flex items-center gap-2 text-stone-950 font-semibold">
+            <span class="inline-flex items-center gap-2 text-white font-semibold">
               <span>{item}</span>
-              <span class="text-amber-800">✦</span>
+              <span style="color: var(--theme-primary-light);">✦</span>
             </span>
           ))}
           {/* Duplicate for seamless infinite loop */}
           {tickerItems.map((item) => (
-            <span class="inline-flex items-center gap-2 text-stone-950 font-semibold">
+            <span class="inline-flex items-center gap-2 text-white font-semibold">
               <span>{item}</span>
-              <span class="text-amber-800">✦</span>
+              <span style="color: var(--theme-primary-light);">✦</span>
             </span>
           ))}
         </div>

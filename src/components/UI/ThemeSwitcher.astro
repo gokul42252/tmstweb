@@ -1,0 +1,280 @@
+---
+import { TEMPLE_THEMES } from "../../data/themes";
+---
+
+<!-- Floating Classy Theme Switcher Widget -->
+<aside aria-label="Theme selector" class="fixed bottom-5 right-5 z-40 no-print">
+  <!-- Trigger Pill Button -->
+  <button
+    id="theme-switcher-trigger"
+    type="button"
+    class="flex items-center space-x-2.5 px-3.5 py-2.5 rounded-full bg-stone-900/90 text-white shadow-xl hover:shadow-2xl border border-white/20 backdrop-blur-md hover:scale-105 active:scale-95 transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-amber-400"
+    title="Choose one of 6 Sacred Temple Color Themes"
+    aria-label="Change Theme"
+  >
+    <!-- Visual color dots preview of current theme -->
+    <span class="relative flex h-3.5 w-3.5">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-gradient-to-r from-amber-400 to-rose-400"></span>
+    </span>
+
+    <span class="text-xs font-semibold tracking-wide flex items-center space-x-1">
+      <span class="text-amber-300">🎨</span>
+      <span class="hidden sm:inline">Theme:</span>
+      <span id="current-theme-label" class="font-bold text-amber-200 capitalize">Neelakantha</span>
+    </span>
+
+    <!-- Quick mini palette dots -->
+    <div id="trigger-mini-dots" class="flex items-center -space-x-1 pl-1">
+      <span class="w-2.5 h-2.5 rounded-full border border-stone-900 bg-[#CCA8DB]"></span>
+      <span class="w-2.5 h-2.5 rounded-full border border-stone-900 bg-[#8475A1]"></span>
+      <span class="w-2.5 h-2.5 rounded-full border border-stone-900 bg-[#46C6CA]"></span>
+      <span class="w-2.5 h-2.5 rounded-full border border-stone-900 bg-[#09979D]"></span>
+      <span class="w-2.5 h-2.5 rounded-full border border-stone-900 bg-[#055B5C]"></span>
+    </div>
+  </button>
+
+  <!-- Theme Selector Modal / Drawer Backdrop & Panel -->
+  <div
+    id="theme-modal-backdrop"
+    class="fixed inset-0 bg-stone-950/60 backdrop-blur-sm z-50 hidden transition-opacity duration-300 items-center justify-center p-3 sm:p-4"
+  >
+    <div
+      id="theme-modal-panel"
+      class="bg-white rounded-3xl shadow-2xl border border-stone-200 max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+    >
+      <!-- Modal Header -->
+      <div class="px-5 sm:px-8 py-5 border-b border-stone-200/80 bg-stone-50 flex items-center justify-between">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/15 text-amber-800 border border-amber-500/30">
+              6 Classy Dopely Themes
+            </span>
+            <span class="text-xs text-stone-500 hidden sm:inline">• Official Temple Design System</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-serif font-black text-stone-900 mt-1">
+            Choose Temple Visual Theme
+          </h3>
+          <p class="text-xs sm:text-sm text-stone-600 mt-0.5">
+            Select any of the 6 authentic sacred palettes to transform buttons, banners, gradients, and accents.
+          </p>
+        </div>
+
+        <button
+          id="theme-modal-close"
+          class="p-2 rounded-full text-stone-400 hover:text-stone-700 hover:bg-stone-200/60 transition-colors focus:outline-none"
+          aria-label="Close theme selector"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Theme Cards Grid (2 cols on md, 3 on lg) -->
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-4 max-h-[calc(90vh-140px)]">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {TEMPLE_THEMES.map((theme) => (
+            <button
+              type="button"
+              class="theme-card-option text-left p-4 sm:p-5 rounded-2xl border-2 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none relative group bg-white border-stone-200 hover:border-stone-400"
+              data-theme-id={theme.id}
+              data-theme-name={theme.name}
+              data-theme-swatches={JSON.stringify(theme.swatches)}
+            >
+              <!-- Active Badge -->
+              <div class="theme-active-indicator absolute top-3 right-3 hidden items-center space-x-1 px-2.5 py-1 rounded-full text-[11px] font-bold text-white bg-emerald-600 shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Active</span>
+              </div>
+
+              <!-- Palette Badge & Titles -->
+              <div class="flex items-center space-x-2 mb-2 pr-16">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-stone-100 text-stone-800 border border-stone-300">
+                  #{theme.paletteNumber}
+                </span>
+                <span class="text-xs font-malayalam font-bold text-stone-600 truncate">
+                  {theme.malayalamName}
+                </span>
+              </div>
+
+              <h4 class="font-serif font-bold text-base sm:text-lg text-stone-900 group-hover:text-amber-800 transition-colors leading-tight">
+                {theme.name}
+              </h4>
+              <p class="text-xs text-stone-500 mt-1 line-clamp-2 leading-relaxed">
+                {theme.tagline}
+              </p>
+
+              <!-- 5 Pill Swatches (Matching Image!) -->
+              <div class="mt-4 pt-3 border-t border-stone-100">
+                <div class="text-[10px] uppercase font-bold tracking-wider text-stone-400 mb-2">
+                  5 Color Palette Swatches
+                </div>
+                <div class="grid grid-cols-5 gap-1.5 h-12 rounded-xl p-1 bg-stone-50 border border-stone-200">
+                  {theme.swatches.map((color) => (
+                    <div
+                      class="rounded-lg shadow-inner h-full flex flex-col items-center justify-end pb-1 transition-transform group-hover:scale-105"
+                      style={`background-color: ${color};`}
+                      title={color}
+                    >
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- 5 Gradient Circles (Matching Image!) -->
+              <div class="mt-3">
+                <div class="text-[10px] uppercase font-bold tracking-wider text-stone-400 mb-1.5">
+                  Gradient Harmony Circles
+                </div>
+                <div class="flex items-center justify-between px-1">
+                  {theme.gradientCircles.map((grad) => (
+                    <div
+                      class="w-6 h-6 rounded-full shadow-sm border border-white transition-transform group-hover:scale-110"
+                      style={`background: ${grad};`}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Signature Button Preview -->
+              <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between">
+                <span class="text-[11px] font-medium text-stone-500">Apply this style</span>
+                <span
+                  class="px-3 py-1 rounded-lg text-xs font-bold text-white shadow-sm"
+                  style={`background: linear-gradient(135deg, ${theme.cssVariables.gradientStart}, ${theme.cssVariables.gradientMid}, ${theme.cssVariables.gradientEnd});`}
+                >
+                  Select & Apply →
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 bg-stone-50 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-600">
+        <div class="flex items-center space-x-2">
+          <span>✨ Chosen theme persists across pages & visits via browser storage.</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <a
+            href="/themes"
+            class="text-amber-800 hover:text-amber-900 font-bold hover:underline"
+          >
+            View Full Themes Gallery Showcase →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script is:inline>
+  (function () {
+    const trigger = document.getElementById('theme-switcher-trigger');
+    const backdrop = document.getElementById('theme-modal-backdrop');
+    const closeBtn = document.getElementById('theme-modal-close');
+    const currentLabel = document.getElementById('current-theme-label');
+    const triggerDots = document.getElementById('trigger-mini-dots');
+    const themeCards = document.querySelectorAll('.theme-card-option');
+
+    function applyTheme(themeId) {
+      if (!themeId) return;
+      document.documentElement.setAttribute('data-theme', themeId);
+      try {
+        localStorage.setItem('thirumarady_theme', themeId);
+      } catch (e) {}
+
+      // Update UI active card
+      themeCards.forEach((card) => {
+        const id = card.getAttribute('data-theme-id');
+        const indicator = card.querySelector('.theme-active-indicator');
+        if (id === themeId) {
+          card.classList.add('border-emerald-600', 'ring-2', 'ring-emerald-500/20', 'bg-emerald-50/20');
+          card.classList.remove('border-stone-200');
+          if (indicator) indicator.classList.remove('hidden');
+          if (indicator) indicator.classList.add('inline-flex');
+
+          // Update trigger label
+          const name = card.getAttribute('data-theme-name');
+          if (currentLabel && name) {
+            currentLabel.textContent = name.split(' ')[0];
+          }
+
+          // Update mini dots
+          const swatchesRaw = card.getAttribute('data-theme-swatches');
+          if (swatchesRaw && triggerDots) {
+            try {
+              const swatches = JSON.parse(swatchesRaw);
+              triggerDots.innerHTML = swatches
+                .map(
+                  (c) =>
+                    `<span class="w-2.5 h-2.5 rounded-full border border-stone-900" style="background-color: ${c}"></span>`
+                )
+                .join('');
+            } catch (e) {}
+          }
+        } else {
+          card.classList.remove('border-emerald-600', 'ring-2', 'ring-emerald-500/20', 'bg-emerald-50/20');
+          card.classList.add('border-stone-200');
+          if (indicator) indicator.classList.add('hidden');
+          if (indicator) indicator.classList.remove('inline-flex');
+        }
+      });
+
+      // Dispatch event
+      window.dispatchEvent(new CustomEvent('thirumarady-theme-change', { detail: { theme: themeId } }));
+    }
+
+    // Initialize active theme
+    const activeTheme = document.documentElement.getAttribute('data-theme') || localStorage.getItem('thirumarady_theme') || 'neelakantha';
+    applyTheme(activeTheme);
+
+    // Modal open/close logic
+    function openModal() {
+      if (backdrop) {
+        backdrop.classList.remove('hidden');
+        backdrop.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal() {
+      if (backdrop) {
+        backdrop.classList.add('hidden');
+        backdrop.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (trigger) trigger.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) closeModal();
+      });
+    }
+
+    // Expose open function globally so header button can invoke it
+    window.openThemeModal = openModal;
+
+    // Handle card clicks
+    themeCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const id = card.getAttribute('data-theme-id');
+        applyTheme(id);
+        setTimeout(closeModal, 250);
+      });
+    });
+
+    // Close on Esc key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && backdrop && !backdrop.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  })();
+</script>

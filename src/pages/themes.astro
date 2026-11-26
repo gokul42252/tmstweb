@@ -1,0 +1,200 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/Sections/PageHeader.astro";
+import { TEMPLE_THEMES } from "../data/themes";
+---
+
+<BaseLayout
+  title="Visual Design Themes | Thirumarady Sri Mahadeva Temple"
+  description="Explore the 6 authentic sacred color palettes and themes designed for Thirumarady Sri Mahadeva Temple, inspired by traditional Kerala temple aesthetics."
+>
+  <PageHeader
+    title="Sacred Temple Themes"
+    subtitle="6 Classy Dopely Color Palettes & Visual Schemes"
+    malayalamSubtitle="ക്ഷേത്രത്തിന്റെ 6 വർണ്ണ സങ്കേതങ്ങൾ"
+  />
+
+  <section class="py-12 sm:py-16">
+    <div class="container max-w-6xl">
+      <!-- Intro Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-stone-200/80 mb-12">
+        <div class="max-w-3xl">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-900 border border-amber-500/30 mb-3">
+            🎨 Design System & Color Harmonies
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-serif font-black text-stone-900 mb-4">
+            Authentic Sacred Palettes for Thirumarady Temple
+          </h2>
+          <p class="text-stone-600 text-sm sm:text-base leading-relaxed">
+            The visual identity of Thirumarady Sri Mahadeva Temple combines ancient Shaivite spirituality with refined modern aesthetics. Below are the 6 handcrafted themes directly adapted from the Dopely color system. Each palette brings a distinct devotional mood — from the celestial Neelakantha teal to the vibrant festival terracotta and serene sandalwood rose.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onclick="window.openThemeModal ? window.openThemeModal() : null"
+              class="btn btn-primary text-sm font-bold shadow-md"
+            >
+              Open Quick Theme Picker ⚡
+            </button>
+            <a href="/" class="btn btn-outline text-sm font-semibold">
+              Return to Home Page
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 Themes Detailed Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {TEMPLE_THEMES.map((theme) => (
+          <div
+            class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border-2 border-stone-200 hover:border-stone-400 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+            id={`theme-card-${theme.id}`}
+          >
+            <div>
+              <!-- Top Badge & Header -->
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <div class="flex items-center space-x-2">
+                    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-black bg-stone-900 text-white shadow-sm">
+                      Dopely #{theme.paletteNumber}
+                    </span>
+                    <span class="text-sm font-malayalam font-bold text-stone-600">
+                      {theme.malayalamName}
+                    </span>
+                  </div>
+                  <h3 class="text-xl sm:text-2xl font-serif font-bold text-stone-900 mt-2">
+                    {theme.name}
+                  </h3>
+                </div>
+
+                <button
+                  type="button"
+                  class="apply-theme-btn flex-shrink-0 px-4 py-2 rounded-xl text-xs font-bold text-white shadow-sm transition-transform hover:scale-105 active:scale-95"
+                  style={`background: linear-gradient(135deg, ${theme.cssVariables.gradientStart}, ${theme.cssVariables.gradientMid}, ${theme.cssVariables.gradientEnd});`}
+                  data-theme-id={theme.id}
+                >
+                  Apply Theme ✨
+                </button>
+              </div>
+
+              <!-- Tagline & Description -->
+              <p class="text-xs sm:text-sm font-medium text-stone-700 italic mb-2">
+                "{theme.tagline}"
+              </p>
+              <p class="text-xs sm:text-sm text-stone-500 leading-relaxed mb-6">
+                {theme.description}
+              </p>
+
+              <!-- 5 Swatch Pills (Matching Uploaded Image) -->
+              <div class="mb-6 bg-stone-50 p-4 rounded-2xl border border-stone-200">
+                <div class="text-[11px] uppercase tracking-wider font-bold text-stone-400 mb-3 flex items-center justify-between">
+                  <span>5-Color Palette Swatches</span>
+                  <span>Hex Identifiers</span>
+                </div>
+                <div class="grid grid-cols-5 gap-2 sm:gap-3">
+                  {theme.swatches.map((hex, idx) => (
+                    <div class="flex flex-col items-center">
+                      <div
+                        class="w-full h-16 sm:h-20 rounded-xl shadow-inner border border-black/5 hover:scale-105 transition-transform"
+                        style={`background-color: ${hex};`}
+                        title={hex}
+                      ></div>
+                      <span class="mt-2 text-[10px] sm:text-xs font-mono font-bold text-stone-700">
+                        {hex}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- 5 Gradient Circles (Matching Uploaded Image) -->
+              <div class="mb-6">
+                <div class="text-[11px] uppercase tracking-wider font-bold text-stone-400 mb-3">
+                  Gradient Harmony Circles
+                </div>
+                <div class="flex items-center justify-between px-2 bg-stone-50/50 py-3 rounded-2xl border border-stone-100">
+                  {theme.gradientCircles.map((grad, i) => (
+                    <div class="flex flex-col items-center space-y-1.5">
+                      <div
+                        class="w-9 h-9 sm:w-11 sm:h-11 rounded-full shadow-md border-2 border-white hover:scale-110 transition-transform"
+                        style={`background: ${grad};`}
+                      ></div>
+                      <span class="text-[9px] font-mono text-stone-400">G{i+1}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Preview Strip -->
+            <div class="pt-5 border-t border-stone-100 flex items-center justify-between gap-3 flex-wrap">
+              <div class="flex items-center space-x-2">
+                <span
+                  class="px-2.5 py-1 rounded-md text-[11px] font-bold"
+                  style={`background-color: ${theme.cssVariables.badgeBg}; color: ${theme.cssVariables.badgeText}; border: 1px solid ${theme.cssVariables.badgeBorder};`}
+                >
+                  Badge Demo
+                </span>
+                <span
+                  class="w-3 h-3 rounded-full"
+                  style={`background-color: ${theme.cssVariables.primary};`}
+                ></span>
+                <span class="text-xs text-stone-500 font-mono">
+                  Primary: {theme.cssVariables.primary}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="apply-theme-btn text-xs font-bold text-stone-800 hover:text-black underline underline-offset-4"
+                data-theme-id={theme.id}
+              >
+                Set as Active Theme →
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function() {
+      const buttons = document.querySelectorAll('.apply-theme-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-theme-id');
+          if (id) {
+            document.documentElement.setAttribute('data-theme', id);
+            try {
+              localStorage.setItem('thirumarady_theme', id);
+            } catch (e) {}
+            
+            // Highlight current card
+            document.querySelectorAll('[id^="theme-card-"]').forEach(card => {
+              card.classList.remove('ring-4', 'ring-emerald-500/30', 'border-emerald-600');
+            });
+            const activeCard = document.getElementById(`theme-card-${id}`);
+            if (activeCard) {
+              activeCard.classList.add('ring-4', 'ring-emerald-500/30', 'border-emerald-600');
+            }
+
+            // Notification toast
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-20 right-5 z-50 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold flex items-center space-x-2 animate-bounce';
+            toast.innerHTML = `<span>✨</span><span>Theme "${id}" activated successfully!</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+          }
+        });
+      });
+
+      // Highlight initial active theme card
+      const current = document.documentElement.getAttribute('data-theme') || 'neelakantha';
+      const initialCard = document.getElementById(`theme-card-${current}`);
+      if (initialCard) {
+        initialCard.classList.add('ring-4', 'ring-emerald-500/30', 'border-emerald-600');
+      }
+    })();
+  </script>
+</BaseLayout>
