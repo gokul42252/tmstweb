@@ -64,6 +64,12 @@ export const TEMPLE_INFO = {
     state: "Kerala",
     pincode: "686662"
   },
+  coordinates: {
+    latitude: 9.887334333519814,
+    longitude: 76.55510677511232,
+    googleMapsUrl: "https://www.google.com/maps/place/Mahadeva+Temple,+Thirumarady,+Keralam+686662/@9.88716,76.5551389,1071m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b07dbfb5bd8875b:0xe12930b3c6ffabfc!8m2!3d9.887123!4d76.555145!16s%2Fg%2F11bvtfgd1q?entry=ttu&g_ep=EgoyMDI2MTEyMy4wIKXMDSoASAFQAw%3D%3D",
+    embedUrl: "https://maps.google.com/maps?q=9.887334333519814,76.55510677511232+(Mahadeva+Temple,+Thirumarady)&t=&z=17&ie=UTF8&iwloc=B&output=embed"
+  },
   phone: "0485-2877300",
   email: "devaswom@thirumaradytemple.org",
   upi: {
