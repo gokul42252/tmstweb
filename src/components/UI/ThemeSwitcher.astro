@@ -184,6 +184,9 @@ import { TEMPLE_THEMES } from "../../data/themes";
     function applyTheme(themeId) {
       if (!themeId) return;
       document.documentElement.setAttribute('data-theme', themeId);
+      if (document.body) {
+        document.body.setAttribute('data-theme', themeId);
+      }
       try {
         localStorage.setItem('thirumarady_theme', themeId);
       } catch (e) {}

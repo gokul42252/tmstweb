@@ -42,6 +42,9 @@ const {
         try {
           const savedTheme = localStorage.getItem('thirumarady_theme') || 'neelakantha';
           document.documentElement.setAttribute('data-theme', savedTheme);
+          document.addEventListener('DOMContentLoaded', function() {
+            if (document.body) document.body.setAttribute('data-theme', savedTheme);
+          });
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'neelakantha');
         }

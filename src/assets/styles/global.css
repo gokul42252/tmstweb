@@ -5,35 +5,25 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   CLASSY THEMES - 6 DOPELY PALETTES ARCHITECTURE
+   CLASSY THEMES - 6 AUTHENTIC DOPELY PALETTES DYNAMIC COLOR ARCHITECTURE
    ========================================================================== */
 
-:root {
-  /* Default: Neelakantha Teal & Iris (Dopely #16) */
-  --theme-primary: #09979D;
-  --theme-primary-dark: #055B5C;
-  --theme-primary-hover: #077C81;
-  --theme-primary-light: #46C6CA;
-  --theme-accent: #46C6CA;
-  --theme-accent-glow: rgba(70, 198, 202, 0.35);
-  --theme-secondary: #8475A1;
-  --theme-surface: #F4FAFA;
-  --theme-surface-alt: #E6F3F4;
-  --theme-card-border: rgba(9, 151, 157, 0.22);
-  --theme-gradient-start: #055B5C;
-  --theme-gradient-mid: #09979D;
-  --theme-gradient-end: #46C6CA;
-  --theme-banner-start: #054D4E;
-  --theme-banner-end: #097E83;
-  --theme-badge-bg: rgba(9, 151, 157, 0.12);
-  --theme-badge-text: #055B5C;
-  --theme-badge-border: rgba(9, 151, 157, 0.3);
-  --theme-btn-text: #FFFFFF;
-  --theme-ring-color: #09979D;
-}
-
-/* 1. Neelakantha Teal & Iris (Dopely #16) */
+:root,
 [data-theme="neelakantha"] {
+  /* 1. Neelakantha Teal & Iris (Dopely #16) */
+  /* Swatches: #CCA8DB, #8475A1, #46C6CA, #09979D, #055B5C */
+  --color-amber-50-rgb: 244 250 250;
+  --color-amber-100-rgb: 228 244 245;
+  --color-amber-200-rgb: 204 168 219;
+  --color-amber-300-rgb: 132 117 161;
+  --color-amber-400-rgb: 70 198 202;
+  --color-amber-500-rgb: 9 151 157;
+  --color-amber-600-rgb: 7 124 129;
+  --color-amber-700-rgb: 6 102 105;
+  --color-amber-800-rgb: 5 91 92;
+  --color-amber-900-rgb: 4 65 66;
+  --color-amber-950-rgb: 2 38 39;
+
   --theme-primary: #09979D;
   --theme-primary-dark: #055B5C;
   --theme-primary-hover: #077C81;
@@ -53,11 +43,23 @@
   --theme-badge-text: #055B5C;
   --theme-badge-border: rgba(9, 151, 157, 0.3);
   --theme-btn-text: #FFFFFF;
-  --theme-ring-color: #09979D;
 }
 
-/* 2. Sacred Vilvam & Forest (Dopely #19) */
 [data-theme="sacred-vilvam"] {
+  /* 2. Sacred Vilvam & Forest (Dopely #19) */
+  /* Swatches: #31C3CC, #1E4755, #7EA205, #D1CD44, #273B02 */
+  --color-amber-50-rgb: 244 248 246;
+  --color-amber-100-rgb: 226 242 235;
+  --color-amber-200-rgb: 209 205 68;
+  --color-amber-300-rgb: 126 162 5;
+  --color-amber-400-rgb: 49 195 204;
+  --color-amber-500-rgb: 30 71 85;
+  --color-amber-600-rgb: 24 58 70;
+  --color-amber-700-rgb: 39 59 2;
+  --color-amber-800-rgb: 30 46 2;
+  --color-amber-900-rgb: 20 38 46;
+  --color-amber-950-rgb: 10 20 25;
+
   --theme-primary: #1E4755;
   --theme-primary-dark: #273B02;
   --theme-primary-hover: #153540;
@@ -77,11 +79,23 @@
   --theme-badge-text: #273B02;
   --theme-badge-border: rgba(126, 162, 5, 0.35);
   --theme-btn-text: #FFFFFF;
-  --theme-ring-color: #31C3CC;
 }
 
-/* 3. Usha Pooja Dawn (Dopely #17) */
 [data-theme="usha-dawn"] {
+  /* 3. Usha Pooja Dawn (Dopely #17) */
+  /* Swatches: #90E3CE, #D5EAA5, #FFEDB4, #F4957B, #CCA8DB */
+  --color-amber-50-rgb: 254 252 248;
+  --color-amber-100-rgb: 255 237 180;
+  --color-amber-200-rgb: 213 234 165;
+  --color-amber-300-rgb: 144 227 206;
+  --color-amber-400-rgb: 204 168 219;
+  --color-amber-500-rgb: 244 149 123;
+  --color-amber-600-rgb: 224 122 96;
+  --color-amber-700-rgb: 188 95 72;
+  --color-amber-800-rgb: 152 70 50;
+  --color-amber-900-rgb: 116 50 35;
+  --color-amber-950-rgb: 72 30 20;
+
   --theme-primary: #D4674B;
   --theme-primary-dark: #9E3C24;
   --theme-primary-hover: #BF553B;
@@ -101,11 +115,23 @@
   --theme-badge-text: #9E3C24;
   --theme-badge-border: rgba(212, 103, 75, 0.3);
   --theme-btn-text: #FFFFFF;
-  --theme-ring-color: #D4674B;
 }
 
-/* 4. Ananda Thandavam - Midnight Sapphire (Dopely #15) */
 [data-theme="ananda-thandavam"] {
+  /* 4. Ananda Thandavam - Midnight Sapphire (Dopely #15) */
+  /* Swatches: #0A1B46, #0A487A, #018ABE, #97CADB, #D6EEF8 */
+  --color-amber-50-rgb: 242 247 250;
+  --color-amber-100-rgb: 214 238 248;
+  --color-amber-200-rgb: 151 202 219;
+  --color-amber-300-rgb: 65 165 210;
+  --color-amber-400-rgb: 1 138 190;
+  --color-amber-500-rgb: 10 72 122;
+  --color-amber-600-rgb: 8 58 98;
+  --color-amber-700-rgb: 10 27 70;
+  --color-amber-800-rgb: 8 21 55;
+  --color-amber-900-rgb: 5 14 38;
+  --color-amber-950-rgb: 3 8 22;
+
   --theme-primary: #018ABE;
   --theme-primary-dark: #0A1B46;
   --theme-primary-hover: #01709C;
@@ -125,11 +151,23 @@
   --theme-badge-text: #0A487A;
   --theme-badge-border: rgba(1, 138, 190, 0.3);
   --theme-btn-text: #FFFFFF;
-  --theme-ring-color: #018ABE;
 }
 
-/* 5. Dhanu Utsavam - Saffron Terracotta (Dopely #18) */
 [data-theme="dhanu-utsavam"] {
+  /* 5. Dhanu Utsavam - Saffron Terracotta (Dopely #18) */
+  /* Swatches: #F25D49, #F98557, #FAC352, #88D1C9, #A3C365 */
+  --color-amber-50-rgb: 254 248 245;
+  --color-amber-100-rgb: 254 236 228;
+  --color-amber-200-rgb: 136 209 201;
+  --color-amber-300-rgb: 163 195 101;
+  --color-amber-400-rgb: 250 195 82;
+  --color-amber-500-rgb: 249 133 87;
+  --color-amber-600-rgb: 242 93 73;
+  --color-amber-700-rgb: 210 65 45;
+  --color-amber-800-rgb: 170 45 30;
+  --color-amber-900-rgb: 125 30 20;
+  --color-amber-950-rgb: 75 18 12;
+
   --theme-primary: #DE432E;
   --theme-primary-dark: #A62716;
   --theme-primary-hover: #C43623;
@@ -149,11 +187,23 @@
   --theme-badge-text: #A62716;
   --theme-badge-border: rgba(222, 67, 46, 0.3);
   --theme-btn-text: #FFFFFF;
-  --theme-ring-color: #DE432E;
 }
 
-/* 6. Nirmalyam Sandalwood - Rose & Sandal (Dopely #20) */
 [data-theme="nirmalyam-sandal"] {
+  /* 6. Nirmalyam Sandalwood - Rose & Sandal (Dopely #20) */
+  /* Swatches: #FCE3C7, #E79796, #FFC88B, #FFB084, #C6C09C */
+  --color-amber-50-rgb: 253 251 248;
+  --color-amber-100-rgb: 252 227 199;
+  --color-amber-200-rgb: 198 192 156;
+  --color-amber-300-rgb: 255 200 139;
+  --color-amber-400-rgb: 255 176 132;
+  --color-amber-500-rgb: 231 151 150;
+  --color-amber-600-rgb: 205 125 124;
+  --color-amber-700-rgb: 170 95 94;
+  --color-amber-800-rgb: 135 70 69;
+  --color-amber-900-rgb: 95 48 47;
+  --color-amber-950-rgb: 55 28 27;
+
   --theme-primary: #C86F6E;
   --theme-primary-dark: #8E3D3C;
   --theme-primary-hover: #B05A59;
@@ -173,7 +223,6 @@
   --theme-badge-text: #8E3D3C;
   --theme-badge-border: rgba(200, 111, 110, 0.3);
   --theme-btn-text: #FFFFFF;
-  --theme-ring-color: #C86F6E;
 }
 
 @layer base {
@@ -184,11 +233,16 @@
   }
   
   body {
-    @apply font-sans text-stone-800 antialiased selection:bg-amber-500 selection:text-white;
-    background-color: var(--theme-surface, #fcfaf5);
+    @apply font-sans text-stone-800 antialiased;
+    background-color: rgb(var(--color-amber-50-rgb));
     overflow-x: hidden;
     width: 100%;
     transition: background-color 0.3s ease;
+  }
+
+  ::selection {
+    background-color: rgb(var(--color-amber-500-rgb));
+    color: #ffffff;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -230,15 +284,15 @@
   }
 
   .btn-primary {
-    color: var(--theme-btn-text, #ffffff) !important;
-    background: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-mid), var(--theme-gradient-end)) !important;
-    box-shadow: 0 4px 14px 0 var(--theme-accent-glow, rgba(0, 0, 0, 0.2)) !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, rgb(var(--color-amber-600-rgb)), rgb(var(--color-amber-500-rgb)), rgb(var(--color-amber-400-rgb))) !important;
+    box-shadow: 0 4px 14px 0 rgba(var(--color-amber-500-rgb), 0.3) !important;
     transition: all 0.25s ease-in-out;
   }
 
   .btn-primary:hover {
     filter: brightness(1.1);
-    box-shadow: 0 6px 20px 0 var(--theme-accent-glow, rgba(0, 0, 0, 0.3)) !important;
+    box-shadow: 0 6px 20px 0 rgba(var(--color-amber-500-rgb), 0.45) !important;
     transform: translateY(-1px);
   }
 
@@ -248,25 +302,30 @@
 
   .btn-accent {
     color: #ffffff !important;
-    background: linear-gradient(135deg, var(--theme-primary-dark), var(--theme-primary)) !important;
-    box-shadow: 0 4px 14px 0 var(--theme-accent-glow, rgba(0, 0, 0, 0.2)) !important;
+    background: linear-gradient(135deg, rgb(var(--color-amber-700-rgb)), rgb(var(--color-amber-500-rgb))) !important;
+    box-shadow: 0 4px 14px 0 rgba(var(--color-amber-500-rgb), 0.3) !important;
   }
 
   .btn-outline {
     @apply text-stone-800 bg-white/90 border border-stone-300 hover:bg-stone-50 focus:ring-2 backdrop-blur-sm;
   }
 
+  .btn-outline:hover {
+    border-color: rgb(var(--color-amber-500-rgb)) !important;
+    color: rgb(var(--color-amber-700-rgb)) !important;
+  }
+
   .btn-outline-gold {
-    color: var(--theme-primary);
-    border: 1px solid var(--theme-card-border);
-    background-color: var(--theme-badge-bg);
+    color: rgb(var(--color-amber-400-rgb)) !important;
+    border: 1px solid rgba(var(--color-amber-400-rgb), 0.6) !important;
+    background-color: rgba(var(--color-amber-950-rgb), 0.2) !important;
     backdrop-filter: blur(4px);
     transition: all 0.2s ease;
   }
 
   .btn-outline-gold:hover {
-    background-color: var(--theme-primary);
-    color: #ffffff;
+    background-color: rgb(var(--color-amber-500-rgb)) !important;
+    color: #ffffff !important;
   }
 
   .card {
@@ -274,8 +333,8 @@
   }
 
   .card:hover {
-    border-color: var(--theme-primary-light, #fbbf24) !important;
-    box-shadow: 0 10px 25px -5px var(--theme-accent-glow, rgba(0,0,0,0.1)) !important;
+    border-color: rgb(var(--color-amber-400-rgb)) !important;
+    box-shadow: 0 10px 25px -5px rgba(var(--color-amber-500-rgb), 0.25) !important;
   }
 
   .temple-gradient-bg {
@@ -284,36 +343,32 @@
 
   .temple-card-dark {
     @apply bg-stone-900/90 rounded-xl backdrop-blur-md;
-    border: 1px solid var(--theme-card-border, rgba(245, 158, 11, 0.2));
+    border: 1px solid rgba(var(--color-amber-500-rgb), 0.25);
   }
 
   .gold-shimmer {
-    background: linear-gradient(135deg, var(--theme-primary-dark) 0%, var(--theme-primary) 50%, var(--theme-primary-light) 100%);
+    background: linear-gradient(135deg, rgb(var(--color-amber-600-rgb)) 0%, rgb(var(--color-amber-400-rgb)) 50%, rgb(var(--color-amber-700-rgb)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   /* Theme-specific Dynamic Utilities */
   .theme-action-strip {
-    background: linear-gradient(to right, var(--theme-banner-start), var(--theme-banner-end));
+    background: linear-gradient(to right, rgb(var(--color-amber-800-rgb)), rgb(var(--color-amber-600-rgb)));
   }
 
   .theme-badge {
-    background-color: var(--theme-badge-bg);
-    color: var(--theme-badge-text);
-    border: 1px solid var(--theme-badge-border);
+    background-color: rgba(var(--color-amber-500-rgb), 0.12);
+    color: rgb(var(--color-amber-800-rgb));
+    border: 1px solid rgba(var(--color-amber-500-rgb), 0.3);
   }
 
   .theme-card-border {
-    border-color: var(--theme-card-border);
+    border-color: rgba(var(--color-amber-500-rgb), 0.22);
   }
 
   .theme-accent-glow {
-    box-shadow: 0 4px 20px -2px var(--theme-accent-glow);
-  }
-
-  .theme-top-brand {
-    border-color: var(--theme-primary);
+    box-shadow: 0 4px 20px -2px rgba(var(--color-amber-500-rgb), 0.35);
   }
 }
 
@@ -323,14 +378,14 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--theme-surface-alt, #f5f0e6);
+  background: rgb(var(--color-amber-50-rgb));
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--theme-primary, #09979D);
+  background: rgb(var(--color-amber-500-rgb));
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--theme-primary-dark, #055B5C);
+  background: rgb(var(--color-amber-700-rgb));
 }
 
 /* Marquee pause on hover */
