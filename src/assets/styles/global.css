@@ -13,20 +13,20 @@
   /* 1. Neelakantha Teal & Iris (Dopely #16) */
   /* Swatches: #CCA8DB, #8475A1, #46C6CA, #09979D, #055B5C */
   --color-amber-50-rgb: 244 250 250;
-  --color-amber-100-rgb: 228 244 245;
+  --color-amber-100-rgb: 224 243 244;
   --color-amber-200-rgb: 204 168 219;
   --color-amber-300-rgb: 132 117 161;
   --color-amber-400-rgb: 70 198 202;
-  --color-amber-500-rgb: 9 151 157;
-  --color-amber-600-rgb: 7 124 129;
-  --color-amber-700-rgb: 6 102 105;
-  --color-amber-800-rgb: 5 91 92;
-  --color-amber-900-rgb: 4 65 66;
-  --color-amber-950-rgb: 2 38 39;
+  --color-amber-500-rgb: 7 130 136;
+  --color-amber-600-rgb: 6 112 117;
+  --color-amber-700-rgb: 5 91 92;
+  --color-amber-800-rgb: 4 72 73;
+  --color-amber-900-rgb: 3 52 53;
+  --color-amber-950-rgb: 2 34 35;
 
-  --theme-primary: #09979D;
+  --theme-primary: #078288;
   --theme-primary-dark: #055B5C;
-  --theme-primary-hover: #077C81;
+  --theme-primary-hover: #067075;
   --theme-primary-light: #46C6CA;
   --theme-accent: #46C6CA;
   --theme-accent-glow: rgba(70, 198, 202, 0.35);
@@ -35,8 +35,8 @@
   --theme-surface-alt: #E6F3F4;
   --theme-card-border: rgba(9, 151, 157, 0.22);
   --theme-gradient-start: #055B5C;
-  --theme-gradient-mid: #09979D;
-  --theme-gradient-end: #46C6CA;
+  --theme-gradient-mid: #067075;
+  --theme-gradient-end: #078288;
   --theme-banner-start: #054D4E;
   --theme-banner-end: #097E83;
   --theme-badge-bg: rgba(9, 151, 157, 0.12);
@@ -70,9 +70,9 @@
   --theme-surface: #F5F8F6;
   --theme-surface-alt: #E8F0EA;
   --theme-card-border: rgba(30, 71, 85, 0.22);
-  --theme-gradient-start: #1E4755;
-  --theme-gradient-mid: #2C6377;
-  --theme-gradient-end: #31C3CC;
+  --theme-gradient-start: #273B02;
+  --theme-gradient-mid: #183A46;
+  --theme-gradient-end: #1E4755;
   --theme-banner-start: #163844;
   --theme-banner-end: #235566;
   --theme-badge-bg: rgba(126, 162, 5, 0.12);
@@ -84,36 +84,36 @@
 [data-theme="usha-dawn"] {
   /* 3. Usha Pooja Dawn (Dopely #17) */
   /* Swatches: #90E3CE, #D5EAA5, #FFEDB4, #F4957B, #CCA8DB */
-  --color-amber-50-rgb: 254 252 248;
+  --color-amber-50-rgb: 254 251 247;
   --color-amber-100-rgb: 255 237 180;
   --color-amber-200-rgb: 213 234 165;
   --color-amber-300-rgb: 144 227 206;
-  --color-amber-400-rgb: 204 168 219;
-  --color-amber-500-rgb: 244 149 123;
-  --color-amber-600-rgb: 224 122 96;
-  --color-amber-700-rgb: 188 95 72;
-  --color-amber-800-rgb: 152 70 50;
-  --color-amber-900-rgb: 116 50 35;
-  --color-amber-950-rgb: 72 30 20;
+  --color-amber-400-rgb: 244 149 123;
+  --color-amber-500-rgb: 192 78 52;
+  --color-amber-600-rgb: 168 62 38;
+  --color-amber-700-rgb: 142 48 28;
+  --color-amber-800-rgb: 116 38 22;
+  --color-amber-900-rgb: 88 28 16;
+  --color-amber-950-rgb: 56 18 10;
 
-  --theme-primary: #D4674B;
-  --theme-primary-dark: #9E3C24;
-  --theme-primary-hover: #BF553B;
+  --theme-primary: #C04E34;
+  --theme-primary-dark: #8E301C;
+  --theme-primary-hover: #A83E26;
   --theme-primary-light: #F4957B;
   --theme-accent: #68C4AE;
   --theme-accent-glow: rgba(244, 149, 123, 0.35);
-  --theme-secondary: #A686BC;
+  --theme-secondary: #CCA8DB;
   --theme-surface: #FBF9F5;
   --theme-surface-alt: #F4EFE6;
-  --theme-card-border: rgba(212, 103, 75, 0.2);
-  --theme-gradient-start: #B24C33;
-  --theme-gradient-mid: #D4674B;
-  --theme-gradient-end: #F4957B;
-  --theme-banner-start: #8C341F;
-  --theme-banner-end: #B24C33;
-  --theme-badge-bg: rgba(212, 103, 75, 0.12);
-  --theme-badge-text: #9E3C24;
-  --theme-badge-border: rgba(212, 103, 75, 0.3);
+  --theme-card-border: rgba(192, 78, 52, 0.22);
+  --theme-gradient-start: #8E301C;
+  --theme-gradient-mid: #A83E26;
+  --theme-gradient-end: #C04E34;
+  --theme-banner-start: #742616;
+  --theme-banner-end: #A83E26;
+  --theme-badge-bg: rgba(192, 78, 52, 0.12);
+  --theme-badge-text: #8E301C;
+  --theme-badge-border: rgba(192, 78, 52, 0.3);
   --theme-btn-text: #FFFFFF;
 }
 
@@ -132,19 +132,19 @@
   --color-amber-900-rgb: 5 14 38;
   --color-amber-950-rgb: 3 8 22;
 
-  --theme-primary: #018ABE;
+  --theme-primary: #0A487A;
   --theme-primary-dark: #0A1B46;
-  --theme-primary-hover: #01709C;
+  --theme-primary-hover: #083A62;
   --theme-primary-light: #97CADB;
   --theme-accent: #018ABE;
   --theme-accent-glow: rgba(1, 138, 190, 0.35);
-  --theme-secondary: #0A487A;
+  --theme-secondary: #018ABE;
   --theme-surface: #F2F7FA;
   --theme-surface-alt: #E3EFF6;
   --theme-card-border: rgba(1, 138, 190, 0.22);
   --theme-gradient-start: #0A1B46;
-  --theme-gradient-mid: #0A487A;
-  --theme-gradient-end: #018ABE;
+  --theme-gradient-mid: #083A62;
+  --theme-gradient-end: #0A487A;
   --theme-banner-start: #081538;
   --theme-banner-end: #083B64;
   --theme-badge-bg: rgba(1, 138, 190, 0.12);
@@ -161,67 +161,67 @@
   --color-amber-200-rgb: 136 209 201;
   --color-amber-300-rgb: 163 195 101;
   --color-amber-400-rgb: 250 195 82;
-  --color-amber-500-rgb: 249 133 87;
-  --color-amber-600-rgb: 242 93 73;
-  --color-amber-700-rgb: 210 65 45;
-  --color-amber-800-rgb: 170 45 30;
-  --color-amber-900-rgb: 125 30 20;
-  --color-amber-950-rgb: 75 18 12;
+  --color-amber-500-rgb: 204 58 38;
+  --color-amber-600-rgb: 178 46 28;
+  --color-amber-700-rgb: 150 36 20;
+  --color-amber-800-rgb: 122 28 16;
+  --color-amber-900-rgb: 92 20 12;
+  --color-amber-950-rgb: 58 12 8;
 
-  --theme-primary: #DE432E;
-  --theme-primary-dark: #A62716;
-  --theme-primary-hover: #C43623;
-  --theme-primary-light: #F98557;
+  --theme-primary: #CC3A26;
+  --theme-primary-dark: #962414;
+  --theme-primary-hover: #B22E1C;
+  --theme-primary-light: #FAC352;
   --theme-accent: #FAC352;
-  --theme-accent-glow: rgba(222, 67, 46, 0.35);
+  --theme-accent-glow: rgba(204, 58, 38, 0.35);
   --theme-secondary: #F98557;
   --theme-surface: #FDF8F5;
   --theme-surface-alt: #FAEEE8;
-  --theme-card-border: rgba(222, 67, 46, 0.22);
-  --theme-gradient-start: #B32B1A;
-  --theme-gradient-mid: #DE432E;
-  --theme-gradient-end: #F98557;
-  --theme-banner-start: #8A1E11;
-  --theme-banner-end: #B32B1A;
-  --theme-badge-bg: rgba(222, 67, 46, 0.12);
-  --theme-badge-text: #A62716;
-  --theme-badge-border: rgba(222, 67, 46, 0.3);
+  --theme-card-border: rgba(204, 58, 38, 0.22);
+  --theme-gradient-start: #962414;
+  --theme-gradient-mid: #B22E1C;
+  --theme-gradient-end: #CC3A26;
+  --theme-banner-start: #7A1C10;
+  --theme-banner-end: #B22E1C;
+  --theme-badge-bg: rgba(204, 58, 38, 0.12);
+  --theme-badge-text: #962414;
+  --theme-badge-border: rgba(204, 58, 38, 0.3);
   --theme-btn-text: #FFFFFF;
 }
 
 [data-theme="nirmalyam-sandal"] {
   /* 6. Nirmalyam Sandalwood - Rose & Sandal (Dopely #20) */
   /* Swatches: #FCE3C7, #E79796, #FFC88B, #FFB084, #C6C09C */
-  --color-amber-50-rgb: 253 251 248;
+  --color-amber-50-rgb: 253 250 246;
   --color-amber-100-rgb: 252 227 199;
   --color-amber-200-rgb: 198 192 156;
   --color-amber-300-rgb: 255 200 139;
   --color-amber-400-rgb: 255 176 132;
-  --color-amber-500-rgb: 231 151 150;
-  --color-amber-600-rgb: 205 125 124;
-  --color-amber-700-rgb: 170 95 94;
-  --color-amber-800-rgb: 135 70 69;
-  --color-amber-900-rgb: 95 48 47;
-  --color-amber-950-rgb: 55 28 27;
+  --color-amber-500-rgb: 168 82 81;
+  --color-amber-600-rgb: 146 66 65;
+  --color-amber-700-rgb: 124 52 51;
+  --color-amber-800-rgb: 102 40 39;
+  --color-amber-900-rgb: 78 30 29;
+  --color-amber-950-rgb: 48 18 18;
 
-  --theme-primary: #C86F6E;
-  --theme-primary-dark: #8E3D3C;
-  --theme-primary-hover: #B05A59;
+  --theme-primary: #A85251;
+  --theme-primary-dark: #7C3433;
+  --theme-primary-hover: #924241;
   --theme-primary-light: #FFB084;
   --theme-accent: #FFB084;
-  --theme-accent-glow: rgba(200, 111, 110, 0.35);
+  --theme-accent-glow: rgba(168, 82, 81, 0.35);
   --theme-secondary: #FFC88B;
   --theme-surface: #FCFAF6;
   --theme-surface-alt: #F7F2EB;
-  --theme-card-border: rgba(200, 111, 110, 0.22);
-  --theme-gradient-start: #8E3D3C;
-  --theme-gradient-mid: #C86F6E;
-  --theme-gradient-end: #E79796;
-  --theme-banner-start: #6F2A29;
-  --theme-banner-end: #8E3D3C;
-  --theme-badge-bg: rgba(200, 111, 110, 0.12);
-  --theme-badge-text: #8E3D3C;
-  --theme-badge-border: rgba(200, 111, 110, 0.3);
+  --theme-card-border: rgba(168, 82, 81, 0.22);
+  --theme-gradient-start: #7C3433;
+  --theme-gradient-mid: #924241;
+  --theme-gradient-end: #A85251;
+  --theme-banner-start: #662827;
+  --theme-banner-end: #924241;
+  --theme-badge-bg: rgba(168, 82, 81, 0.12);
+  --theme-badge-text: #7C3433;
+  --theme-badge-border: rgba(168, 82, 81, 0.3);
   --theme-btn-text: #FFFFFF;
 }
 
@@ -285,7 +285,7 @@
 
   .btn-primary {
     color: #ffffff !important;
-    background: linear-gradient(135deg, rgb(var(--color-amber-600-rgb)), rgb(var(--color-amber-500-rgb)), rgb(var(--color-amber-400-rgb))) !important;
+    background: linear-gradient(135deg, rgb(var(--color-amber-700-rgb)), rgb(var(--color-amber-600-rgb)), rgb(var(--color-amber-500-rgb))) !important;
     box-shadow: 0 4px 14px 0 rgba(var(--color-amber-500-rgb), 0.3) !important;
     transition: all 0.25s ease-in-out;
   }

@@ -165,10 +165,15 @@ import { TEMPLE_THEMES } from "../data/themes";
         btn.addEventListener('click', () => {
           const id = btn.getAttribute('data-theme-id');
           if (id) {
-            document.documentElement.setAttribute('data-theme', id);
-            try {
-              localStorage.setItem('thirumarady_theme', id);
-            } catch (e) {}
+            if (window.applyTempleTheme) {
+              window.applyTempleTheme(id);
+            } else {
+              document.documentElement.setAttribute('data-theme', id);
+              if (document.body) document.body.setAttribute('data-theme', id);
+              try {
+                localStorage.setItem('thirumarady_theme', id);
+              } catch (e) {}
+            }
             
             // Highlight current card
             document.querySelectorAll('[id^="theme-card-"]').forEach(card => {

@@ -261,8 +261,9 @@ import { TEMPLE_THEMES } from "../../data/themes";
       });
     }
 
-    // Expose open function globally so header button can invoke it
+    // Expose open & apply functions globally so header/showcase buttons stay in sync
     window.openThemeModal = openModal;
+    window.applyTempleTheme = applyTheme;
 
     // Handle card clicks
     themeCards.forEach((card) => {
