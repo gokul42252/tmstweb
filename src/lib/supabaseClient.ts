@@ -1,7 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 
-export const SUPABASE_URL = "https://bbskmcedlhvntjqndcqh.supabase.co";
-export const SUPABASE_ANON_KEY = "sb_publishable_nXRAAmcu5J4T0AmoGJc_HA_oukr2m19";
+export const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL || "";
+export const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "";
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.warn(
+    "Missing PUBLIC_SUPABASE_URL or PUBLIC_SUPABASE_ANON_KEY environment variables. Check your .env file."
+  );
+}
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
